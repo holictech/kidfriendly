@@ -1,0 +1,20 @@
+<ion-view>
+  <ion-content class="padding has-header has-footer">
+    <div class="kf-width-50-porcent padding kf-float-left">
+      <div ng-repeat="item in vm.characteristics track by item.idCharacteristic">
+        <label class="kf-font-size-80-porcent">
+          <input type="checkbox">
+          {{item.desCharacteristic}}
+        </label>
+      </div>
+    </div>
+    <div class="kf-width-50-porcent padding kf-float-right">
+      <div ng-repeat="item in vm.halfCharacteristics track by item.idCharacteristic">
+        <label class="kf-font-size-80-porcent">
+          <input type="checkbox">
+          {{item.desCharacteristic}}
+        </label>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

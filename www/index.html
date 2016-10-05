@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="kidfriendly">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <!--
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    -->
+
+    <title>Kid Friendly</title>
+
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngcordova/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- lib -->
+    <script src="lib/md5/md5.min.js"></script>
+    <script src="lib/rest/restangular.min.js"></script>
+    <script src="lib/ui/mask/mask.min.js"></script>
+    <script src="lib/ui/mask/string-mask.js"></script>
+    <script src="lib/ui/validate/validate.min.js"></script>
+    <script src="lib/upload/ng-file-upload-shim.min.js"></script>
+    <script src="lib/upload/ng-file-upload.min.js"></script>
+    <script src="lib/cookies/angular-cookies.min.js"></script>
+
+    <!-- comum -->
+    <script src="app/comum/comum.module.js"></script>
+
+    <!-- comum controller -->
+    <script src="app/comum/controller/controller.module.js"></script>
+    <script src="app/comum/controller/abstract.controller.js"></script>
+
+    <!-- comum filter -->
+    <script src="app/comum/filter/filter.module.js"></script>
+    <script src="app/comum/filter/mask/mask.date.filter.js"></script>
+    <script src="app/comum/filter/mask/mask.filter.js"></script>
+
+    <!-- comum service -->
+    <script src="app/comum/service/service.module.js"></script>
+    <script src="app/comum/service/abstract.service.js"></script>
+
+    <!-- comum validator -->
+    <script type="text/javascript" src="app/comum/validator/validator.module.js"></script>
+    <script type="text/javascript" src="app/comum/validator/email/email.validator.directive.js">
+    </script>
+
+    <!-- app -->
+    <script src="app/kidfriendly.module.js"></script>
+    <script src="app/kidfriendly.run.js"></script>
+    <script src="app/kidfriendly.config.js"></script>
+    <script src="app/kidfriendly.constant.js"></script>
+
+    <!-- characteristic -->
+    <script src="app/vendor/characteristic/service/characteristic.service.js"></script>
+
+    <!-- main -->
+    <script src="app/vendor/main/controller/main.controller.js"></script>
+
+    <!-- home -->
+    <script src="app/vendor/home/service/home.service.js"></script>
+    <script src="app/vendor/home/controller/home.controller.js"></script>
+
+    <!-- search -->
+    <!--script src="app/vendor/search/service/search.service.js"></script-->
+    <script src="app/vendor/search/controller/search.controller.js"></script>
+
+    <!-- result -->
+    <script src="app/vendor/result/controller/result.controller.js"></script>
+
+    <!-- company -->
+    <script src="app/vendor/company/service/company.service.js"></script>
+    <script src="app/vendor/company/controller/company.controller.js"></script>
+
+  </head>
+  <body>
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>
