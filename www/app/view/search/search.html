@@ -1,9 +1,12 @@
 <ion-view>
-  <ion-content class="padding has-header has-footer">
+  <ion-content class="padding has-header has-subfooter has-footer">
+    <div class="padding-left kf-title-black">Buscar {{vm.dsCategory | lowercase}} com:</div>
     <div class="kf-width-50-porcent padding kf-float-left">
       <div ng-repeat="item in vm.characteristics track by item.idCharacteristic">
         <label class="kf-font-size-80-porcent">
-          <input type="checkbox">
+          <input type="checkbox"
+            ng-checked="vm.isExists(item, vm.characteristcsSelected);"
+            ng-click="vm.toggle(item, vm.characteristcsSelected);">
           {{item.desCharacteristic}}
         </label>
       </div>
@@ -11,10 +14,33 @@
     <div class="kf-width-50-porcent padding kf-float-right">
       <div ng-repeat="item in vm.halfCharacteristics track by item.idCharacteristic">
         <label class="kf-font-size-80-porcent">
-          <input type="checkbox">
+          <input type="checkbox"
+            ng-checked="vm.isExists(item, vm.characteristcsSelected);"
+            ng-click="vm.toggle(item, vm.characteristcsSelected);">
           {{item.desCharacteristic}}
         </label>
       </div>
     </div>
+    <div class="kf-clear kf-float-left padding-top padding-left kf-width-50-porcent">
+      <label class="kf-font-size-80-porcent kf-font-weight-bold">
+        <input type="checkbox" ng-model="vm.isSuperKidFriendly">
+        Super Kid Friendly
+      </label>
+    </div>
+    <div class="padding-top padding-right kf-float-right kf-width-50-porcent text-right">
+      <label class="kf-font-size-80-porcent kf-font-weight-bold">
+        <input type="checkbox" ng-model="vm.isNextToMe">
+        Próximos a mim
+      </label>
+    </div>
   </ion-content>
+  <div class="bar bar-subfooter">
+    <div class="title"></div>
+    <div class="buttons">
+      <button class="button button-outline button-small button-stable icon-left ion-search"
+        ng-click="vm.search();">
+        Pesquisar
+      </button>
+    </div>
+  </div>
 </ion-view>

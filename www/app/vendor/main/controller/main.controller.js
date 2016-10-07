@@ -12,7 +12,7 @@
     initialize();
 
     vm.isShowBackButtonIOS = function() {
-      return /*ionic.Platform.isIOS() &&*/ !angular.isUndefined(state) && !$state.is('main.home');
+      return ionic.Platform.isIOS() && !angular.isUndefined(state) && !$state.is('main.home');
     };
 
     vm.goBack = function() {

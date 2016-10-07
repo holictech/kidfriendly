@@ -23,7 +23,7 @@
   padding-left: 1% !important;
 }
 
-.bar-footer {
+.bar-footer, .bar-subfooter {
   border: 0px !important;
   border-bottom: none !important;
   border-bottom-color: transparent !important;
@@ -48,6 +48,10 @@
 
 .kf-font-size-80-porcent {
   font-size: 80% !important;
+}
+
+.kf-font-weight-bold {
+  font-weight: bold;
 }
 /* END TEXT */
 
@@ -110,6 +114,10 @@
 
 .kf-float-right {
   float: right !important;
+}
+
+.kf-clear {
+  clear: both;
 }
 /* END CONTAINER */
 
