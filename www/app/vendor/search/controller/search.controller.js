@@ -64,7 +64,7 @@
     };
 
     function initialize() {
-      $scope.$on('$ionicView.beforeEnter', function() {
+      $scope.$on('$ionicView.enter', function() {
         $ionicScrollDelegate.scrollTop();
         $ionicLoading.show();
         var category = $state.params.params;
