@@ -3,11 +3,12 @@
 
   angular.module('kidfriendly').controller('SearchController', SearchController);
 
-  SearchController.$inject = ['$scope', '$state', '$ionicLoading', '$ionicScrollDelegate', 'SearchService', 'CharacteristicService'];
+  SearchController.$inject = ['SearchService', 'CharacteristicService', '$scope', '$state', '$controller', '$ionicScrollDelegate'];
 
-  function SearchController($scope, $state, $ionicLoading, $ionicScrollDelegate, SearchService, CharacteristicService) {
+  function SearchController(SearchService, CharacteristicService, $scope, $state, $controller, $ionicScrollDelegate) {
     var vm = this;
     var idCategory;
+    angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.characteristics = [];
     vm.halfCharacteristics = [];
     vm.dsCategory = "";
@@ -44,11 +45,10 @@
       };
 
       if (vm.isNextToMe) {
-        $ionicLoading.show();
+        vm.showLoading();
         SearchService.getGeolocation().then(function(response) {
-          $ionicLoading.hide();
-
           if (angular.isString(response)) {
+            vm.hideLoading();
             SearchService.ionicPopupAlertAttention(response).then(function() {
               executeSearch(params);
             });
@@ -65,9 +65,9 @@
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
-        $ionicScrollDelegate.scrollTop();
-        $ionicLoading.show();
         var category = $state.params.params;
+        $ionicScrollDelegate.scrollTop();
+        vm.showLoading();
 
         if (!angular.isDefined(idCategory) || idCategory !== category.idCategory) {
           idCategory = category.idCategory;
@@ -81,13 +81,13 @@
           vm.characteristics = response;
           vm.halfCharacteristics = vm.characteristics.splice((vm.characteristics.length / 2) + 1);
           vm.isVisible = true;
-          $ionicLoading.hide();
+          vm.timeoutHideLoading();
         }, function(response) {
           vm.characteristics = [];
           vm.halfCharacteristics = 0;
           vm.isVisible = false;
+          vm.hideLoading();
           SearchService.ionicPopupAlertError(response);
-          $ionicLoading.hide();
         });
       });
     }
@@ -111,22 +111,22 @@
     }
 
     function executeSearch(params) {
-      $ionicLoading.show();
+      vm.showLoading();
       SearchService.get(params).then(function(response) {
         if (angular.isString(response)) {
-          $ionicLoading.hide();
+          vm.hideLoading();
           SearchService.ionicPopupAlertError(response);
         } else if (angular.isObject(response) &&
                    ((response.results === null) ||
                    (angular.isArray(response.results) && response.results.length === 0))) {
-          $ionicLoading.hide();
+          vm.hideLoading();
           SearchService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
         } else if (angular.isObject(response) &&
                    angular.isArray(response.results) &&
                    response.results.length !== 0) {
           $state.go('main.result', {'params': {filters: params, 'response': response}});
         } else {
-          $ionicLoading.hide();
+          vm.hideLoading();
         }
       });
     }

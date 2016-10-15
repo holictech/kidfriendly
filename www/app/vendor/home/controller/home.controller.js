@@ -3,10 +3,11 @@
 
   angular.module('kidfriendly').controller('HomeController', HomeController);
 
-  HomeController.$inject = ['HomeService', '$ionicLoading', '$scope'];
+  HomeController.$inject = ['HomeService', '$scope', '$state', '$controller'];
 
-  function HomeController(HomeService, $ionicLoading, $scope) {
+  function HomeController(HomeService, $scope, $state, $controller) {
     var vm = this;
+    angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.suggestions = [];
     vm.nextToMe = [];
     initialize(true);
@@ -15,12 +16,16 @@
       initialize(false);
     };
 
-    function initialize(isShowMessageGeolocation) {
-      $ionicLoading.show();
-      HomeService.getGeolocation().then(function(response) {
-        $ionicLoading.hide();
+    vm.detailCompany = function(company) {
+      vm.showLoading();
+      $state.go('main.company', (angular.isUndefined(company) ? null : {'params': company}));
+    };
 
+    function initialize(isShowMessageGeolocation) {
+      vm.showLoading();
+      HomeService.getGeolocation().then(function(response) {
         if (angular.isString(response) && isShowMessageGeolocation) {
+          vm.hideLoading();
           HomeService.ionicPopupAlertAttention(response).then(function() {
             listCompanies();
           });
@@ -31,23 +36,24 @@
     }
 
     function listCompanies(longitudeLatitude) {
-      $ionicLoading.show();
       HomeService.get(longitudeLatitude).then(function(response) {
         var suggestions = [];
         var nextToMe = [];
-        $ionicLoading.hide();
 
         if (HomeService.isObject(response)) {
           suggestions = response.suggestions;
           nextToMe = response.nextToMe;
 
           if (suggestions.length === 0 && nextToMe.length === 0) {
+            vm.hideLoading();
             HomeService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
           }
         } else {
+          vm.hideLoading();
           HomeService.ionicPopupAlertError(response);
         }
 
+        vm.timeoutHideLoading();
         vm.suggestions = suggestions;
         vm.nextToMe = nextToMe;
       }).finally(function() {

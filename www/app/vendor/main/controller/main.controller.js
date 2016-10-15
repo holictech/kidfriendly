@@ -3,12 +3,12 @@
 
   angular.module('kidfriendly').controller('MainController', MainController);
 
-  MainController.$inject = ['$rootScope', '$scope', '$state', '$ionicHistory', '$ionicPopover', '$ionicLoading'];
+  MainController.$inject = ['$rootScope', '$scope', '$state', '$ionicHistory', '$ionicPopover', '$controller'];
 
-  function MainController($rootScope, $scope, $state, $ionicHistory, $ionicPopover, $ionicLoading) {
+  function MainController($rootScope, $scope, $state, $ionicHistory, $ionicPopover, $controller) {
     var vm = this;
     var state;
-
+    angular.extend(this, $controller('AbstractController', {'vm': vm}));
     initialize();
 
     vm.isShowBackButtonIOS = function() {
@@ -37,7 +37,7 @@
 
     vm.go = function(state, loading, params) {
       if (!angular.isUndefined(loading) && loading && !$state.is(state)) {
-        $ionicLoading.show();
+        vm.showLoading();
       }
 
       $state.go(state, (angular.isUndefined(params) ? null : {'params': params}));

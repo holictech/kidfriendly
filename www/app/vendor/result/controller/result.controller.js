@@ -3,12 +3,13 @@
 
   angular.module('kidfriendly').controller('ResultController', ResultController);
 
-  ResultController.$inject = ['$scope', '$state', '$ionicLoading', 'SearchService'];
+  ResultController.$inject = ['SearchService', '$scope', '$state', '$controller'];
 
-  function ResultController($scope, $state, $ionicLoading, SearchService) {
+  function ResultController(SearchService, $scope, $state, $controller) {
     var vm = this;
     var filters = null;
     var paginatorDto = null;
+    angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.results = [];
     vm.isInfiniteScroll = false;
     initialize();
@@ -24,7 +25,7 @@
         'pageSize': paginatorDto.pageSize
       };
 
-      $ionicLoading.show();
+      vm.showLoading();
       SearchService.get(params).then(function(response) {
         if (angular.isString(response)) {
           SearchService.ionicPopupAlertError(response);
@@ -35,8 +36,13 @@
         }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
-        $ionicLoading.hide();
+        vm.timeoutHideLoading();
       });
+    };
+
+    vm.detailCompany = function(company) {
+      vm.showLoading();
+      $state.go('main.company', (angular.isUndefined(company) ? null : {'params': company}));
     };
 
     function initialize() {
@@ -45,7 +51,7 @@
         paginatorDto = $state.params.params.response.paginatorDto;
         vm.results = $state.params.params.response.results;
         vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
-        $ionicLoading.hide();
+        vm.timeoutHideLoading();
       });
     }
   }
