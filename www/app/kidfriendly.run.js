@@ -24,7 +24,9 @@
         }
       }, 100);
 
-      navigator.app.overrideButton("menubutton", true);
+      if (navigator && navigator.app) {
+        navigator.app.overrideButton("menubutton", true);
+      }
     });
   }
 })();
