@@ -27,7 +27,9 @@
         params: null
       },
       abstract: true,
-      templateUrl: 'app/view/main/main.html'
+      templateUrl: 'app/view/main/main.html',
+      controller: 'MainController',
+      controllerAs: 'vm'
     })
     .state('main.home', {
       url: "/home",

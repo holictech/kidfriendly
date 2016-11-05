@@ -23,6 +23,8 @@
           $ionicHistory.goBack(-1);
         }
       }, 100);
+
+      navigator.app.overrideButton("menubutton", true);
     });
   }
 })();

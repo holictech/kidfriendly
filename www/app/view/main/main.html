@@ -1,13 +1,13 @@
-<ion-header-bar align-title="center" ng-controller="MainController as vm">
+<ion-header-bar align-title="center">
   <div class="buttons" ng-if="vm.isShowBackButtonIOS();">
     <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.goBack();"></button>
   </div>
   <h1 class="title">Logo Marca</h1>
 </ion-header-bar>
 <ion-nav-view name="main-view"></ion-nav-view>
-<ion-footer-bar ng-controller="MainController as vm">
+<ion-footer-bar>
   <h1 class="title"></h1>
   <div class="buttons">
-    <button class="button button-icon icon ion-navicon" ng-click="vm.showMenu($event);"></button>
+    <button id="menuPopover" class="button button-icon icon ion-navicon" ng-click="vm.showMenu($event);"></button>
   </div>
 </ion-footer-bar>

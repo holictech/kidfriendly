@@ -79,7 +79,7 @@
         vm.dsCategory = getDsCategory(category.idCategory);
         CharacteristicService.listByCategory(category).then(function(response) {
           vm.characteristics = response;
-          vm.halfCharacteristics = vm.characteristics.splice((vm.characteristics.length / 2) + 1);
+          vm.halfCharacteristics = vm.characteristics.splice(Math.ceil((vm.characteristics.length / 2)));
           vm.isVisible = true;
           vm.timeoutHideLoading();
         }, function(response) {

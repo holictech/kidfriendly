@@ -19,7 +19,7 @@
     vm.timeoutHideLoading = function() {
       $timeout(function() {
         vm.hideLoading();
-      }, 550);
+      }, 700);
     };
   }
 })();
