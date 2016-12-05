@@ -1,52 +1,68 @@
-<style type="text/css" media="screen">
-  .border {
-    border: 1px solid;
-  }
-</style>
 <ion-view>
-  <ion-content class="padding has-header has-footer">
-    <div class="row kf-no-padding">
-      <div class="col-75 kf-no-padding">
-        <h4 class="kf-no-margin">Restaurante do Zé</h4>
-        <h6 class="kf-no-margin">SQN 652, Bloco D, Sala 22, Asa Norte, Brasília-DF.</h6>
-        <h6 class="kf-no-margin">(61) 2145-5874, (61) 99245-8866</h6>
-        <h6 class="kf-no-margin">www.restaurantedoze.com.br</h6>
-        <div class="kf-position-relative">
-          <div class="kf-wrap">
-            <ion-scroll direction="x" class="kf-scroll kf-width-100-porcent">
-              <div class="row">
-                <div class="col-90" ng-repeat="item in vm.characteristics track by $index">
-                  <h6 class="kf-no-margin">{{item}}</h6>
+  <section ng-if="vm.isVisible">
+    <ion-content class="padding has-header has-footer" scroll="false">
+      <div id="companyData" class="row kf-no-padding-top kf-no-padding-rigth kf-no-padding-left padding-bottom">
+        <div class="col-80 kf-no-padding">
+          <h4 class="kf-no-margin">Restaurante do Zé</h4>
+          <h6 class="kf-no-margin">SQN 652, Bloco D, Sala 22, Asa Norte, Brasília-DF.</h6>
+          <h6 class="kf-no-margin">(61) 2145-5874, (61) 99245-8866</h6>
+          <h6 class="kf-no-margin">www.restaurantedoze.com.br</h6>
+          <div ng-if="vm.characteristics.length > 0">
+            <div class="kf-wrap">
+              <ion-scroll direction="x" class="kf-scroll kf-width-100-porcent">
+                <div class="row padding-top">
+                  <div class="col-90" ng-repeat="item in vm.characteristics track by $index">
+                    <h6 class="kf-no-margin">{{item}}</h6>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-90" ng-repeat="item in vm.halfCharacteristics track by $index">
-                  <h6 class="kf-no-margin">{{item}}</h6>
+                <div class="row padding-top">
+                  <div class="col-90" ng-repeat="item in vm.halfCharacteristics track by $index">
+                    <h6 class="kf-no-margin">{{item}}</h6>
+                  </div>
                 </div>
-              </div>
-            </ion-scroll>
+              </ion-scroll>
+            </div>
           </div>
         </div>
+        <div class="col-20 kf-no-padding kf-display-flex text-center">
+          <i class="icon" ng-if="vm.company.numRate !== null">
+            <img ng-src="images/status-kidfriendly-{{vm.company.numRate}}.png" class="kf-company-icon-rate">
+          </i>
+        </div>
       </div>
-      <div class="col-25 kf-no-padding kf-display-flex kf-justify-content-center kf-align-items-end">
-        <i class="icon" ng-if="vm.company.numRate !== null">
-          <img ng-src="images/status-kidfriendly-{{vm.company.numRate}}.png" class="kf-company-icon-rate">
-        </i>
+      <div id="menu" class="row padding-top" style="border-top: 1px solid; border-bottom: 1px solid;">
+        <div class="col text-center kf-no-padding">
+          <button class="button button-icon kf-company-button">
+            <i class="icon ion-android-map kf-company-button-icon dark"></i>Como Chegar
+          </button>
+        </div>
+        <div class="col text-center kf-no-padding">
+          <button class="button button-icon kf-company-button kf-no-padding">
+            <i class="icon ion-android-camera kf-company-button-icon "></i>Galeria
+          </button>
+        </div>
+        <div class="col text-center kf-no-padding">
+          <button class="button button-icon kf-company-button kf-no-padding">
+            <i class="icon ion-android-star kf-company-button-icon"></i>Favoritos
+          </button>
+        </div>
+        <div class="col text-center kf-no-padding">
+          <button class="button button-icon kf-company-button kf-no-padding">
+            <i class="icon ion-ios-compose kf-company-button-icon"></i>Avaliar
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="row padding-top border">
-      <div class="col text-center">
-        1
-      </div>
-      <div class="col text-center">
-        2
-      </div>
-      <div class="col text-center">
-        3
-      </div>
-      <div class="col text-center">
-        4
-      </div>
-    </div>
-  </ion-content>
+      <div id="lbRating" class="padding-top kf-title-black">Avaliações</div>
+      <ion-scroll id="scrollRating" kf-scroll-heigth>
+        <div class="list card kf-no-margin-left kf-no-margin-right">
+          <div class="item item-avatar item-text-wrap">
+            <!--
+            <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
+            -->
+            <img ng-if="true" ng-src="images/default-logo.png">
+          </div>
+        </div>
+      </ion-scroll>
+    </ion-content>
+  </section>
 </ion-view>

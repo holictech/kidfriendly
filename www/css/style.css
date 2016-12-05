@@ -3,11 +3,31 @@
   margin: 1% !important;
 }
 
+.margin {
+  margin: 1% !important;
+}
+
+.margin-top, .margin-vertical  {
+  margin-top: 1% !important;
+}
+
+.margin-right, .margin-horizontal {
+  margin-right: 1% !important;
+}
+
+.margin-bottom, .margin-vertical {
+  margin-bottom: 1% !important;
+}
+
+.margin-left, .margin-horizontal {
+  margin-left: 1% !important;
+}
+
 .padding {
   padding: 1% !important;
 }
 
-.padding-top, .padding-vertical {
+.padding-top, .padding-vertical  {
   padding-top: 1% !important;
 }
 
@@ -32,6 +52,46 @@
 
 .popup-head {
   text-align: left !important;
+}
+
+.col-10 {
+  width: 10% !important;
+}
+
+.col-20 {
+  width: 20% !important;
+}
+
+.col-25 {
+  width: 25% !important;
+}
+
+.col-33 {
+  width: 33.3333% !important;
+}
+
+.col-50 {
+  width: 50% !important;
+}
+
+.col-67 {
+  width: 66.6666% !important;
+}
+
+.col-75 {
+  width: 75% !important;
+}
+
+.col-80 {
+  width: 80% !important;
+}
+
+.col-90 {
+  width: 90% !important;
+}
+
+.item-icon-right .icon {
+  right: 0.4% !important;
 }
 /* END OVERRIDE IONIC */
 
@@ -140,11 +200,12 @@
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
-  align-items: flex-start;
 }
 
 .kf-justify-content-center {
   justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
 }
 
 .kf-align-itens-center {
@@ -259,16 +320,27 @@ ion-popover-view .kf-menu ion-content {
 .platform-android ion-popover-view .kf-menu {
   margin-top: 10px;
 }
-/* MENU */
 
+/* MENU */
 .kf-home-icon-rate {
-  width: 32px;
+  width: 3.3ex;
 }
 /* END HOME */
 
 /* COMPANY */
 .kf-company-icon-rate {
-  width: 80px;
+  width: 10ex;
+}
+
+.kf-company-button {
+  font-size: 1.7ex;
+  line-height: 2ex;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.kf-company-button-icon {
+  display: block;
 }
 /* END COMPANY*/
 

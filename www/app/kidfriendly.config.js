@@ -13,7 +13,7 @@
     $httpProvider.interceptors.push(function() {
       return {
         'request': function(config) {
-          config.timeout = 10000;
+          config.timeout = 30000;
 
           return config;
         }

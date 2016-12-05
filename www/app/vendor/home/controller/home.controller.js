@@ -16,7 +16,7 @@
       initialize(false);
     };
 
-    vm.detailCompany = function(company) {
+    vm.detailsCompany = function(company) {
       vm.showLoading();
       $state.go('main.company', (angular.isUndefined(company) ? null : {'params': company}));
     };

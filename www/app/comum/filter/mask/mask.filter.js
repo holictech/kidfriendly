@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('comum.filter').filter('cpMask', CPMask);
+	angular.module('comum.filter').filter('mask', CPMask);
 
 	function CPMask() {
 		return function(input, format) {
