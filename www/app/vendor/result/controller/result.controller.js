@@ -28,15 +28,16 @@
       vm.showLoading();
       SearchService.get(params).then(function(response) {
         if (angular.isString(response)) {
+          vm.hideLoading();
           SearchService.ionicPopupAlertError(response);
         } else {
           paginatorDto = response.paginatorDto;
           vm.results = vm.results.concat(response.results);
           vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
+          vm.timeoutHideLoading();
         }
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
-        vm.timeoutHideLoading();
       });
     };
 
@@ -46,7 +47,7 @@
     };
 
     function initialize() {
-      $scope.$on('$ionicView.enter', function() {
+      $scope.$on('$ionicView.beforeEnter', function() {
         filters = $state.params.params.filters;
         paginatorDto = $state.params.params.response.paginatorDto;
         vm.results = $state.params.params.response.results;

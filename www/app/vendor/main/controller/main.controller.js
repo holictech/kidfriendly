@@ -3,9 +3,9 @@
 
   angular.module('kidfriendly').controller('MainController', MainController);
 
-  MainController.$inject = ['$rootScope', '$scope', '$state', '$ionicHistory', '$ionicPopover', '$controller', '$ionicPlatform'];
+  MainController.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', '$controller', '$ionicPlatform'];
 
-  function MainController($rootScope, $scope, $state, $ionicHistory, $ionicPopover, $controller, $ionicPlatform) {
+  function MainController($rootScope, $scope, $state, $ionicPopover, $controller, $ionicPlatform) {
     var vm = this;
     var state;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
@@ -13,10 +13,6 @@
 
     vm.isShowBackButtonIOS = function() {
       return ionic.Platform.isIOS() && !angular.isUndefined(state) && !$state.is('main.home');
-    };
-
-    vm.goBack = function() {
-      $ionicHistory.goBack(-1);
     };
 
     vm.showMenu = function(event) {

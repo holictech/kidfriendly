@@ -9,7 +9,7 @@
     var AbstractService = function(uri) {
       //var _uri = 'http://10.0.2.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.3.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
-      //var _uri = 'http://192.168.0.13:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
+      //var _uri = 'http://192.168.0.14:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       var _uri = 'http://kidfriendly.servehttp.com:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       var method = {
         success: function(response) {

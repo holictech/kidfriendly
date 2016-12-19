@@ -1,9 +1,9 @@
 (function() {
 	'use strict';
 
-	angular.module('comum.filter').filter('maskDate', CPMaskDate);
+	angular.module('comum.filter').filter('maskDate', MaskDate);
 
-	function CPMaskDate() {
+	function MaskDate() {
 		return function(input, format) {
 			return moment(input).format(format);
 		};

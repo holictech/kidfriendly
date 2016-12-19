@@ -93,17 +93,17 @@
     }
 
     function getDsCategory(idCategory) {
-      var dsCategory = "";
+      var dsCategory = '';
 
       switch (idCategory) {
         case 1:
-          dsCategory = "Restaurantes";
+          dsCategory = 'Restaurantes';
           break;
         case 2:
-          dsCategory = "Hoteis";
+          dsCategory = 'Hoteis';
           break;
         case 3:
-          dsCategory = "Passeios";
+          dsCategory = 'Passeios';
           break;
       }
 

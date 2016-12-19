@@ -3,10 +3,15 @@
     <ion-content class="padding has-header has-footer" scroll="false">
       <div id="companyData" class="row kf-no-padding-top kf-no-padding-rigth kf-no-padding-left padding-bottom">
         <div class="col-80 kf-no-padding">
-          <h4 class="kf-no-margin">Restaurante do Zé</h4>
-          <h6 class="kf-no-margin">SQN 652, Bloco D, Sala 22, Asa Norte, Brasília-DF.</h6>
-          <h6 class="kf-no-margin">(61) 2145-5874, (61) 99245-8866</h6>
-          <h6 class="kf-no-margin">www.restaurantedoze.com.br</h6>
+          <h4 class="kf-no-margin">{{vm.company.desName}}</h4>
+          <h6 class="kf-no-margin" ng-if="vm.address !== null && vm.address.length > 0">{{vm.address}}</h6>
+          <h6 class="kf-no-margin" ng-if="vm.company.phones !== null && vm.company.phones.length > 0">
+            Tel:
+            <span ng-repeat="item in vm.company.phones track by item.idPhone">
+              {{$index > 0 ? ', ' : ''}}{{item.numPhone | mask:'(00) 90000-0000'}}
+            </span>
+          </h6>
+          <h6 class="kf-no-margin" ng-if="vm.company.desSite !== null && vm.company.desSite.length > 0">{{vm.company.desSite}}</h6>
           <div ng-if="vm.characteristics.length > 0">
             <div class="kf-wrap">
               <ion-scroll direction="x" class="kf-scroll kf-width-100-porcent">
@@ -30,7 +35,7 @@
           </i>
         </div>
       </div>
-      <div id="menu" class="row padding-top" style="border-top: 1px solid; border-bottom: 1px solid;">
+      <div id="menu" class="row margin-top padding-top" style="border-top: 1px solid; border-bottom: 1px solid;">
         <div class="col text-center kf-no-padding">
           <button class="button button-icon kf-company-button">
             <i class="icon ion-android-map kf-company-button-icon dark"></i>Como Chegar
@@ -41,28 +46,32 @@
             <i class="icon ion-android-camera kf-company-button-icon "></i>Galeria
           </button>
         </div>
+        <!--
         <div class="col text-center kf-no-padding">
           <button class="button button-icon kf-company-button kf-no-padding">
             <i class="icon ion-android-star kf-company-button-icon"></i>Favoritos
           </button>
         </div>
+        -->
         <div class="col text-center kf-no-padding">
           <button class="button button-icon kf-company-button kf-no-padding">
             <i class="icon ion-ios-compose kf-company-button-icon"></i>Avaliar
           </button>
         </div>
       </div>
-      <div id="lbRating" class="padding-top kf-title-black">Avaliações</div>
-      <ion-scroll id="scrollRating" kf-scroll-heigth>
-        <div class="list card kf-no-margin-left kf-no-margin-right">
-          <div class="item item-avatar item-text-wrap">
-            <!--
-            <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
-            -->
-            <img ng-if="true" ng-src="images/default-logo.png">
+      <section ng-if="vm.ratings.length > 0">
+        <div id="lbRating" class="padding-top kf-title-black">Avaliações</div>
+        <ion-scroll id="scrollRating" kf-scroll-heigth>
+          <div class="list card kf-no-margin-left kf-no-margin-right">
+            <div class="item item-avatar item-text-wrap" ng-repeat="item in vm.ratings track by $index">
+              <img ng-if="item.imgUser === null" ng-src="images/default-logo.png">
+              <img ng-if="item.imgUser !== null" ng-src="data:image/*;base64,{{item.imgUser}}">
+            </div>
           </div>
-        </div>
-      </ion-scroll>
+          <ion-infinite-scroll ng-if="vm.isInfiniteScroll" on-infinite="vm.infiniteScroll();">
+          </ion-infinite-scroll>
+        </ion-scroll>
+      </section>
     </ion-content>
   </section>
 </ion-view>
