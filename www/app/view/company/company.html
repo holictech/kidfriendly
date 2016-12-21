@@ -16,13 +16,13 @@
             <div class="kf-wrap">
               <ion-scroll direction="x" class="kf-scroll kf-width-100-porcent">
                 <div class="row padding-top">
-                  <div class="col-90" ng-repeat="item in vm.characteristics track by $index">
-                    <h6 class="kf-no-margin">{{item}}</h6>
+                  <div class="col-80" ng-repeat="item in vm.characteristics track by item.idCharacteristic">
+                    <h6 class="kf-no-margin">{{item.desCharacteristic}}</h6>
                   </div>
                 </div>
                 <div class="row padding-top">
-                  <div class="col-90" ng-repeat="item in vm.halfCharacteristics track by $index">
-                    <h6 class="kf-no-margin">{{item}}</h6>
+                  <div class="col-80" ng-repeat="item in vm.halfCharacteristics track by item.idCharacteristic">
+                    <h6 class="kf-no-margin">{{item.desCharacteristic}}</h6>
                   </div>
                 </div>
               </ion-scroll>
@@ -60,12 +60,31 @@
         </div>
       </div>
       <section ng-if="vm.ratings.length > 0">
-        <div id="lbRating" class="padding-top kf-title-black">Avaliações</div>
+        <div id="lbRating" class="padding-top padding-left kf-title-black">Avaliações</div>
         <ion-scroll id="scrollRating" kf-scroll-heigth>
-          <div class="list card kf-no-margin-left kf-no-margin-right">
-            <div class="item item-avatar item-text-wrap" ng-repeat="item in vm.ratings track by $index">
+          <div class="list card">
+            <div class="item item-avatar item-text-wrap" ng-repeat="item in vm.ratings track by item.idRating">
               <img ng-if="item.imgUser === null" ng-src="images/default-logo.png">
               <img ng-if="item.imgUser !== null" ng-src="data:image/*;base64,{{item.imgUser}}">
+              <h3 class="kf-no-margin">
+                <div class="kf-float-left kf-width-80-porcent">
+                  <div>{{vm.getFirstLastName(item.desNameUser)}}</div>
+                  <h4 style="opacity: 0.5">{{item.dtRating | maskDate:'DD/MM/YYYY HH:mm:ss'}}</h4>
+                </div>
+                <div class="kf-float-right kf-width-20-porcent text-right">
+                  <img ng-src="images/status-kidfriendly-{{item.idStatusKidFriendly}}.png" class="kf-list-icon-rate">
+                </div>
+              </h3>
+              <h4 class="kf-clear kf-text-align-justify padding-top">
+                {{item.desRating}}
+              </h4>
+              <section ng-if="item.desAnswer !== null && item.desAnswer.length > 0">
+                <hr/>
+                <h4>{{item.desNameCompany}}</h4>
+                <h5 class="kf-text-align-justify" style="padding-left: 5%;">
+                  {{item.desAnswer}}
+                </h5>
+              </section>
             </div>
           </div>
           <ion-infinite-scroll ng-if="vm.isInfiniteScroll" on-infinite="vm.infiniteScroll();">

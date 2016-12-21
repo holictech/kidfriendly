@@ -38,29 +38,34 @@
       });
     };
 
+    vm.getFirstLastName = function(name) {
+      var strName = '';
+      name = name.split(' ');
+      strName = name[0] + ' ' + ((name.length > 1) ? name[name.length - 1] : '');
+
+      return strName;
+    };
+
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function () {
         vm.isVisible = false;
-        var companyDto = $state.params.params;
+        var company = $state.params.params.company;
+        var idCategory = $state.params.params.idCategory;
 
-        if(CompanyService.isObject(companyDto)) {
-          CompanyService.details(companyDto.idCompany).then(function(response) {
+        if(CompanyService.isObject(company)) {
+          CompanyService.details(company.idCompany, idCategory).then(function(response) {
             if (angular.isString(response)) {
               vm.hideLoading();
               CompanyService.ionicPopupAlertError(response).then(function() {
                 vm.goBack();
               });
             } else {
-              paginatorDto = response.ratingResultDto.paginatorDto;
+              paginatorDto = response.ratings.paginatorDto;
               vm.company = response.company;
               vm.address = getAddress(vm.company);
-              vm.ratings = response.ratingResultDto.results;
-
-              /*
-              vm.characteristics = [1, 2, 3, 4 , 5, 6, 7, 8, 9];
+              vm.ratings = response.ratings.results;
+              vm.characteristics = response.characteristics;
               vm.halfCharacteristics = vm.characteristics.splice(Math.ceil((vm.characteristics.length / 2)));
-              */
-
               vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
               vm.isVisible = true;
               vm.timeoutHideLoading();

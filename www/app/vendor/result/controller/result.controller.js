@@ -43,7 +43,7 @@
 
     vm.detailsCompany = function(company) {
       vm.showLoading();
-      $state.go('main.company', (angular.isUndefined(company) ? null : {'params': company}));
+      $state.go('main.company', (angular.isUndefined(company) ? null : {'params': {'company': company, 'idCategory': filters.idCategory}}));
     };
 
     function initialize() {

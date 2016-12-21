@@ -33,7 +33,7 @@
     };
 
     vm.search = function() {
-      if (vm.characteristcsSelected.length === 0) {
+      if (vm.characteristcsSelected.length === 0 && !vm.isNextToMe && !vm.isSuperKidFriendly) {
         SearchService.ionicPopupAlertAttention('Nenhum filtro selecionado.');
         return;
       }

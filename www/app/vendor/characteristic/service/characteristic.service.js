@@ -15,7 +15,7 @@
       var abstractService = new AbstractService();
 
       if (this.isUndefined(characteristics) || characteristics === null) {
-        this.httpGet(this.getURI() + '/listbycategory', category).then(function(response) {
+        this.httpGet(this.getURI() + '/listbycategory/' + category.idCategory).then(function(response) {
           if (angular.isString(response)) {
             q.reject(response);
           } else {

@@ -113,6 +113,10 @@
 .kf-font-weight-bold {
   font-weight: bold;
 }
+
+.kf-text-align-justify {
+  text-align: justify
+}
 /* END TEXT */
 
 /* CONTAINER */
@@ -120,8 +124,16 @@
   width: 100% !important;
 }
 
+.kf-width-80-porcent {
+  width: 80% !important;
+}
+
 .kf-width-50-porcent {
   width: 50% !important;
+}
+
+.kf-width-20-porcent {
+  width: 20% !important;
 }
 
 .kf-height-100-porcent {
@@ -320,12 +332,13 @@ ion-popover-view .kf-menu ion-content {
 .platform-android ion-popover-view .kf-menu {
   margin-top: 10px;
 }
+/* END MENU */
 
-/* MENU */
-.kf-home-icon-rate {
+/* LIST*/
+.kf-list-icon-rate {
   width: 3.3ex;
 }
-/* END HOME */
+/* END LIST */
 
 /* COMPANY */
 .kf-company-icon-rate {
