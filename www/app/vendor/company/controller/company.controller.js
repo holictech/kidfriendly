@@ -46,6 +46,28 @@
       return strName;
     };
 
+    vm.launchNavigator = function() {
+      vm.showLoading();
+      CompanyService.getGeolocation().then(function(response) {
+        if (angular.isString(response)) {
+          CompanyService.ionicPopupAlertAttention(response);
+        } else {
+          if (angular.isObject(vm.company.address)) {
+            var destination = [vm.company.address.numLatitude, vm.company.address.numLongitude];
+            var start = [response.latitude, response.longitude];
+
+            launchnavigator.navigate(destination, {
+              'start': start,
+              'appSelectionDialogHeader': 'Selecione o aplicativo para navegação.',
+              'appSelectionCancelButton': 'Cancelar'
+            });
+          }
+        }
+
+        vm.hideLoading();
+      });
+    };
+
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function () {
         vm.isVisible = false;
