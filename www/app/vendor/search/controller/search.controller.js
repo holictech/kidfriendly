@@ -77,7 +77,7 @@
         }
 
         vm.dsCategory = getDsCategory(category.idCategory);
-        CharacteristicService.listByCategory(category).then(function(response) {
+        CharacteristicService.listByCategory(category.idCategory).then(function(response) {
           vm.characteristics = response;
           vm.halfCharacteristics = vm.characteristics.splice(Math.ceil((vm.characteristics.length / 2)));
           vm.isVisible = true;
@@ -113,20 +113,16 @@
     function executeSearch(params) {
       vm.showLoading();
       SearchService.get(params).then(function(response) {
-        if (angular.isString(response)) {
-          vm.hideLoading();
-          SearchService.ionicPopupAlertError(response);
-        } else if (angular.isObject(response) &&
-                   ((response.results === null) ||
-                   (angular.isArray(response.results) && response.results.length === 0))) {
-          vm.hideLoading();
-          SearchService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
-        } else if (angular.isObject(response) &&
-                   angular.isArray(response.results) &&
-                   response.results.length !== 0) {
-          $state.go('main.result', {'params': {filters: params, 'response': response}});
+        if (angular.isObject(response) && angular.isArray(response.results) && response.results.length !== 0) {
+          $state.go('main.result', {'params': {filters: params, 'response': response, 'dsCategory': getDsCategory(params.idCategory)}});
         } else {
           vm.hideLoading();
+
+          if (angular.isString(response)) {
+            SearchService.ionicPopupAlertError(response);
+          } else {
+            SearchService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
+          }
         }
       });
     }

@@ -16,7 +16,6 @@
     };
 
     vm.showMenu = function(event) {
-      console.log(event);
       $ionicPopover.fromTemplateUrl('app/view/main/menu.html', {
         scope: $scope
       }).then(function(popover) {

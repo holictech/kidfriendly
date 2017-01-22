@@ -1,5 +1,6 @@
 <ion-view>
   <ion-content class="padding has-header has-footer">
+    <div class="padding-left kf-title-black">{{vm.dsCategory}} encontrados:</div>
     <div class="list card" ng-if="vm.results.length > 0">
       <a class="item item-thumbnail-left item-icon-right item-text-wrap" href="#" ng-repeat="item in vm.results track by item.idCompany"
         ng-click="vm.detailsCompany(item);">

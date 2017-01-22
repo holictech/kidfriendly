@@ -12,6 +12,7 @@
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.results = [];
     vm.isInfiniteScroll = false;
+    vm.dsCategory = '';
     initialize();
 
     vm.infiniteScroll = function() {
@@ -36,7 +37,7 @@
           vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
           vm.timeoutHideLoading();
         }
-
+      }).finally(function() {
         $scope.$broadcast('scroll.infiniteScrollComplete');
       });
     };
@@ -52,6 +53,7 @@
         paginatorDto = $state.params.params.response.paginatorDto;
         vm.results = $state.params.params.response.results;
         vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
+        vm.dsCategory = $state.params.params.dsCategory;
         vm.timeoutHideLoading();
       });
     }

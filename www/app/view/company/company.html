@@ -30,8 +30,9 @@
           </div>
         </div>
         <div class="col-20 kf-no-padding kf-display-flex text-center">
-          <i class="icon" ng-if="vm.company.numRate !== null">
-            <img ng-src="images/status-kidfriendly-{{vm.company.numRate}}.png" class="kf-company-icon-rate">
+          <i class="icon">
+            <img ng-if="vm.company.numRate !== null" ng-src="images/status-kidfriendly-{{vm.company.numRate}}.png" class="kf-company-icon-rate">
+            <img ng-if="vm.company.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-company-icon-rate">
           </i>
         </div>
       </div>
@@ -42,7 +43,7 @@
           </button>
         </div>
         <div class="col text-center kf-no-padding">
-          <button class="button button-icon kf-company-button kf-no-padding">
+          <button class="button button-icon kf-company-button kf-no-padding" ng-click="vm.showGallery();">
             <i class="icon ion-android-camera kf-company-button-icon "></i>Galeria
           </button>
         </div>
@@ -64,7 +65,7 @@
         <ion-scroll id="scrollRating" kf-scroll-heigth>
           <div class="list card">
             <div class="item item-avatar item-text-wrap" ng-repeat="item in vm.ratings track by item.idRating">
-              <img ng-if="item.imgUser === null" ng-src="images/default-logo.png">
+              <img ng-if="item.imgUser === null" ng-src="images/empty-avatar.jpg">
               <img ng-if="item.imgUser !== null" ng-src="data:image/*;base64,{{item.imgUser}}">
               <h3 class="kf-no-margin">
                 <div class="kf-float-left kf-width-80-porcent">
