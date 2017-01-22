@@ -138,9 +138,23 @@
         return $cookies.getObject(key);
       };
 
-      this.putCookies = function(key, value, days) {
+      this.putCookies = function(key, value, hours, minutes) {
         var expire = new Date();
-        expire.setDate(expire.getDate() + ((this.isUndefined(days)) ? 1 : days));
+
+        if (!this.isUndefined(hours)) {
+          expire.setHours(expire.getHours() + hours);
+        }
+
+        if (!this.isUndefined(minutes)) {
+          expire.setMinutes(expire.getMinutes() + minutes);
+        }
+
+        if (this.isUndefined(hours) && this.isUndefined(minutes)) {
+          expire.setDate(expire.getDate() + 1);
+        }
+
+        console.log(expire);
+
         $cookies.putObject(key, value, {expires: expire});
       };
     };
