@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').controller('MainController', MainController);
-
   MainController.$inject = ['$rootScope', '$scope', '$state', '$ionicPopover', '$controller', '$ionicPlatform'];
 
   function MainController($rootScope, $scope, $state, $ionicPopover, $controller, $ionicPlatform) {

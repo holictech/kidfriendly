@@ -32,7 +32,7 @@
         <div class="col-20 kf-no-padding kf-display-flex text-center">
           <i class="icon">
             <img ng-if="vm.company.numRate !== null" ng-src="images/status-kidfriendly-{{vm.company.numRate}}.png" class="kf-company-icon-rate">
-            <img ng-if="vm.company.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-company-icon-rate">
+            <img ng-if="vm.company.numRate === null" ng-src="images/status-kidfriendly-1.png" class="kf-company-icon-rate">
           </i>
         </div>
       </div>
@@ -55,7 +55,7 @@
         </div>
         -->
         <div class="col text-center kf-no-padding">
-          <button class="button button-icon kf-company-button kf-no-padding">
+          <button class="button button-icon kf-company-button kf-no-padding" ng-click="vm.showRating();">
             <i class="icon ion-ios-compose kf-company-button-icon"></i>Avaliar
           </button>
         </div>

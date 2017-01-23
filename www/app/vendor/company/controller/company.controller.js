@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-
   CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService'];
 
   function CompanyController(CompanyService, $scope, $state, $controller, maskFilter, RatingService, $ionicModal, ImageService) {
@@ -18,6 +17,7 @@
     vm.images = [];
     vm.isInfiniteScroll = false;
     vm.isVisible = false;
+    vm.rating = {};
     initialize();
 
     vm.launchNavigator = function() {
@@ -68,7 +68,32 @@
     };
 
     vm.closeGallery = function() {
-      vm.gallery.hide();
+      vm.modalGallery.hide();
+    };
+
+    vm.showRating = function() {
+      vm.rating = {};
+      openRating();
+    };
+
+    vm.closeRating = function() {
+      vm.modalRating.hide();
+    };
+
+    vm.selectedStatusRating = function(event, idStatusKidFriendly) {
+      vm.rating.statusKidFriendly = {
+        'idStatusKidFriendly': idStatusKidFriendly
+      };
+
+      angular.forEach(document.querySelectorAll('.kf-rating-icon-rate'), function(value, key) {
+        angular.element(value)[0].classList.remove('kf-rating-icon-rate-active');
+      });
+
+      event.srcElement.classList.add('kf-rating-icon-rate-active');
+    };
+
+    vm.includeRating = function() {
+      //IMPLEMENTAR A LOGICA PARA GRAVAR
     };
 
     vm.getFirstLastName = function(name) {
@@ -84,7 +109,6 @@
         'currentPage': paginatorDto.currentPage + 1,
         'pageSize': paginatorDto.pageSize
       };
-
       vm.showLoading();
       RatingService.listByCompany(vm.company.idCompany, params).then(function(response) {
         if (angular.isString(response)) {
@@ -147,14 +171,15 @@
 
     function openGallery() {
       $ionicModal.fromTemplateUrl('app/view/company/gallery.html', {
-        scope: $scope
+        scope: $scope,
+        animation: 'kf-slide-in-down'
       }).then(function(modal) {
-        var stopListening = $scope.$on('modal.hidden', function() {
-          stopListening();
-          vm.gallery.remove();
+        var stopListeningGallery = $scope.$on('modal.hidden', function() {
+          stopListeningGallery();
+          vm.modalGallery.remove();
         });
-        vm.gallery = modal;
-        vm.gallery.show().then(function() {
+        vm.modalGallery = modal;
+        vm.modalGallery.show().then(function() {
           var galleryTop = new ionic.views.Swiper(angular.element(document.querySelector('.kf-gallery-top')), {
             spaceBetween: 5,
             preloadImages: false,
@@ -172,10 +197,23 @@
         });
       });
     }
+
+    function openRating() {
+      $ionicModal.fromTemplateUrl('app/view/company/rating.html', {
+        scope: $scope,
+        animation: 'kf-slide-in-down'
+      }).then(function(modal) {
+        var stopListeningRating = $scope.$on('modal.hidden', function() {
+          stopListeningRating();
+          vm.modalRating.remove();
+        });
+        vm.modalRating = modal;
+        vm.modalRating.show();
+      });
+    }
   }
 
   angular.module('kidfriendly').directive('kfScrollHeigth', ScrollHeigth);
-
   ScrollHeigth.$inject = ['$window'];
 
   function ScrollHeigth($window) {

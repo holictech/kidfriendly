@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').controller('SearchController', SearchController);
-
   SearchController.$inject = ['SearchService', 'CharacteristicService', '$scope', '$state', '$controller', '$ionicScrollDelegate'];
 
   function SearchController(SearchService, CharacteristicService, $scope, $state, $controller, $ionicScrollDelegate) {
@@ -84,7 +83,7 @@
           vm.timeoutHideLoading();
         }, function(response) {
           vm.characteristics = [];
-          vm.halfCharacteristics = 0;
+          vm.halfCharacteristics = [];
           vm.isVisible = false;
           vm.hideLoading();
           SearchService.ionicPopupAlertError(response);

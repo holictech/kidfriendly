@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').controller('HomeController', HomeController);
-
   HomeController.$inject = ['HomeService', '$scope', '$state', '$controller'];
 
   function HomeController(HomeService, $scope, $state, $controller) {

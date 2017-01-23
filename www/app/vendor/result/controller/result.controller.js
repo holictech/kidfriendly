@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').controller('ResultController', ResultController);
-
   ResultController.$inject = ['SearchService', '$scope', '$state', '$controller'];
 
   function ResultController(SearchService, $scope, $state, $controller) {
@@ -25,7 +24,6 @@
         'currentPage': paginatorDto.currentPage + 1,
         'pageSize': paginatorDto.pageSize
       };
-
       vm.showLoading();
       SearchService.get(params).then(function(response) {
         if (angular.isString(response)) {

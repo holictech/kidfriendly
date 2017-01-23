@@ -1,0 +1,43 @@
+<ion-modal-view>
+  <ion-header-bar align-title="center">
+    <h1 class="title">Avaliação</h1>
+    <div class="buttons">
+      <button class="button button-icon icon ion-ios-close-empty" ng-click="vm.closeRating();"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="padding" scroll="false">
+    <form name="vm.formRating" novalidate ng-submit="vm.includeRating();">
+      <div class="padding">
+        <div class="kf-title-black text-center">O local visitado é:</div>
+        <div class="row">
+          <div class="col text-center">
+            <img ng-src="images/status-kidfriendly-1.png" class="kf-rating-icon-rate"
+              ng-click="vm.selectedStatusRating($event, 1);">
+          </div>
+          <div class="col text-center">
+            <img ng-src="images/status-kidfriendly-2.png" class="kf-rating-icon-rate"
+              ng-click="vm.selectedStatusRating($event, 2);">
+          </div>
+          <div class="col text-center">
+            <img ng-src="images/status-kidfriendly-3.png" class="kf-rating-icon-rate"
+              ng-click="vm.selectedStatusRating($event, 3);">
+          </div>
+          <div class="col text-center">
+            <img ng-src="images/status-kidfriendly-4.png" class="kf-rating-icon-rate"
+              ng-click="vm.selectedStatusRating($event, 4);">
+          </div>
+        </div>
+      </div>
+      <div class="padding kf-title-black">Qual seu comentário sobre sua experiência no local?</div>
+      <div class="padding kf-width-100-porcent">
+        <textarea id="desRating" name="desRating" maxlength="250" ng-model="vm.rating.desRating" required></textarea>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-outline button-block button-stable"
+          ng-disabled="vm.formRating.$invalid || vm.rating.statusKidFriendly === undefined">
+          Avaliar
+        </button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

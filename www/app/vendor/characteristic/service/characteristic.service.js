@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').service('CharacteristicService', CharacteristicService);
-
   CharacteristicService.$inject = ['AbstractService', '$q'];
 
   function CharacteristicService(AbstractService, $q) {

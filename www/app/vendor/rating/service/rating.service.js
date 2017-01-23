@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').service('RatingService', RatingService);
-
   RatingService.$inject = ['AbstractService'];
 
   function RatingService(AbstractService) {

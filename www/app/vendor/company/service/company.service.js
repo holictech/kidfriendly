@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').service('CompanyService', CompanyService);
-
   CompanyService.$inject = ['AbstractService'];
 
   function CompanyService(AbstractService) {

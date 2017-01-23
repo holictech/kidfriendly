@@ -1,4 +1,4 @@
-<ion-view>
+<ion-modal-view>
   <ion-header-bar align-title="center">
     <h1 class="title">Galeria</h1>
     <div class="buttons">
@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content class="padding" scroll="false">
-    <div class="kf-gallery-top has-header">
+    <div class="kf-gallery-top">
       <div class="swiper-wrapper">
         <div class="swiper-slide" ng-repeat="item in vm.images track by item.idImage">
           <img ng-if="item.imgImage !== null" ng-src="data:image/*;base64,{{item.imgImage}}" class="kf-gallery-img">
@@ -23,4 +23,4 @@
       </div>
     </div>
   </ion-footer-bar>
-</ion-view>
+</ion-modal-view>

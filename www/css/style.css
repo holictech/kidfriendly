@@ -102,6 +102,29 @@
   background-size: cover !important;
   background-position: center !important;
 }
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  border: 1px solid !important;
+  width: 100% !important;
+}
+
+textarea {
+  height: 68px !important;
+}
 /* END OVERRIDE IONIC */
 
 /* TEXT */
@@ -392,3 +415,16 @@ ion-popover-view .kf-menu ion-content {
   opacity: 1;
 }
 /* END GALLERY */
+
+/* RATING */
+.kf-rating-icon-rate {
+  width: 100%;
+  opacity: 0.2;
+}
+
+.kf-rating-icon-rate-active {
+  width: 100%;
+  opacity: 1;
+}
+
+/* END RATING */
