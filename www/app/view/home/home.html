@@ -10,8 +10,8 @@
           <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
           <img ng-if="item.imgLogo === null" ng-src="images/default-logo.png">
           <h2>{{item.desName}}</h2>
-          <h4 ng-if="item.desState !== null && item.desCity !== null">
-            {{item.desCity}}/{{item.desState}}
+          <h4 ng-if="item.addressDto.cityDto.desCity !== null && item.addressDto.cityDto.desState !== null">
+            {{item.addressDto.cityDto.desCity}}/{{item.addressDto.cityDto.desState}}
           </h4>
           <i class="icon" ng-if="item.numRate !== null">
             <img ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-list-icon-rate">
@@ -27,8 +27,8 @@
           <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
           <img ng-if="item.imgLogo === null" ng-src="images/default-logo.png">
           <h2>{{item.desName}}</h2>
-          <h4 ng-if="item.desState !== null && item.desCity !== null">
-            {{item.desCity}}/{{item.desState}}
+          <h4 ng-if="item.addressDto.cityDto.desCity !== null && item.addressDto.cityDto.desState !== null">
+            {{item.addressDto.cityDto.desCity}}/{{item.addressDto.cityDto.desState}}
           </h4>
           <i class="icon" ng-if="item.numRate !== null">
             <img ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-list-icon-rate">
