@@ -23,13 +23,13 @@
     function initialize(isShowMessageGeolocation) {
       vm.showLoading();
       HomeService.getGeolocation().then(function(response) {
-        if (angular.isString(response) && isShowMessageGeolocation) {
+        if (response.error && isShowMessageGeolocation) {
           vm.hideLoading();
-          HomeService.ionicPopupAlertAttention(response).then(function() {
+          HomeService.ionicPopupAlertAttention(response.message).then(function() {
             listCompanies();
           });
         } else {
-          listCompanies(response);
+          listCompanies(response.data);
         }
       });
     }
@@ -39,9 +39,9 @@
         var suggestions = [];
         var nextToMe = [];
 
-        if (HomeService.isObject(response)) {
-          suggestions = response.suggestions;
-          nextToMe = response.nextToMe;
+        if (!response.error) {
+          suggestions = response.data.suggestions;
+          nextToMe = response.data.nextToMe;
 
           if (suggestions.length === 0 && nextToMe.length === 0) {
             vm.hideLoading();
@@ -49,7 +49,7 @@
           }
         } else {
           vm.hideLoading();
-          HomeService.ionicPopupAlertError(response);
+          HomeService.ionicPopupAlertError(response.message);
         }
 
         vm.timeoutHideLoading();

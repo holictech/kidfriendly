@@ -6,17 +6,28 @@
 
   function AbstractService(Upload, $http, $cordovaGeolocation, $ionicPopup, $cookies) {
     var AbstractService = function(uri) {
+      //var _uri = 'http://localhost:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.2.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.3.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
-      var _uri = 'http://192.168.0.14:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
-      //var _uri = 'http://kidfriendly.servehttp.com:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
+      //var _uri = 'http://192.168.0.14:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
+      var _uri = 'http://kidfriendly.servehttp.com:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       var method = {
         success: function(response) {
-          return response.data;
+          var _response = {
+            error: false,
+            data: response.data
+          }
+
+          return _response;
         },
 
         error: function(response) {
-          return ((angular.isUndefined(response.data) || response.data === null || response.status === 0) ? 'Serviço indisponível.' : response.data.message);
+          var _response = {
+            error: true,
+            message: ((angular.isUndefined(response.data) || response.data === null || angular.isUndefined(response.data.message) || response.data.message === null) ? "Serviço indisponível.<br/>Tente mais tarde." : response.data.message)
+          }
+
+          return _response;
         },
 
         upload: function (uri, method, formData) {
@@ -29,14 +40,23 @@
         },
 
         geolocationSuccess: function(response) {
-          return {
-            longitude: response.coords.longitude,
-            latitude: response.coords.latitude
-          };
+          var _response = {
+            error: false,
+            data: {
+              longitude: response.coords.longitude,
+              latitude: response.coords.latitude
+            }
+          }
+          return _response;
         },
 
         geolocationError: function() {
-          return "Localização não disponível.";
+          var _response = {
+            error: true,
+            message: 'Localização não disponível.'
+          }
+
+          return _response;
         },
 
         isObject: function(object) {
@@ -125,12 +145,8 @@
         return this.ionicPopupAlert('Atenção', message, 'kf-popup-attention');
       };
 
-      this.isObject = function(object) {
-        return method.isObject(object);
-      };
-
-      this.isUndefined = function(object) {
-        return method.isUndefined(object);
+      this.ionicPopupAlertSuccess = function(message) {
+        return this.ionicPopupAlert('Sucesso', method.isUndefined(message) ? 'Operação realizada com sucesso.' : message, 'kf-popup-success');
       };
 
       this.getCookies = function(key) {
@@ -140,15 +156,15 @@
       this.putCookies = function(key, value, hours, minutes) {
         var expire = new Date();
 
-        if (!this.isUndefined(hours)) {
+        if (!method.isUndefined(hours)) {
           expire.setHours(expire.getHours() + hours);
         }
 
-        if (!this.isUndefined(minutes)) {
+        if (!method.isUndefined(minutes)) {
           expire.setMinutes(expire.getMinutes() + minutes);
         }
 
-        if (this.isUndefined(hours) && this.isUndefined(minutes)) {
+        if (method.isUndefined(hours) && method.isUndefined(minutes)) {
           expire.setDate(expire.getDate() + 1);
         }
 

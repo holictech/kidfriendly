@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').service('RatingService', RatingService);
-  RatingService.$inject = ['AbstractService'];
+  RatingService.$inject = ['AbstractService', '$http'];
 
-  function RatingService(AbstractService) {
+  function RatingService(AbstractService, $http) {
     AbstractService.call(this, '/rating');
 
     this.listByCompany = function(idCompany, params) {

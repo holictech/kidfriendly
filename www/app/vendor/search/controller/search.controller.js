@@ -46,14 +46,14 @@
       if (vm.isNextToMe) {
         vm.showLoading();
         SearchService.getGeolocation().then(function(response) {
-          if (angular.isString(response)) {
+          if (response.error) {
             vm.hideLoading();
-            SearchService.ionicPopupAlertAttention(response).then(function() {
+            SearchService.ionicPopupAlertAttention(response.message).then(function() {
               executeSearch(params);
             });
           } else {
-            params.longitude = response.longitude;
-            params.latitude = response.latitude;
+            params.longitude = response.data.longitude;
+            params.latitude = response.data.latitude;
             executeSearch(params);
           }
         });
@@ -86,7 +86,7 @@
           vm.halfCharacteristics = [];
           vm.isVisible = false;
           vm.hideLoading();
-          SearchService.ionicPopupAlertError(response);
+          SearchService.ionicPopupAlertError(response.message);
         });
       });
     }
@@ -112,16 +112,14 @@
     function executeSearch(params) {
       vm.showLoading();
       SearchService.get(params).then(function(response) {
-        if (angular.isObject(response) && angular.isArray(response.results) && response.results.length !== 0) {
-          $state.go('main.result', {'params': {filters: params, 'response': response, 'dsCategory': getDsCategory(params.idCategory)}});
-        } else {
+        if (response.error) {
           vm.hideLoading();
-
-          if (angular.isString(response)) {
-            SearchService.ionicPopupAlertError(response);
-          } else {
-            SearchService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
-          }
+          SearchService.ionicPopupAlertError(response.message);
+        } else if (response.data.results.length === 0) {
+          vm.hideLoading();
+          SearchService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
+        } else {
+          $state.go('main.result', {'params': {filters: params, 'response': response, 'dsCategory': getDsCategory(params.idCategory)}});
         }
       });
     }

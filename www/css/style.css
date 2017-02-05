@@ -333,6 +333,13 @@ textarea {
   background-position: left;
   background-repeat: no-repeat;
 }
+
+.kf-popup-success .popup-head {
+  padding-left: 40px !important;
+  background-image: url('../images/icon-success-32x32.png');
+  background-position: left;
+  background-repeat: no-repeat;
+}
 /* END POPUP */
 
 /* SCROLL */

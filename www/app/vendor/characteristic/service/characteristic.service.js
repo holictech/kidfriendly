@@ -13,16 +13,16 @@
       var characteristics = this.getCookies(prefixCookie + idCategory);
       var abstractService = new AbstractService();
 
-      if (this.isUndefined(characteristics) || characteristics === null) {
+      if (angular.isUndefined(characteristics) || characteristics === null) {
         this.httpGet(this.getURI() + '/listbycategory/' + idCategory).then(function(response) {
-          if (angular.isString(response)) {
+          if (response.error) {
             q.reject(response);
           } else {
-            q.resolve(response);
-            abstractService.putCookies(prefixCookie + idCategory, response);
+            q.resolve(response.data);
+            abstractService.putCookies(prefixCookie + idCategory, response.data);
           }
         });
-      } else if (this.isObject(characteristics)) {
+      } else if (angular.isObject(characteristics)) {
         q.resolve(characteristics);
       } else {
         q.resolve([]);

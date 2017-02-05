@@ -26,12 +26,12 @@
       };
       vm.showLoading();
       SearchService.get(params).then(function(response) {
-        if (angular.isString(response)) {
+        if (response.error) {
           vm.hideLoading();
-          SearchService.ionicPopupAlertError(response);
+          SearchService.ionicPopupAlertError(response.message);
         } else {
-          paginatorDto = response.paginatorDto;
-          vm.results = vm.results.concat(response.results);
+          paginatorDto = response.data.paginatorDto;
+          vm.results = vm.results.concat(response.data.results);
           vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
           vm.timeoutHideLoading();
         }
@@ -48,8 +48,8 @@
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         filters = $state.params.params.filters;
-        paginatorDto = $state.params.params.response.paginatorDto;
-        vm.results = $state.params.params.response.results;
+        paginatorDto = $state.params.params.response.data.paginatorDto;
+        vm.results = $state.params.params.response.data.results;
         vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
         vm.dsCategory = $state.params.params.dsCategory;
         vm.timeoutHideLoading();

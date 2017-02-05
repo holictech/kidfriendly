@@ -48,18 +48,18 @@
         vm.images = [];
         vm.showLoading();
         ImageService.listByCompany(idCompany).then(function(response) {
-          if (angular.isObject(response) && angular.isArray(response) && response.length !== 0) {
-            vm.images = response;
-            vm.timeoutHideLoading();
-            openGallery();
-          } else {
-            vm.hideLoading();
-
-            if (angular.isString(response)) {
-              ImageService.ionicPopupAlertError(response);
+          if (!response.error) {
+            if (response.data.length !== 0) {
+              vm.images = response.data;
+              vm.timeoutHideLoading();
+              openGallery();
             } else {
+              vm.hideLoading();
               ImageService.ionicPopupAlertAttention('Nenhuma imagem encontrada.');
             }
+          } else {
+            vm.hideLoading();
+            ImageService.ionicPopupAlertError(response.message);
           }
         });
       } else {
@@ -74,6 +74,7 @@
     vm.showRating = function() {
       vm.rating = {};
       openRating();
+      //implementar a regra que verifica se o usuário está logado e está no prazo para efetuar um novo comentario
     };
 
     vm.closeRating = function() {
@@ -81,9 +82,7 @@
     };
 
     vm.selectedStatusRating = function(event, idStatusKidFriendly) {
-      vm.rating.statusKidFriendly = {
-        'idStatusKidFriendly': idStatusKidFriendly
-      };
+      vm.rating.statusKidFriendly = {'idStatusKidFriendly': idStatusKidFriendly};
 
       angular.forEach(document.querySelectorAll('.kf-rating-icon-rate'), function(value, key) {
         angular.element(value)[0].classList.remove('kf-rating-icon-rate-active');
@@ -93,7 +92,18 @@
     };
 
     vm.includeRating = function() {
-      //IMPLEMENTAR A LOGICA PARA GRAVAR
+      vm.rating.company = {'idCompany': vm.company.idCompany};
+      vm.rating.user = {'idUser': 1};
+      vm.showLoading();
+      RatingService.include(vm.rating).then(function(response) {
+        vm.hideLoading();
+
+        if (response.error) {
+          RatingService.ionicPopupAlertError(response.message);
+        } else {
+          RatingService.ionicPopupAlertSuccess();
+        }
+      });
     };
 
     vm.getFirstLastName = function(name) {
@@ -111,12 +121,12 @@
       };
       vm.showLoading();
       RatingService.listByCompany(vm.company.idCompany, params).then(function(response) {
-        if (angular.isString(response)) {
+        if (response.error) {
           vm.hideLoading();
-          RatingService.ionicPopupAlertError(response);
+          RatingService.ionicPopupAlertError(response.message);
         } else {
-          paginatorDto = response.paginatorDto;
-          vm.ratings = vm.ratings.concat(response.results);
+          paginatorDto = response.data.paginatorDto;
+          vm.ratings = vm.ratings.concat(response.data.results);
           vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
           vm.timeoutHideLoading();
         }
@@ -131,19 +141,19 @@
         var company = $state.params.params.company;
         var idCategory = $state.params.params.idCategory;
 
-        if (CompanyService.isObject(company)) {
+        if (angular.isObject(company)) {
           CompanyService.details(company.idCompany, idCategory).then(function(response) {
-            if (angular.isString(response)) {
+            if (response.error) {
               vm.hideLoading();
-              CompanyService.ionicPopupAlertError(response).then(function() {
+              CompanyService.ionicPopupAlertError(response.message).then(function() {
                 vm.goBack();
               });
             } else {
-              paginatorDto = response.ratings.paginatorDto;
-              vm.company = response.company;
+              paginatorDto = response.data.ratings.paginatorDto;
+              vm.company = response.data.company;
               vm.address = getAddress(vm.company);
-              vm.ratings = response.ratings.results;
-              vm.characteristics = response.characteristics;
+              vm.ratings = response.data.ratings.results;
+              vm.characteristics = response.data.characteristics;
               vm.halfCharacteristics = vm.characteristics.splice(Math.ceil((vm.characteristics.length / 2)));
               vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
               vm.isVisible = true;
