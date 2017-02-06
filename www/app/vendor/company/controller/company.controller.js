@@ -26,7 +26,7 @@
         if (angular.isString(response)) {
           CompanyService.ionicPopupAlertAttention(response);
         } else {
-          if (angular.isObject(vm.company.address)) {
+          if (angular.isObject(vm.company.address) && angular.isDefined(launchnavigator)) {
             var destination = [vm.company.address.numLatitude, vm.company.address.numLongitude];
             var start = [response.latitude, response.longitude];
 
@@ -55,7 +55,7 @@
               openGallery();
             } else {
               vm.hideLoading();
-              ImageService.ionicPopupAlertAttention('Nenhuma imagem encontrada.');
+              ImageService.ionicPopupAlertAttention('Nenhuma imagem na galeria.');
             }
           } else {
             vm.hideLoading();
@@ -72,9 +72,21 @@
     };
 
     vm.showRating = function() {
-      vm.rating = {};
-      openRating();
       //implementar a regra que verifica se o usuário está logado e está no prazo para efetuar um novo comentario
+      vm.rating = {};
+      vm.showLoading();
+      RatingService.haspermission(vm.company.idCompany, 1).then(function(response) {
+        if (response.error) {
+          vm.hideLoading();
+          RatingService.ionicPopupAlertError(response.message);
+        } else if (response.data) {
+          openRating();
+          vm.timeoutHideLoading();
+        } else {
+          vm.hideLoading();
+          RatingService.ionicPopupAlertAttention('Sua última avalição ocorreu a menos de 1 mês.');
+        }
+      });
     };
 
     vm.closeRating = function() {
@@ -93,7 +105,7 @@
 
     vm.includeRating = function() {
       vm.rating.company = {'idCompany': vm.company.idCompany};
-      vm.rating.user = {'idUser': 1};
+      vm.rating.user = {'idUser': 1};//pegar a informação do usuario logado.
       vm.showLoading();
       RatingService.include(vm.rating).then(function(response) {
         vm.hideLoading();
@@ -101,7 +113,9 @@
         if (response.error) {
           RatingService.ionicPopupAlertError(response.message);
         } else {
-          RatingService.ionicPopupAlertSuccess();
+          RatingService.ionicPopupAlertSuccess().then(function() {
+            vm.closeRating();
+          });
         }
       });
     };

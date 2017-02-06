@@ -16,7 +16,7 @@
           var _response = {
             error: false,
             data: response.data
-          }
+          };
 
           return _response;
         },
@@ -25,7 +25,7 @@
           var _response = {
             error: true,
             message: ((angular.isUndefined(response.data) || response.data === null || angular.isUndefined(response.data.message) || response.data.message === null) ? "Serviço indisponível.<br/>Tente mais tarde." : response.data.message)
-          }
+          };
 
           return _response;
         },
@@ -46,7 +46,8 @@
               longitude: response.coords.longitude,
               latitude: response.coords.latitude
             }
-          }
+          };
+
           return _response;
         },
 
@@ -54,7 +55,7 @@
           var _response = {
             error: true,
             message: 'Localização não disponível.'
-          }
+          };
 
           return _response;
         },
