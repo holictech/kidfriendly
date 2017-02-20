@@ -11,21 +11,13 @@
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.results = [];
     vm.isInfiniteScroll = false;
-    vm.dsCategory = '';
     initialize();
 
     vm.infiniteScroll = function() {
-      var params = {
-        'idCharacteristic': filters.idCharacteristic,
-        'idCategory': filters.idCategory,
-        'isSuperKidFriendly': filters.isSuperKidFriendly,
-        'longitude': (angular.isDefined(filters.longitude) ? filters.longitude : null),
-        'latitude': (angular.isDefined(filters.latitude) ? filters.latitude : null),
-        'currentPage': paginatorDto.currentPage + 1,
-        'pageSize': paginatorDto.pageSize
-      };
+      filters.currentPage = paginatorDto.currentPage + 1;
+      filters.pageSize = paginatorDto.pageSize;
       vm.showLoading();
-      SearchService.get(params).then(function(response) {
+      SearchService.get(filters).then(function(response) {
         if (response.error) {
           vm.hideLoading();
           SearchService.ionicPopupAlertError(response.message);
@@ -51,7 +43,6 @@
         paginatorDto = $state.params.params.response.data.paginatorDto;
         vm.results = $state.params.params.response.data.results;
         vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
-        vm.dsCategory = $state.params.params.dsCategory;
         vm.timeoutHideLoading();
       });
     }

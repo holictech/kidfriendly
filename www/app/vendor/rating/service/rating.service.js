@@ -11,7 +11,7 @@
       return this.httpGet(this.getURI() + '/listbycompany/' + idCompany, params);
     };
 
-    this.haspermission = function(idCompany, idUser) {
+    this.hasPermission = function(idCompany, idUser) {
       return this.httpGet(this.getURI() + '/haspermission/' + idCompany + '/' + idUser);
     };
   }

@@ -1,7 +1,5 @@
 <ion-view>
   <ion-content class="padding has-header has-footer">
-    <ion-refresher on-refresh="vm.refresh();" spinner="none">
-    </ion-refresher>
     <section ng-if="vm.suggestions.length > 0">
       <div class="padding-left kf-title-black">Sugestões</div>
       <div class="list card">
@@ -36,5 +34,7 @@
         </a>
       </div>
     </section>
+    <ion-refresher on-refresh="vm.refresh();" spinner="none">
+    </ion-refresher>
   </ion-content>
 </ion-view>

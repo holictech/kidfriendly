@@ -1,19 +1,19 @@
 (function() {
   'use strict';
 
-  angular.module('kidfriendly').service('CharacteristicService', CharacteristicService);
-  CharacteristicService.$inject = ['AbstractService', '$q'];
+  angular.module('kidfriendly').service('CategoryService', CategoryService);
+  CategoryService.inject = ['AbstractService', '$q'];
 
-  function CharacteristicService(AbstractService, $q) {
-    AbstractService.call(this, '/characteristic');
+  function CategoryService(AbstractService, $q) {
+    AbstractService.call(this, '/category');
 
-    this.listByCategory = function(idCategory) {
+    this.listAll = function() {
       var defer = $q.defer();
-      var key =  'kf_category_' + idCategory;
+      var key = 'kf_categories';
       var _response = this.getSessionStorage(key);
 
       if (angular.isUndefined(_response)) {
-        this.httpGet(this.getURI() + '/listbycategory/' + idCategory).then(function(response) {
+        this.get().then(function(response) {
           if (response.error) {
             defer.reject(response);
           } else {

@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('HomeController', HomeController);
-  HomeController.$inject = ['HomeService', '$scope', '$state', '$controller'];
+  HomeController.$inject = ['HomeService', '$scope', '$controller'];
 
-  function HomeController(HomeService, $scope, $state, $controller) {
+  function HomeController(HomeService, $scope, $controller) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.suggestions = [];
@@ -12,16 +12,15 @@
     initialize(true);
 
     vm.refresh = function() {
+      vm.showLoading();
       initialize(false);
     };
 
     vm.detailsCompany = function(company) {
-      vm.showLoading();
-      $state.go('main.company', (angular.isUndefined(company) ? null : {'params': {'company': company}}));
+      vm.go('main.company', true, (angular.isUndefined(company) ? null : {'company': company}));
     };
 
     function initialize(isShowMessageGeolocation) {
-      vm.showLoading();
       HomeService.getGeolocation().then(function(response) {
         if (response.error && isShowMessageGeolocation) {
           vm.hideLoading();
@@ -55,6 +54,10 @@
         vm.timeoutHideLoading();
         vm.suggestions = suggestions;
         vm.nextToMe = nextToMe;
+
+        if (navigator && navigator.splashscreen) {
+          navigator.splashscreen.hide();
+        }
       }).finally(function() {
         $scope.$broadcast('scroll.refreshComplete');
       });

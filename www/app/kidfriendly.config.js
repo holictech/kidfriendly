@@ -2,10 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').config(Config);
-
   Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
-  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, LocalityService, CategoryService) {
     if (ionic.Platform.isAndroid()) {
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
@@ -47,7 +46,15 @@
         'main-view': {
           templateUrl: 'app/view/search/search.html',
           controller: 'SearchController',
-          controllerAs: 'vm'
+          controllerAs: 'vm',
+          resolve: {
+            statesPrepService: function(LocalityService) {
+              return LocalityService.listStateWithCityByCountry();
+            },
+            categoriesPrepService: function(CategoryService) {
+              return CategoryService.listAll();
+            }
+          }
         }
       }
     })

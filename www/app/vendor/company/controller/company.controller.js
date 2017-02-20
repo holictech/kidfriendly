@@ -23,17 +23,18 @@
     vm.launchNavigator = function() {
       vm.showLoading();
       CompanyService.getGeolocation().then(function(response) {
-        if (angular.isString(response)) {
-          CompanyService.ionicPopupAlertAttention(response);
+        if (response.error) {
+          CompanyService.ionicPopupAlertAttention(response.message);
         } else {
           if (angular.isObject(vm.company.address) && angular.isDefined(launchnavigator)) {
-            var destination = [vm.company.address.numLatitude, vm.company.address.numLongitude];
-            var start = [response.latitude, response.longitude];
+            var destination = '' + vm.company.address.numLatitude + ', ' + vm.company.address.numLongitude + '';
+            var start = '' + response.data.latitude + ', ' + response.data.longitude + '';
 
             launchnavigator.navigate(destination, {
               'start': start,
               'appSelectionDialogHeader': 'Selecione o aplicativo para navegação.',
-              'appSelectionCancelButton': 'Cancelar'
+              'appSelectionCancelButton': 'Cancelar',
+              'appSelectionList': [launchnavigator.APP.GOOGLE_MAPS, launchnavigator.APP.APPLE_MAPS, launchnavigator.APP.WAZE]
             });
           }
         }
@@ -75,7 +76,7 @@
       //implementar a regra que verifica se o usuário está logado e está no prazo para efetuar um novo comentario
       vm.rating = {};
       vm.showLoading();
-      RatingService.haspermission(vm.company.idCompany, 1).then(function(response) {
+      RatingService.hasPermission(vm.company.idCompany, 1).then(function(response) {
         if (response.error) {
           vm.hideLoading();
           RatingService.ionicPopupAlertError(response.message);

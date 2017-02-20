@@ -8,7 +8,7 @@
           <h6 class="kf-no-margin" ng-if="vm.company.phones !== null && vm.company.phones.length > 0">
             Tel:
             <span ng-repeat="item in vm.company.phones track by item.idPhone">
-              {{$index > 0 ? ', ' : ''}}{{item.numPhone | mask:'(00) 90000-0000'}}
+              {{$index > 0 ? ', ' : ''}}{{item.numPhone | mask:'(00) 000000009'}}
             </span>
           </h6>
           <h6 class="kf-no-margin" ng-if="vm.company.desSite !== null && vm.company.desSite.length > 0">{{vm.company.desSite}}</h6>
@@ -88,7 +88,7 @@
               </section>
             </div>
           </div>
-          <ion-infinite-scroll ng-if="vm.isInfiniteScroll" on-infinite="vm.infiniteScroll();">
+          <ion-infinite-scroll ng-if="vm.isInfiniteScroll" on-infinite="vm.infiniteScroll();" spinner="none" icon="none">
           </ion-infinite-scroll>
         </ion-scroll>
       </section>

@@ -58,14 +58,6 @@
           };
 
           return _response;
-        },
-
-        isObject: function(object) {
-          return !method.isUndefined(object) && angular.isObject(object);
-        },
-
-        isUndefined: function(object) {
-          return angular.isUndefined(object);
         }
       };
 
@@ -134,7 +126,7 @@
         return $ionicPopup.alert({
           title: title,
           template: message,
-          cssClass: (method.isUndefined(cssClass) ? '' : cssClass)
+          cssClass: (angular.isUndefined(cssClass) ? '' : cssClass)
         });
       };
 
@@ -147,7 +139,7 @@
       };
 
       this.ionicPopupAlertSuccess = function(message) {
-        return this.ionicPopupAlert('Sucesso', method.isUndefined(message) ? 'Operação realizada com sucesso.' : message, 'kf-popup-success');
+        return this.ionicPopupAlert('Sucesso', angular.isUndefined(message) ? 'Operação realizada com sucesso.' : message, 'kf-popup-success');
       };
 
       this.getCookies = function(key) {
@@ -157,19 +149,39 @@
       this.putCookies = function(key, value, hours, minutes) {
         var expire = new Date();
 
-        if (!method.isUndefined(hours)) {
+        if (!angular.isUndefined(hours)) {
           expire.setHours(expire.getHours() + hours);
         }
 
-        if (!method.isUndefined(minutes)) {
+        if (!angular.isUndefined(minutes)) {
           expire.setMinutes(expire.getMinutes() + minutes);
         }
 
-        if (method.isUndefined(hours) && method.isUndefined(minutes)) {
+        if (angular.isUndefined(hours) && angular.isUndefined(minutes)) {
           expire.setDate(expire.getDate() + 1);
         }
 
         $cookies.putObject(key, value, {expires: expire});
+      };
+
+      this.setLocalStorage = function(key, value) {
+        localStorage.setItem(key, angular.toJson(value));
+      };
+
+      this.getLocalStorage = function(key) {
+        return angular.fromJson(localStorage[key]);
+      };
+
+      this.removeLocalStorage = function(key) {
+        localStorage.removeItem(key);
+      };
+
+      this.setSessionStorage = function(key, value) {
+        sessionStorage.setItem(key, angular.toJson(value));
+      };
+
+      this.getSessionStorage = function(key) {
+        return angular.fromJson(sessionStorage[key]);
       };
     };
 

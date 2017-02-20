@@ -103,6 +103,7 @@
   background-position: center !important;
 }
 
+select,
 textarea,
 input[type="text"],
 input[type="password"],
@@ -118,12 +119,11 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
-  border: 1px solid !important;
   width: 100% !important;
 }
 
 textarea {
-  height: 68px !important;
+  height: 8em !important;
 }
 /* END OVERRIDE IONIC */
 
@@ -152,20 +152,57 @@ textarea {
 /* END TEXT */
 
 /* CONTAINER */
+.kf-border-back {
+  border: 1px solid !important;
+  color: black;
+}
+
+.kf-no-border {
+  border: 1px solid !important;
+}
+
 .kf-width-100-porcent {
   width: 100% !important;
+}
+
+.kf-width-90-porcent {
+  width: 90% !important;
 }
 
 .kf-width-80-porcent {
   width: 80% !important;
 }
 
+.kf-width-70-porcent {
+  width: 70% !important;
+}
+
+.kf-width-60-porcent {
+  width: 60% !important;
+}
+
 .kf-width-50-porcent {
   width: 50% !important;
 }
 
+.kf-width-45-porcent {
+  width: 45% !important;
+}
+
+.kf-width-40-porcent {
+  width: 40% !important;
+}
+
+.kf-width-30-porcent {
+  width: 30% !important;
+}
+
 .kf-width-20-porcent {
   width: 20% !important;
+}
+
+.kf-width-10-porcent {
+  width: 10% !important;
 }
 
 .kf-height-100-porcent {
@@ -253,6 +290,9 @@ textarea {
 }
 
 .kf-align-itens-center {
+  -webkit-align-items: center !important;
+  -moz-align-items: center !important;
+  -ms-align-items: center !important;
   align-items: center !important;
 }
 

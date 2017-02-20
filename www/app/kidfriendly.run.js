@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('kidfriendly').run(Run);
-
   Run.$inject = ['$ionicPlatform', '$state', '$ionicHistory'];
 
   function Run($ionicPlatform, $state, $ionicHistory) {

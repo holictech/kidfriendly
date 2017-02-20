@@ -1,50 +1,98 @@
 <ion-view>
   <section ng-if="vm.isVisible">
-    <ion-content class="padding has-header has-subfooter has-footer">
-      <div class="padding-left kf-title-black">Buscar {{vm.dsCategory | lowercase}} com:</div>
-      <div class="kf-width-50-porcent padding kf-float-left">
-        <div ng-repeat="item in vm.characteristics track by item.idCharacteristic">
-          <label class="kf-font-size-80-porcent">
-            <input type="checkbox"
-              ng-checked="vm.isExists(item.idCharacteristic, vm.characteristcsSelected);"
-              ng-click="vm.toggle(item.idCharacteristic, vm.characteristcsSelected);">
-            {{item.desCharacteristic}}
-          </label>
+    <form name="vm.formSearch" novalidate ng-submit="vm.search();">
+      <ion-content class="padding has-header has-subfooter">
+        <div class="kf-title-black margin-bottom">Buscar por:</div>
+        <div class="margin-top margin-bottom">
+          <label for="desNameCompany">Estabelecimento</label>
+          <input type="text" id="desNameCompany" name="desNameCompany" ng-model="vm.desNameCompany" minlength="5" maxlength="150"
+            class="kf-border-back" autocomplete="off" required>
+        </div>
+        <div class="kf-display-flex kf-align-itens-center" style="height: 2em;">
+          <div class="kf-width-45-porcent">
+            <hr />
+          </div>
+          <div class="kf-width-10-porcent margin-left margin-right text-center">e/ou</div>
+          <div class="kf-width-45-porcent">
+            <hr />
+          </div>
+        </div>
+        <div class="margin-bottom">
+          <label for="state">Estado</label>
+          <select id="state" ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states" ng-change="vm.listCityByState();">
+            <option value="">Todos</option>
+          </select>
+        </div>
+        <div class="margin-top margin-bottom">
+          <label for="city">Cidade</label>
+          <select id="city" ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="kf-display-flex kf-align-itens-center" style="height: 2em;">
+          <div class="kf-width-45-porcent">
+            <hr />
+          </div>
+          <div class="kf-width-10-porcent margin-left margin-right text-center">e/ou</div>
+          <div class="kf-width-45-porcent">
+            <hr />
+          </div>
+        </div>
+        <div class="margin-bottom">
+          <label for="category">Categoria</label>
+          <select id="category" ng-model="vm.idCategory" ng-options="item.idCategory as item.desCategory for item in vm.categories"
+            ng-change="vm.listCharacteristicByCategiry();">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="margin-top margin-bottom" ng-if="vm.characteristics.length > 0">
+          <div><label for="category">Característica</label></div>
+          <div class="kf-display-flex kf-width-100-porcent">
+          <div class="kf-width-50-porcent padding-top padding-right">
+            <div ng-repeat="item in vm.characteristics track by item.idCharacteristic">
+              <label class="kf-font-size-80-porcent">
+                <input type="checkbox"
+                  ng-checked="vm.isExists(item.idCharacteristic);"
+                  ng-click="vm.toggle(item.idCharacteristic);">
+                {{item.desCharacteristic}}
+              </label>
+            </div>
+          </div>
+          <div class="kf-width-50-porcent padding-top padding-left">
+            <div ng-repeat="item in vm.halfCharacteristics track by item.idCharacteristic">
+              <label class="kf-font-size-80-porcent">
+                <input type="checkbox"
+                  ng-checked="vm.isExists(item.idCharacteristic);"
+                  ng-click="vm.toggle(item.idCharacteristic);">
+                {{item.desCharacteristic}}
+              </label>
+            </div>
+          </div>
+          </div>
+        </div>
+      </ion-content>
+      <div class="bar bar-subfooter">
+        <div class="buttons">
+          <div>
+            <label class="kf-font-size-80-porcent">
+              <input type="checkbox" ng-model="vm.isSuperKidFriendly">
+              Super Kid Friendly
+            </label>
+          </div>
+          <div>
+            <label class="kf-font-size-80-porcent">
+              <input type="checkbox" ng-model="vm.isNextToMe">
+              Próximos a mim
+            </label>
+          </div>
+        </div>
+        <div class="title" style="z-index: -1 !important;"></div>
+        <div class="buttons">
+          <button type="submit" class="button button-outline button-small button-stable icon-left ion-search">
+            Pesquisar
+          </button>
         </div>
       </div>
-      <div class="kf-width-50-porcent padding kf-float-right">
-        <div ng-repeat="item in vm.halfCharacteristics track by item.idCharacteristic">
-          <label class="kf-font-size-80-porcent">
-            <input type="checkbox"
-              ng-checked="vm.isExists(item.idCharacteristic, vm.characteristcsSelected);"
-              ng-click="vm.toggle(item.idCharacteristic, vm.characteristcsSelected);">
-            {{item.desCharacteristic}}
-          </label>
-        </div>
-      </div>
-    </ion-content>
-    <div class="bar bar-subfooter">
-      <div class="buttons">
-        <div>
-          <label class="kf-font-size-80-porcent">
-            <input type="checkbox" ng-model="vm.isSuperKidFriendly">
-            Super Kid Friendly
-          </label>
-        </div>
-        <div>
-          <label class="kf-font-size-80-porcent">
-            <input type="checkbox" ng-model="vm.isNextToMe">
-            Próximos a mim
-          </label>
-        </div>
-      </div>
-      <div class="title" style="z-index: -1 !important;"></div>
-      <div class="buttons">
-        <button class="button button-outline button-small button-stable icon-left ion-search"
-          ng-click="vm.search();">
-          Pesquisar
-        </button>
-      </div>
-    </div>
+    </form>
   </section>
 </ion-view>
