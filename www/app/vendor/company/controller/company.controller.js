@@ -56,7 +56,7 @@
               openGallery();
             } else {
               vm.hideLoading();
-              ImageService.ionicPopupAlertAttention('Nenhuma imagem na galeria.');
+              ImageService.ionicPopupAlertAttention('Ainda não temos nenhuma imagem na galeria.');
             }
           } else {
             vm.hideLoading();
@@ -73,7 +73,7 @@
     };
 
     vm.showRating = function() {
-      //implementar a regra que verifica se o usuário está logado e está no prazo para efetuar um novo comentario
+      //implementar a regra que verifica se o usuário está logado e está no prazo para efetuar um novo comentário
       vm.rating = {};
       vm.showLoading();
       RatingService.hasPermission(vm.company.idCompany, 1).then(function(response) {
@@ -85,7 +85,7 @@
           vm.timeoutHideLoading();
         } else {
           vm.hideLoading();
-          RatingService.ionicPopupAlertAttention('Sua última avalição ocorreu a menos de 1 mês.');
+          RatingService.ionicPopupAlertAttention('Você avaliou este estabelecimento a menos de um mês.');
         }
       });
     };
@@ -105,6 +105,14 @@
     };
 
     vm.includeRating = function() {
+      if (angular.isUndefined(vm.rating.statusKidFriendly)) {
+        RatingService.ionicPopupAlertAttention('Para avaliar, é necessário que você escolha uma das quatros opções que representa sua experiência no local.');
+        return;
+      } else if (vm.formRating.desRating.$error.required) {
+        RatingService.ionicPopupAlertAttention('Para avaliar, é necessário que você faça um comentário.');
+        return;
+      }
+
       vm.rating.company = {'idCompany': vm.company.idCompany};
       vm.rating.user = {'idUser': 1};//pegar a informação do usuario logado.
       vm.showLoading();

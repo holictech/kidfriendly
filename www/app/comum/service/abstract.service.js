@@ -54,7 +54,7 @@
         geolocationError: function() {
           var _response = {
             error: true,
-            message: 'Localização não disponível.'
+            message: 'Não foi possível encontrar nenhuma localização.'
           };
 
           return _response;
