@@ -1,24 +1,16 @@
-<ion-popover-view class="kf-menu">
+<ion-popover-view>
   <ion-content>
     <div class="list">
-      <a class="item" ng-click="vm.go('main.search', true);">
+      <a class="item" ng-click="vm.popoverHide(); vm.go('main.search', true);">
+        <i class="icon ion-search"></i>
         Pesquisa
       </a>
-      <!--
-      <a class="item" ng-click="vm.go('main.search', true, {idCategory: 2});">
-        Hotel
-      </a>
-      <a class="item" ng-click="vm.go('main.search', true, {idCategory: 1});">
-        Restaurante
-      </a>
-      <a class="item" ng-click="vm.go('main.search', true, {idCategory: 3});">
-        Passeio
-      </a>
-      -->
-      <a class="item" ng-click="vm.go('main.about', false);">
+      <a class="item" ng-click="vm.popoverHide(); vm.go('main.about', false);">
+        <i class="icon ion-document"></i>
         Sobre KidFriendly
       </a>
-      <a class="item" ng-click="vm.go('main.termsofuse', false);">
+      <a class="item" ng-click="vm.popoverHide(); vm.go('main.termsofuse', false);">
+        <i class="icon ion-document"></i>
         Termos de Uso
       </a>
     </div>

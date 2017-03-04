@@ -6,12 +6,11 @@
 
   function MainController($rootScope, $scope, $state, $ionicPopover, $controller, $ionicPlatform) {
     var vm = this;
-    var state;
-    angular.extend(this, $controller('AbstractController', {'vm': vm}));
+    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
     initialize();
 
     vm.isShowBackButtonIOS = function() {
-      return ionic.Platform.isIOS() && !angular.isUndefined(state) && !$state.is('main.home');
+      return (ionic.Platform.isIOS() && !angular.isUndefined(vm.state) && !$state.is('main.home'));
     };
 
     vm.showMenu = function(event) {
@@ -30,18 +29,13 @@
       });
     };
 
-    vm.go = function(state, loading, params) {
-      if (!angular.isUndefined(loading) && loading && !$state.is(state)) {
-        vm.showLoading();
-      }
-
-      $state.go(state, (angular.isUndefined(params) ? null : {'params': params}));
+    vm.popoverHide = function() {
       vm.popover.hide();
     };
 
     function initialize() {
       $rootScope.$on('$stateChangeStart',  function(event, toState, toParams, fromState, fromParams) {
-        state = toState.name;
+        vm.state = toState.name;
       });
 
       $ionicPlatform.on('menubutton', function(event) {

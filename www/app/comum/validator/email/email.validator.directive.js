@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('comum.validator').directive('cpEmailValidator', CPEmailValidator);
+  angular.module('comum.validator').directive('emailValidator', EmailValidator);
 
-  function CPEmailValidator() {
+  function EmailValidator() {
     var method = {
       isEmail: function(email) {
         var expression = /^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2,3}/g;

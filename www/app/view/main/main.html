@@ -3,6 +3,15 @@
     <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.goBack();"></button>
   </div>
   <h1 class="title">Logo Marca</h1>
+  <div class="buttons">
+    <button class="button" ng-class="{'button-icon icon ion-log-in': !vm.isUserLogged() , 'button-clear': vm.isUserLogged()}"
+      ng-click="((vm.isUserLogged()) ? vm.logout() : vm.openLogin())">
+      <img ng-if="vm.isUserLogged() && vm.getUserLogged().mgUser !== null"
+        ng-src="data:image/*;base64,{{vm.getUserLogged().mgUser}}" class="kf-avatar-header">
+      <img ng-if="vm.isUserLogged() && vm.getUserLogged().mgUser === null"
+        ng-src="images/empty-avatar.jpg" class="kf-avatar-header">
+    </button>
+  </div>
 </ion-header-bar>
 <ion-nav-view name="main-view"></ion-nav-view>
 <ion-footer-bar>

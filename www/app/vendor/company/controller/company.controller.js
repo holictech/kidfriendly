@@ -2,13 +2,13 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-  CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService'];
+  CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService', 'EVENT_USER_LOGGED'];
 
-  function CompanyController(CompanyService, $scope, $state, $controller, maskFilter, RatingService, $ionicModal, ImageService) {
+  function CompanyController(CompanyService, $scope, $state, $controller, maskFilter, RatingService, $ionicModal, ImageService, EVENT_USER_LOGGED) {
     var vm = this;
     var paginatorDto = null;
     var idCompany = null;
-    angular.extend(this, $controller('AbstractController', {'vm': vm}));
+    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
     vm.company = {};
     vm.address = null;
     vm.characteristics = [];
@@ -73,21 +73,27 @@
     };
 
     vm.showRating = function() {
-      //implementar a regra que verifica se o usuário está logado e está no prazo para efetuar um novo comentário
-      vm.rating = {};
-      vm.showLoading();
-      RatingService.hasPermission(vm.company.idCompany, 1).then(function(response) {
-        if (response.error) {
-          vm.hideLoading();
-          RatingService.ionicPopupAlertError(response.message);
-        } else if (response.data) {
-          openRating();
-          vm.timeoutHideLoading();
-        } else {
-          vm.hideLoading();
-          RatingService.ionicPopupAlertAttention('Você avaliou este estabelecimento a menos de um mês.');
-        }
-      });
+      if (vm.isUserLogged()) {
+        vm.rating = {};
+        vm.showLoading();
+        RatingService.hasPermission(vm.company.idCompany, vm.getUserLogged().idUser).then(function(response) {
+          if (response.error) {
+            vm.hideLoading();
+            RatingService.ionicPopupAlertError(response.message);
+          } else if (response.data) {
+            openRating();
+            vm.timeoutHideLoading();
+          } else {
+            vm.hideLoading();
+            RatingService.ionicPopupAlertAttention('Você avaliou este estabelecimento a menos de um mês.');
+          }
+        });
+      } else {
+        vm.openLogin();
+        $scope.$on(EVENT_USER_LOGGED, function() {
+          vm.showRating();
+        });
+      }
     };
 
     vm.closeRating = function() {
@@ -106,15 +112,15 @@
 
     vm.includeRating = function() {
       if (angular.isUndefined(vm.rating.statusKidFriendly)) {
-        RatingService.ionicPopupAlertAttention('Para avaliar, é necessário que você escolha uma das quatros opções que representa sua experiência no local.');
+        RatingService.ionicPopupAlertAttention('Escolha uma das quatros opções que representa sua experiência no local.');
         return;
       } else if (vm.formRating.desRating.$error.required) {
-        RatingService.ionicPopupAlertAttention('Para avaliar, é necessário que você faça um comentário.');
+        RatingService.ionicPopupAlertAttention('Para avaliar, é necessário que você deixe um comentário.');
         return;
       }
 
       vm.rating.company = {'idCompany': vm.company.idCompany};
-      vm.rating.user = {'idUser': 1};//pegar a informação do usuario logado.
+      vm.rating.user = {'idUser': vm.getUserLogged().idUser};
       vm.showLoading();
       RatingService.include(vm.rating).then(function(response) {
         vm.hideLoading();
@@ -122,7 +128,7 @@
         if (response.error) {
           RatingService.ionicPopupAlertError(response.message);
         } else {
-          RatingService.ionicPopupAlertSuccess().then(function() {
+          RatingService.ionicPopupAlertSuccess('Obrigado por avaliar. Em breve seu comentário estará disponível.').then(function() {
             vm.closeRating();
           });
         }

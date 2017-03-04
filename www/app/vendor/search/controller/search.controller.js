@@ -8,7 +8,7 @@
   function SearchController(SearchService, CharacteristicService, $scope, $state, $controller, $ionicScrollDelegate,
     statesPrepService, categoriesPrepService, LocalityService) {
     var vm = this;
-    angular.extend(this, $controller('AbstractController', {'vm': vm}));
+    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
     vm.isVisible = false;
     vm.desNameCompany = null;
     vm.states = [];
@@ -76,7 +76,7 @@
 
     vm.search = function() {
       if (vm.formSearch.desNameCompany.$error.minlength) {
-          SearchService.ionicPopupAlertAttention('Estabeledimento deve conter no mínimo 5 caracteres.');
+          SearchService.ionicPopupAlertAttention('A pesquisa deve ter, no mínimo, 5 caracteres.');
           return;
       }
 

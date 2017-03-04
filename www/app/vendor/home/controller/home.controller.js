@@ -6,7 +6,7 @@
 
   function HomeController(HomeService, $scope, $controller) {
     var vm = this;
-    angular.extend(this, $controller('AbstractController', {'vm': vm}));
+    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
     vm.suggestions = [];
     vm.nextToMe = [];
     initialize(true);
@@ -24,7 +24,9 @@
       HomeService.getGeolocation().then(function(response) {
         if (response.error && isShowMessageGeolocation) {
           vm.hideLoading();
+          closeSplashScreen();
           HomeService.ionicPopupAlertAttention(response.message).then(function() {
+            vm.showLoading();
             listCompanies();
           });
         } else {
@@ -54,13 +56,16 @@
         vm.timeoutHideLoading();
         vm.suggestions = suggestions;
         vm.nextToMe = nextToMe;
-
-        if (navigator && navigator.splashscreen) {
-          navigator.splashscreen.hide();
-        }
+        closeSplashScreen();
       }).finally(function() {
         $scope.$broadcast('scroll.refreshComplete');
       });
+    }
+
+    function closeSplashScreen() {
+      if (navigator && navigator.splashscreen) {
+        navigator.splashscreen.hide();
+      }
     }
   }
 })();

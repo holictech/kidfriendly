@@ -15,7 +15,7 @@
         success: function(response) {
           var _response = {
             error: false,
-            data: response.data
+            data: ((angular.isString(response.data) && response.data.trim().length === 0) ? null : response.data)
           };
 
           return _response;

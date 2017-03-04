@@ -1,5 +1,5 @@
 (function() {
   'use strict';
 
-  angular.module('kidfriendly', ['ionic', 'ngCookies', 'ngCordova', 'ui.mask', 'ui.validate', 'ngFileUpload', 'comum']);
+  angular.module('kidfriendly', ['ionic', 'ngCookies', 'ngCordova', 'ui.mask', 'ui.validate', 'ngFileUpload', 'comum', 'ngOpenFB']);
 })();

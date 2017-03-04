@@ -8,7 +8,7 @@
     var vm = this;
     var filters = null;
     var paginatorDto = null;
-    angular.extend(this, $controller('AbstractController', {'vm': vm}));
+    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
     vm.results = [];
     vm.isInfiniteScroll = false;
     initialize();

@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy"
+      content="default-src *; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
 
     <title>Kid Friendly</title>
 
@@ -20,6 +21,8 @@
     <!-- lib -->
     <script src="lib/cookies/angular-cookies.min.js"></script>
     <script src="lib/date/moment-with-locales.min.js"></script>
+    <script src="lib/facebook/openfb.js"></script>
+    <script src="lib/facebook/ngopenfb.js"></script>
     <script src="lib/md5/md5.min.js"></script>
     <script src="lib/rest/restangular.min.js"></script>
     <script src="lib/ui/mask/mask.min.js"></script>
@@ -30,10 +33,6 @@
 
     <!-- comum -->
     <script src="app/comum/comum.module.js"></script>
-
-    <!-- comum controller -->
-    <script src="app/comum/controller/controller.module.js"></script>
-    <script src="app/comum/controller/abstract.controller.js"></script>
 
     <!-- comum filter -->
     <script src="app/comum/filter/filter.module.js"></script>
@@ -48,6 +47,10 @@
     <script type="text/javascript" src="app/comum/validator/validator.module.js"></script>
     <script type="text/javascript" src="app/comum/validator/email/email.validator.directive.js">
     </script>
+
+    <!-- comum controller -->
+    <script src="app/comum/controller/controller.module.js"></script>
+    <script src="app/comum/controller/abstract.controller.js"></script>
 
     <!-- app -->
     <script src="app/kidfriendly.module.js"></script>
