@@ -27,7 +27,7 @@
             defer.reject(response);
           } else {
             defer.resolve(response);
-            new AbstractService().setSessionStorage(key, response);
+            _this.setSessionStorage(key, response);
           }
         });
       } else {

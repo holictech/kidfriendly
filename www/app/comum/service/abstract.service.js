@@ -2,15 +2,16 @@
   'use strict';
 
   angular.module('comum.service').service('AbstractService', AbstractService);
-  AbstractService.$inject = ['Upload', '$http', '$cordovaGeolocation', '$ionicPopup', '$cookies'];
+  AbstractService.$inject = ['Upload', '$http', '$cordovaGeolocation', '$ionicPopup', '$cookies', '$q'];
 
-  function AbstractService(Upload, $http, $cordovaGeolocation, $ionicPopup, $cookies) {
+  function AbstractService(Upload, $http, $cordovaGeolocation, $ionicPopup, $cookies, $q) {
     var AbstractService = function(uri) {
       //var _uri = 'http://localhost:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.2.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.3.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://192.168.0.14:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       var _uri = 'http://kidfriendly.servehttp.com:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
+      //var _uri = 'http://kidfriendly.com.br/kf' + (angular.isUndefined(uri) ? '' : uri);
       var method = {
         success: function(response) {
           var _response = {
@@ -30,12 +31,12 @@
           return _response;
         },
 
-        upload: function (uri, method, formData) {
+        upload: function (uri, method, data) {
           return Upload.http({
               url: uri,
               method: method,
-              headers: {'Content-Type': undefined},
-              data: formData
+              //headers: {'Content-Type': undefined},
+              data: data
             });
         },
 
@@ -87,8 +88,8 @@
         }).then(method.success, method.error);
       };
 
-      this.httpUploadPost = function(uri, formData) {
-        return method.upload(uri, 'POST', formData).then(method.success, method.error);
+      this.httpUploadPost = function(uri, data) {
+        return method.upload(uri, 'POST', data).then(method.success, method.error);
       };
 
       this.update = function(data) {
@@ -102,8 +103,8 @@
         }).then(method.success, method.error);
       };
 
-      this.httpUploadPut = function(uri, formData) {
-        return method.upload(uri, 'PUT', formData).then(method.success, method.error);
+      this.httpUploadPut = function(uri, data) {
+        return method.upload(uri, 'PUT', data).then(method.success, method.error);
       };
 
       this.delete = function(key) {
@@ -182,6 +183,30 @@
 
       this.getSessionStorage = function(key) {
         return angular.fromJson(sessionStorage[key]);
+      };
+
+      this.urlToBase64 = function(url) {
+        var defer = $q.defer();
+        var vm = this;
+        Upload.urlToBlob(url).then(function(response) {
+          vm.blobToBase64(response).then(function(response) {
+            defer.resolve(response);
+          });
+        });
+
+        return defer.promise;
+      };
+
+      this.blobToBase64 = function(blob) {
+        var defer = $q.defer();
+        var fileReader = new FileReader();
+        fileReader.onloadend = function () {
+            var base64 = fileReader.result;
+            defer.resolve(base64.split(',')[1]);
+        };
+        fileReader.readAsDataURL(blob);
+
+        return defer.promise;
       };
     };
 

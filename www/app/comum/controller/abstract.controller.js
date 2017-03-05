@@ -3,9 +3,9 @@
 
   angular.module('comum.controller').controller('AbstractController', AbstractController);
   AbstractController.$inject = ['$ionicLoading', '$timeout', '$ionicHistory', '$state', 'AbstractService', '$ionicModal', '$scope',
-    'EVENT_USER_LOGGED', 'ngFB', 'Upload'];
+    'EVENT_USER_LOGGED', 'ngFB'];
 
-  function AbstractController($ionicLoading, $timeout, $ionicHistory, $state, AbstractService, $ionicModal, $scope, EVENT_USER_LOGGED, ngFB, Upload) {
+  function AbstractController($ionicLoading, $timeout, $ionicHistory, $state, AbstractService, $ionicModal, $scope, EVENT_USER_LOGGED, ngFB) {
     var vm = this;
     var abstractService = new AbstractService();
     var keyLocalStorageUser = 'keyLocalStorageUser';
@@ -73,6 +73,8 @@
     vm.authenticate = function(formLogin) {
       vm.showLoading();
       abstractService.httpGet(abstractService.getURI() + '/login/authenticateuser/' + vm.login.idLogin).then(function(response) {
+        vm.hideLoading();
+
         if (response.error) {
           abstractService.ionicPopupAlertError(response.message);
         } else if (!response.data.login.stActive) {
@@ -82,12 +84,11 @@
         } else {
           finishAuthenticateUser(response.data);
         }
-
-        vm.hideLoading();
       });
     };
 
     vm.authenticateFB = function() {
+      vm.showLoading();
       ngFB.login().then(function(response) {
         if (response.status === 'connected') {
           ngFB.api({
@@ -97,6 +98,7 @@
             authenticateUserFB(response);
           }, function(response) {
             abstractService.ionicPopupAlertError('Falha ao se comunicar com o facebook.<br/>Tente mais tarde.');
+            vm.hideLoading();
           });
         }
       });
@@ -111,14 +113,13 @@
     }
 
     function authenticateUserFB(userFB) {
-      vm.showLoading();
       authenticateUserSocialNetwork(userFB.id).then(function(response) {
         if (response.error) {
           abstractService.ionicPopupAlertError(response.message);
           vm.hideLoading();
         } else if (response.data !== null) {
-          finishAuthenticateUser(response.data);
           vm.hideLoading();
+          finishAuthenticateUser(response.data);
         } else {
           includeUserFB(userFB);
         }
@@ -129,10 +130,14 @@
       var user = {
         genderEnum: ((userFB.gender === null || angular.isUndefined(userFB.gender)) ? null : userFB.gender.toUpperCase()),
         idSocialNetwork: userFB.id,
-        dsName: userFB.name
+        dsName: userFB.name,
+        mgUser: null
       };
 
-      includeUserSocicalNetwork(user, userFB.picture.data.url);
+      abstractService.urlToBase64(userFB.picture.data.url).then(function(response) {
+        user.mgUser = response;
+        includeUserSocicalNetwork(user);
+      });
     }
 
     function authenticateUserSocialNetwork(idSocialNetwork) {
@@ -141,14 +146,14 @@
       });
     }
 
-    function includeUserSocicalNetwork(user, urlImg) {
-      abstractService.httpPost(abstractService.getURI() + '/user/includesocialnetwork/', user, {urlImg: urlImg}).then(function(response) {
+    function includeUserSocicalNetwork(user) {
+      abstractService.httpPost(abstractService.getURI() + '/user/includesocialnetwork', user).then(function(response) {
         if (response.error) {
           abstractService.ionicPopupAlertError(response.message);
           vm.hideLoading();
         } else {
-          finishAuthenticateUser(response.data);
           vm.hideLoading();
+          finishAuthenticateUser(response.data);
         }
       });
     }

@@ -11,6 +11,7 @@
       var defer = $q.defer();
       var key = 'kf_categories';
       var _response = this.getSessionStorage(key);
+      var vm = this;
 
       if (angular.isUndefined(_response)) {
         this.get().then(function(response) {
@@ -18,7 +19,7 @@
             defer.reject(response);
           } else {
             defer.resolve(response);
-            new AbstractService().setSessionStorage(key, response);
+            vm.setSessionStorage(key, response);
           }
         });
       } else {
