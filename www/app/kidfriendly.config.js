@@ -93,8 +93,22 @@
           templateUrl: 'app/view/template/termsofuse.html'
         }
       }
+    })
+    .state('main.user', {
+      url: '/user',
+      views: {
+        'main-view': {
+          templateUrl: 'app/view/user/user.html',
+          controller: 'UserController',
+          controllerAs: 'vm',
+          resolve: {
+            statesPrepService: function(LocalityService) {
+              return LocalityService.listStateWithCityByCountry();
+            }
+          }
+        }
+      }
     });
-
 
     $urlRouterProvider.otherwise("/main/home");
   }
