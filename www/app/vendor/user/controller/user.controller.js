@@ -13,9 +13,9 @@
     initialize();
 
     vm.include = function() {
-      vm.user.dsName = "Wesley Garcia de Sousa"
+      vm.user.dsName = "Wesley Garcia de Sousa";
       vm.user.genderEnum = "MALE";
-      vm.user.dtBirthDay = new Date(moment('1982-05-04').toISOString()).getTime()
+      vm.user.dtBirthDay = new Date(moment('1982-05-04').toISOString()).getTime();
       vm.user.blHasChildren = false;
       vm.user.city = {idCity: 1};
       vm.user.login = {
@@ -37,7 +37,7 @@
 
         vm.hideLoading();
       });
-    }
+    };
 
     vm.update = function() {
       vm.showLoading();
@@ -53,7 +53,7 @@
 
         vm.hideLoading();
       });
-    }
+    };
 
     function initialize() {
       if (statesPrepService.error) {

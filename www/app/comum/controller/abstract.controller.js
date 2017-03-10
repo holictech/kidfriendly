@@ -88,8 +88,9 @@
     };
 
     vm.authenticateFB = function() {
-      vm.showLoading();
       ngFB.login().then(function(response) {
+        vm.showLoading();
+
         if (response.status === 'connected') {
           ngFB.api({
             path: '/me',
@@ -100,6 +101,8 @@
             abstractService.ionicPopupAlertError('Falha ao se comunicar com o facebook.<br/>Tente mais tarde.');
             vm.hideLoading();
           });
+        } else {
+          vm.hideLoading();
         }
       });
     };
