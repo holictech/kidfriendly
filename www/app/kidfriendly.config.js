@@ -4,7 +4,7 @@
   angular.module('kidfriendly').config(Config);
   Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
-  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, LocalityService, CategoryService) {
+  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, LocalityService, CategoryService, UserService) {
     if (ionic.Platform.isAndroid()) {
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
@@ -104,6 +104,9 @@
           resolve: {
             statesPrepService: function(LocalityService) {
               return LocalityService.listStateWithCityByCountry();
+            },
+            minMaxDtBirthdayPrepService: function(UserService) {
+              return UserService.getMinMaxDtBirthday();
             }
           }
         }

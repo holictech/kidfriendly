@@ -120,10 +120,15 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   width: 100% !important;
+  height: 2em !important;
 }
 
 textarea {
   height: 8em !important;
+}
+
+input {
+  padding: 1% !important;
 }
 /* END OVERRIDE IONIC */
 

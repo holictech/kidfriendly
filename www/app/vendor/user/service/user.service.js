@@ -6,5 +6,9 @@
 
   function UserService(AbstractService) {
     AbstractService.call(this, '/user');
+
+    this.getMinMaxDtBirthday = function() {
+      return this.httpGet(this.getURI() + '/minmaxdtbirthday');
+    };
   }
 })();

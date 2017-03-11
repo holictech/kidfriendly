@@ -19,7 +19,8 @@
         </div>
         <div class="margin-bottom">
           <label for="state">Estado</label>
-          <select id="state" ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states" ng-change="vm.listCityByState();">
+          <select id="state" ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states"
+            ng-change="vm.listCityByState();">
             <option value="">Todos</option>
           </select>
         </div>
