@@ -33,13 +33,13 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.holictechnology.kidfriendly"
+        },
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
-        },
-        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.holictechnology.kidfriendly"
         }
     }

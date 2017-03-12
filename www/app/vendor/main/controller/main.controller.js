@@ -13,6 +13,10 @@
       return (ionic.Platform.isIOS() && !angular.isUndefined(vm.state) && !$state.is('main.home'));
     };
 
+    vm.isShowButtonLogInAvatar = function() {
+      return (!$state.is('main.user'));
+    }
+
     vm.showMenu = function(event) {
       $ionicPopover.fromTemplateUrl('app/view/main/menu.html', {
         scope: $scope

@@ -35,7 +35,7 @@
           return Upload.http({
               url: uri,
               method: method,
-              //headers: {'Content-Type': undefined},
+              headers: {'Content-Type': undefined},
               data: data
             });
         },
@@ -208,6 +208,10 @@
 
         return defer.promise;
       };
+
+      this.createToken = function(value) {
+        return md5("fRiEnDlY" + md5(value) + "KiD");
+      }
     };
 
     return AbstractService;

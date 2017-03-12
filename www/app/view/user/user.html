@@ -2,117 +2,124 @@
   <section ng-if="vm.isVisible">
     <form name="vm.formUser" novalidate ng-submit="((!vm.isUserLogged()) ? vm.include() : vm.update())">
       <ion-content class="padding has-header">
-        <div class="row kf-no-padding">
-          <div class="col-75 padding-right">
-            <div>
-              <label for="dsName">Nome completo <span style="color:red">*</span></label>
-              <input type="text" id="dsName" name="dsName" ng-model="vm.user.dsName" minlength="5" maxlength="150"
-                class="kf-border-back" autocomplete="off" required placeholder="Insira o seu nome">
-            </div>
-            <div class="padding-top">
-              <label for="dtBirthDay">Aniversário</label>
-              <input type="date" id="dtBirthDay" name="dtBirthDay" ng-model="vm.user.dtBirthDay"
-                class="kf-border-back" autocomplete="off" max="{{vm.maxDate}}" min="{{vm.minDate}}">
-            </div>
-            <div class="padding-top padding-bottom">
-              <div class="row kf-no-padding">
-                <div class="col kf-no-padding padding-left">
-                  <label for="genderEnum">Gênero</label>
-                  <div>
-                    <label>
-                      <input type="radio" name="genderEnum" ng-model="vm.user.genderEnum" ng-value="'MALE'">
-                      Masculino
-                    </label>
+        <section ng-if="vm.isIncludeUser || vm.isUpdateUser">
+          <div class="row kf-no-padding">
+            <div class="col-75 padding-right">
+              <div>
+                <label for="dsName">Nome completo<span style="color:red"> *</span></label>
+                <input type="text" id="dsName" name="dsName" ng-model="vm.user.dsName" minlength="5" maxlength="150"
+                  class="kf-border-back" autocomplete="off" required placeholder="Insira o seu nome">
+              </div>
+              <div class="padding-top">
+                <label for="dtBirthDay">Aniversário</label>
+                <input type="date" id="dtBirthDay" name="dtBirthDay" ng-model="vm.dtBirthDay"
+                  class="kf-border-back" autocomplete="off" max="{{vm.maxDate}}" min="{{vm.minDate}}">
+              </div>
+              <div class="padding-top padding-bottom">
+                <div class="row kf-no-padding">
+                  <div class="col kf-no-padding padding-left">
+                    <label for="genderEnum">Gênero</label>
+                    <div>
+                      <label>
+                        <input type="radio" name="genderEnum" ng-model="vm.user.genderEnum" ng-value="'MALE'">
+                        Masculino
+                      </label>
+                    </div>
+                    <div>
+                      <label>
+                        <input type="radio" name="genderEnum" ng-model="vm.user.genderEnum" ng-value="'FEMALE'">
+                        Feminino
+                      </label>
+                    </div>
                   </div>
-                  <div>
-                    <label>
-                      <input type="radio" name="genderEnum" ng-model="vm.user.genderEnum" ng-value="'FEMALE'">
-                      Feminino
-                    </label>
+                  <div class="col kf-no-padding">
+                    <label for="blHasChildren">Possui Filhos?</label>
+                    <div>
+                      <label>
+                        <input type="radio" name="blHasChildren" ng-model="vm.user.blHasChildren" ng-value="true">
+                        Sim
+                      </label>
+                    </div>
+                    <div>
+                      <label>
+                        <input type="radio" name="blHasChildren" ng-model="vm.user.blHasChildren" ng-value="false">
+                        Não
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <div class="col kf-no-padding">
-                  <label for="blHasChildren">Possui Filhos?</label>
-                  <div>
-                    <label>
-                      <input type="radio" name="blHasChildren" ng-model="vm.user.blHasChildren" ng-value="true">
-                      Sim
-                    </label>
-                  </div>
-                  <div>
-                    <label>
-                      <input type="radio" name="blHasChildren" ng-model="vm.user.blHasChildren" ng-value="false">
-                      Não
-                    </label>
-                  </div>
+              </div>
+            </div>
+            <div class="col-25 text-center padding-left">
+              <div class="kf-width-100-porcent">
+                <img ng-if="vm.user.mgUser !== null"
+                  ng-src="data:image/*;base64,{{vm.user.mgUser}}" class="kf-avatar-header kf-width-100-porcent">
+                <img ng-if="vm.user.mgUser === null"
+                  ng-src="images/empty-avatar.jpg" class="kf-avatar-header kf-width-100-porcent">
+              </div>
+              <div class="row kf-no-padding kf-width-100-porcent">
+                <div class="col kf-no-padding text-center">
+                  <button type="button" class="button button-icon" ng-click="vm.editAvatar(1);">
+                    <i class="icon ion-android-camera"></i>
+                  </button>
+                </div>
+                <div class="col kf-no-padding text-center">
+                  <button type="button" class="button button-icon" ng-click="vm.editAvatar(0);">
+                    <i class="icon ion-image"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-25 text-center padding-left">
-            <div class="kf-width-100-porcent">
-              <img ng-if="vm.user.mgUser !== null"
-                ng-src="data:image/*;base64,{{vm.user.mgUser}}" class="kf-avatar-header kf-width-100-porcent">
-              <img ng-if="vm.user.mgUser === null"
-                ng-src="images/empty-avatar.jpg" class="kf-avatar-header kf-width-100-porcent">
-            </div>
-            <div class="row kf-no-padding kf-width-100-porcent">
-              <div class="col kf-no-padding text-center">
-                <button type="button" class="button button-icon" ng-click="vm.editAvatar(1);">
-                  <i class="icon ion-android-camera"></i>
-                </button>
-              </div>
-              <div class="col kf-no-padding text-center">
-                <button type="button" class="button button-icon" ng-click="vm.editAvatar(0);">
-                  <i class="icon ion-image"></i>
-                </button>
+          <div class="row kf-no-padding">
+            <div class="col kf-no-padding">
+              <div class="padding-top padding-right padding-bottom">
+                <label for="state">Estado</label>
+                <select id="state" ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states"
+                  ng-change="vm.listCityByState(vm.idState);">
+                  <option value="">Selecione</option>
+                </select>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row kf-no-padding">
-          <div class="col kf-no-padding">
-            <div class="padding-top padding-right padding-bottom">
-              <label for="state">Estado</label>
-              <select id="state" ng-model="vm.user.city.state.idState" ng-options="item.idState as item.desState for item in vm.states"
-                ng-change="vm.listCityByState(vm.user.city.state.idState);">
-                <option value="">Selecione</option>
-              </select>
+            <div class="col kf-no-padding">
+              <div class="padding-top padding-left padding-bottom">
+                <label for="city">Cidade<span style="color:red" ng-if="vm.idState !== null"> *</label>
+                <select id="city" ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities"
+                  ng-required="vm.idState !== null">
+                  <option value="">Selecione</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col kf-no-padding">
-            <div class="padding-top padding-left padding-bottom">
-              <label for="city">Cidade</label>
-              <select id="city" ng-model="vm.user.city.idCity" ng-options="item.idCity as item.desCity for item in vm.cities">
-                <option value="">Selecione</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <section ng-if="vm.user.idSocialNetwork === null">
+        </section>
+        <section ng-if="vm.isIncludeUser || vm.isUpdatePassword">
           <div class="row kf-no-padding">
             <div class="col kf-no-padding">
               <div class="maring-top padding-top padding-bottom">
-                <label for="idLogin">Email <span style="color:red">*</span></label>
-                <input type="email" id="idLogin" name="idLogin" ng-model="vm.user.login.idLogin" maxlength="150"
-                  class="kf-border-back" autocomplete="off" required email-validator placeholder="Insira o seu email">
+                <label for="idLogin">Login<span style="color:red" ng-if="vm.user.idUser === null"> *</span></label>
+                <input type="email" id="idLogin" name="idLogin" ng-model="vm.idLogin" maxlength="150"
+                  class="kf-border-back" autocomplete="off" required email-validator placeholder="Insira o seu email"
+                  ng-readonly="vm.user.idUser !== null">
               </div>
             </div>
           </div>
-          <div class="row kf-no-padding maring-top">
+          <div class="row kf-no-padding">
             <div class="col kf-no-padding">
-              <div class="padding-top padding-right">
-                <label for="desPassword">Senha <span style="color:red">*</span></label>
-                <input type="password" id="desPassword" name="desPassword" ng-model="vm.user.login.desPassword" minlength="6" maxlength="10"
-                  class="kf-border-back" autocomplete="off" required placeholder="Insira a sua senha">
+              <div class="maring-top padding-top padding-bottom">
+                <label for="desPassword">Senha<span style="color:red"> *</span></label>
+                <input type="password" id="desPassword" name="desPassword" ng-model="vm.desPassword" minlength="6" maxlength="10"
+                  class="kf-border-back" autocomplete="off" placeholder="Insira a sua senha de 6 a 10 caracteres" required pattern="[^\s]+">
               </div>
             </div>
+          </div>
+          <div class="row kf-no-padding">
             <div class="col kf-no-padding">
-              <div class="padding-top padding-left">
-                <label for="confirmDesPassword">Confirma Senha <span style="color:red">*</span></label>
-                <input type="password" id="confirmDesPassword" name="confirmDesPassword" ng-model="vm.confirmPassword" minlength="6" maxlength="10"
-                  class="kf-border-back" autocomplete="off" required placeholder="Confirme a sua senha"
-                  ui-validate="'$value === vm.user.login.desPassword'" ui-validate-watch="'vm.user.login.desPassword'">
+              <div class="maring-top padding-top padding-bottom">
+                <label for="repeatDesPassword">Repetir Senha<span style="color:red"> *</span></label>
+                <input type="password" id="repeatDesPassword" name="repeatDesPassword" ng-model="vm.repeatDesPassword" minlength="6" maxlength="10"
+                  class="kf-border-back" autocomplete="off" placeholder="Repita a sua senha"
+                  ui-validate="'$value === vm.desPassword'" ui-validate-watch="'vm.desPassword'" required pattern="[^\s]+">
+              </div>
             </div>
           </div>
         </section>

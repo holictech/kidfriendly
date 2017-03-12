@@ -108,11 +108,39 @@
     };
 
     vm.logout = function() {
-      abstractService.removeLocalStorage(keyLocalStorageUser);
+      var isUserSocialNetwork = (vm.getUserLogged().idSocialNetwork !== null);
+      var _buttonLabels = [];
+      _buttonLabels.push("Meus Dados");
+
+      if (!isUserSocialNetwork) {
+        _buttonLabels.push('Alterar Senha');
+      }
+
+      _buttonLabels.push("Sair");
+
+      var options = {
+        androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT,
+        buttonLabels: _buttonLabels,
+        androidEnableCancelButton : true,
+        winphoneEnableCancelButton : true,
+        addCancelButtonWithLabel: 'Cancelar',
+        position: [20, 40]
+      };
+
+      window.plugins.actionsheet.show(options, function(buttonIndex) {
+        if (buttonIndex === 1) {
+          vm.go('main.user', true, {isUpdateUser: true});
+        } else if (buttonIndex === 2 && !isUserSocialNetwork) {
+          vm.go('main.user', true, {isUpdatePassword: true});
+        } else if ((buttonIndex === 2 && isUserSocialNetwork) || buttonIndex === 3) {
+          abstractService.removeLocalStorage(keyLocalStorageUser);
+          vm.go('main.home', true);
+        }
+      });
     };
 
     function getToken() {
-      return "fRiEnDlY" + md5(vm.login.idLogin + md5(vm.login.desPassword)) + "KiD";
+      return abstractService.createToken(vm.login.idLogin + md5(vm.login.desPassword));
     }
 
     function authenticateUserFB(userFB) {

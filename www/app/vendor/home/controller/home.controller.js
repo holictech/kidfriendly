@@ -21,6 +21,9 @@
     };
 
     function initialize(isShowMessageGeolocation) {
+      $scope.$on('$ionicView.beforeEnter', function() {
+        vm.hideLoading();
+      });
       HomeService.getGeolocation().then(function(response) {
         if (response.error && isShowMessageGeolocation) {
           vm.hideLoading();

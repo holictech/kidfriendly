@@ -76,7 +76,7 @@
             "type": "registry",
             "id": "cordova-plugin-actionsheet"
         },
-        "is_top_level": false,
+        "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-inappbrowser": {
