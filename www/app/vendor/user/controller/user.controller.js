@@ -24,7 +24,7 @@
         destinationType: Camera.DestinationType.DATA_URL,
         'sourceType': sourceType,
         allowEdit: true,
-        encodingType: Camera.EncodingType.PNG,
+        encodingType: Camera.EncodingType.JPEG,
         targetWidth: 100,
         targetHeight: 100,
         mediaType: Camera.MediaType.PICTURE,
@@ -158,7 +158,7 @@
     function defineLogin() {
       vm.user.login = ((vm.idLogin === null || angular.isUndefined(vm.idLogin))? null : {
         idLogin: vm.idLogin,
-        desPassword: md5(vm.desPassword),
+        desPassword: sha256_digest(vm.desPassword),
         stActive: true,
         user: {
           idUser: vm.user.idUser

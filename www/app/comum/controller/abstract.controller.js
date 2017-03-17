@@ -140,7 +140,7 @@
     };
 
     function getToken() {
-      return abstractService.createToken(vm.login.idLogin + md5(vm.login.desPassword));
+      return abstractService.createToken(vm.login.idLogin + sha256_digest(vm.login.desPassword));
     }
 
     function authenticateUserFB(userFB) {

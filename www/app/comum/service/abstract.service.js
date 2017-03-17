@@ -210,8 +210,8 @@
       };
 
       this.createToken = function(value) {
-        return md5("fRiEnDlY" + md5(value) + "KiD");
-      }
+        return sha256_digest("fRiEnDlY" + sha256_digest(value) + "KiD");
+      };
     };
 
     return AbstractService;
