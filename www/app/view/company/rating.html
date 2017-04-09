@@ -34,7 +34,7 @@
           autocomplete="off" required></textarea>
       </div>
       <div class="padding">
-        <button type="submit" class="kf-button-active" ng-disabled="vm.rating.desRating.length > 10 ? false : true">
+        <button type="submit" ng-class="vm.rating.desRating.length > 5 && vm.rating.statusKidFriendly != undefined ? 'kf-button-active' : 'kf-button-inative'" ng-disabled="vm.rating.desRating.length > 5 && vm.rating.statusKidFriendly != undefined ? false : true">
           Avaliar
         </button>
       </div>
