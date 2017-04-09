@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view class="kf-background-page">
   <section ng-if="vm.isVisible">
     <form name="vm.formUser" novalidate ng-submit="((!vm.isUserLogged()) ? vm.include() : vm.update())">
       <ion-content class="padding has-header">
@@ -76,7 +76,7 @@
               <div class="padding-top padding-right padding-bottom">
                 <label for="state">Estado</label>
                 <select id="state" ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states"
-                  ng-change="vm.listCityByState(vm.idState);">
+                  ng-change="vm.listCityByState(vm.idState);" class="styled-select kf-color semi-squares">
                   <option value="">Selecione</option>
                 </select>
               </div>
@@ -85,7 +85,7 @@
               <div class="padding-top padding-left padding-bottom">
                 <label for="city">Cidade<span style="color:red" ng-if="vm.idState !== null"> *</label>
                 <select id="city" ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities"
-                  ng-required="vm.idState !== null">
+                  ng-required="vm.idState !== null" class="styled-select kf-color semi-squares">
                   <option value="">Selecione</option>
                 </select>
               </div>

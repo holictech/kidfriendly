@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view class="kf-background-page">
   <section ng-if="vm.isVisible">
     <form name="vm.formSearch" novalidate ng-submit="vm.search();">
       <ion-content class="padding has-header has-subfooter">
@@ -20,13 +20,14 @@
         <div class="margin-bottom">
           <label for="state">Estado</label>
           <select id="state" ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states"
-            ng-change="vm.listCityByState();">
+            ng-change="vm.listCityByState();" class="styled-select kf-color semi-squares">
             <option value="">Todos</option>
           </select>
         </div>
         <div class="margin-top margin-bottom">
           <label for="city">Cidade</label>
-          <select id="city" ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities">
+          <select id="city" ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities"
+          class="styled-select kf-color semi-squares">
             <option value="">Todas</option>
           </select>
         </div>
@@ -42,7 +43,7 @@
         <div class="margin-bottom">
           <label for="category">Categoria</label>
           <select id="category" ng-model="vm.idCategory" ng-options="item.idCategory as item.desCategory for item in vm.categories"
-            ng-change="vm.listCharacteristicByCategiry();">
+            ng-change="vm.listCharacteristicByCategiry();" class="styled-select kf-color semi-squares">
             <option value="">Todas</option>
           </select>
         </div>
@@ -72,7 +73,7 @@
           </div>
         </div>
       </ion-content>
-      <div class="bar bar-subfooter">
+      <div class="bar bar-subfooter kf-background-page">
         <div class="buttons">
           <div>
             <label class="kf-font-size-80-porcent">
@@ -89,7 +90,7 @@
         </div>
         <div class="title" style="z-index: -1 !important;"></div>
         <div class="buttons">
-          <button type="submit" class="button button-outline button-small button-stable icon-left ion-search">
+          <button type="submit" class="kf-button-active">
             Pesquisar
           </button>
         </div>
