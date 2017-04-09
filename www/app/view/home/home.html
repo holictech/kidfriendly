@@ -1,9 +1,9 @@
 <ion-view>
-  <ion-content class="padding has-header has-footer">
-    <section ng-if="vm.suggestions.length > 0">
-      <div class="padding-left kf-title-black">Sugestões</div>
-      <div class="list card">
-        <a class="item item-thumbnail-left item-icon-right item-text-wrap" href="#" ng-repeat="item in vm.suggestions track by item.idCompany"
+  <ion-content class="padding has-header has-footer kf-background-page">
+    <section ng-if="vm.suggestions.length > 0" class="kf-background-information">
+      <div class="padding-left kf-title-black kf-background-information">Sugestões</div>
+      <div class="list card kf-background-information">
+        <a class="item item-thumbnail-left item-icon-right item-text-wrap kf-background-miolo" href="#" ng-repeat="item in vm.suggestions track by item.idCompany"
           ng-click="vm.detailsCompany(item);">
           <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
           <img ng-if="item.imgLogo === null" ng-src="images/default-logo.png">
@@ -18,10 +18,10 @@
         </a>
       </div>
     </section>
-    <section ng-if="vm.nextToMe.length > 0">
-      <div class="padding-left padding-top kf-title-black">Próximos a mim</div>
-      <div class="list card">
-        <a class="item item-thumbnail-left item-icon-right item-text-wrap" href="#" ng-repeat="item in vm.nextToMe track by item.idCompany"
+    <section ng-if="vm.nextToMe.length > 0" class="kf-background-information">
+      <div class="padding-left padding-top kf-title-black kf-background-information">Próximos a mim</div>
+      <div class="list card kf-background-information">
+        <a class="item item-thumbnail-left item-icon-right item-text-wrap kf-background-miolo" href="#" ng-repeat="item in vm.nextToMe track by item.idCompany"
           ng-click="vm.detailsCompany(item);">
           <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
           <img ng-if="item.imgLogo === null" ng-src="images/default-logo.png">

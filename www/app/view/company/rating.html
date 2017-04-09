@@ -1,5 +1,5 @@
-<ion-modal-view>
-  <ion-header-bar align-title="center">
+<ion-modal-view class="kf-background-page">
+  <ion-header-bar align-title="center" class="kf-header-logo">
     <h1 class="title">Avaliação</h1>
     <div class="buttons">
       <button class="button button-icon icon ion-ios-close-empty" ng-click="vm.closeRating();"></button>
@@ -34,7 +34,7 @@
           autocomplete="off" required></textarea>
       </div>
       <div class="padding">
-        <button type="submit" class="button button-outline button-block button-stable">
+        <button type="submit" ng-class="vm.rating.desRating.length > 5 && vm.rating.statusKidFriendly != undefined ? 'kf-button-active' : 'kf-button-inative'" ng-disabled="vm.rating.desRating.length > 5 && vm.rating.statusKidFriendly != undefined ? false : true">
           Avaliar
         </button>
       </div>
