@@ -11,8 +11,9 @@
           <h4 ng-if="item.addressDto.cityDto.desCity !== null && item.addressDto.cityDto.desState !== null">
             {{item.addressDto.cityDto.desCity}}/{{item.addressDto.cityDto.desState}}
           </h4>
-          <i class="icon" ng-if="item.numRate !== null">
-            <img ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-list-icon-rate">
+          <i class="icon">
+            <img ng-if="item.numRate !== null" ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-company-icon-rate">
+            <img ng-if="item.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-company-icon-rate">
           </i>
         </a>
       </div>
@@ -28,8 +29,9 @@
           <h4 ng-if="item.addressDto.cityDto.desCity !== null && item.addressDto.cityDto.desState !== null">
             {{item.addressDto.cityDto.desCity}}/{{item.addressDto.cityDto.desState}}
           </h4>
-          <i class="icon" ng-if="item.numRate !== null">
-            <img ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-list-icon-rate">
+          <i class="icon">
+            <img ng-if="item.numRate !== null" ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-company-icon-rate">
+            <img ng-if="item.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-company-icon-rate">
           </i>
         </a>
       </div>
