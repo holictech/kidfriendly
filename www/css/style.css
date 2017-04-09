@@ -489,4 +489,49 @@ ion-popover-view ion-content {
   border-radius: 50%;
   width: 2em;
 }
+
+.kf-header-logo{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #e8be4a;
+}
+
+.kf-footer-menu{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #e8be4a;
+}
+
 /* END HEADER */
+
+/* Open background page */
+
+.kf-background-page{
+  background-color: #ffffdb;
+}
+
+.kf-background-information{
+  background-color: #ffffdb;
+}
+
+.kf-background-miolo{
+  background-color: #F0FFF0;
+}
+
+/* END PAGE */
+
+/* OPEN BUTTON */
+
+.kf-button-inative{
+  background: #F5F5F2;
+  box-shadow: none;
+  width: 100%;
+  color: #fff;
+}
+
+.kf-button-active{
+  background: #397FF5;
+  box-shadow: none;
+  width: 100%;
+  color: #fff;
+}
