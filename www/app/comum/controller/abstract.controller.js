@@ -132,7 +132,8 @@
           vm.go('main.user', true, {isUpdateUser: true});
         } else if (buttonIndex === 2 && !isUserSocialNetwork) {
           vm.go('main.user', true, {isUpdatePassword: true});
-        } else if ((buttonIndex === 2 && isUserSocialNetwork) || buttonIndex === 3) {
+        } else if ((buttonIndex === 2 && isUserSocialNetwork) ||
+            (buttonIndex === 3 && !isUserSocialNetwork)) {
           abstractService.removeLocalStorage(keyLocalStorageUser);
           vm.go('main.home', true);
         }
