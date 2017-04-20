@@ -3,8 +3,8 @@
   <name>Kid Friendly</name>
   <description/>
   <author email="holic@holictechnology.com" href="http://www.holictechnology.com/">
-	   Holic Technology
-    </author>
+	  Holic Technology
+  </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="Orientation" value="portrait"/>
