@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 411.7 411.7" enable-background="new 0 0 411.7 411.7" xml:space="preserve">
+<g>
+	<defs>
+		<circle id="SVGID_43_" cx="205.9" cy="205.9" r="150.8"/>
+	</defs>
+	<clipPath id="SVGID_1_">
+		<use xlink:href="#SVGID_43_"  overflow="visible"/>
+	</clipPath>
+	<circle clip-path="url(#SVGID_1_)" fill="#585857" cx="205.9" cy="205.9" r="150.8"/>
+	<g clip-path="url(#SVGID_1_)">
+		<circle fill="#B3B2B2" cx="205.9" cy="173.8" r="61"/>
+		<path fill="#B3B2B2" d="M205.9,245.9c-61.6,0-111.5,49.9-111.5,111.5l223.1,0C317.4,295.8,267.5,245.9,205.9,245.9z"/>
+	</g>
+</g>
+</svg>

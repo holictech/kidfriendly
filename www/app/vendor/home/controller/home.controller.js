@@ -11,38 +11,18 @@
     vm.nextToMe = [];
     vm.isShowNextToMe = false;
     vm.message = {
+      suggestions: '',
       nextToMe: ''
     };
 
     initialize();
 
-    vm.details = function(company) {
-      vm.go('main.home-company', {'primarykey': company.idCompany}, true);
+    vm.details = function(primarykey) {
+      vm.go('main.home-company', {'primarykey': primarykey}, true);
     };
 
-    /*
-    function initialize(isShowMessageGeolocation) {
-      
-      /*$scope.$on('$ionicView.beforeEnter', function() {
-        vm.hideLoading();
-        console.log('passei aqui');
-      });
-
-      LocalityService.getGeolocation().then(function(response) {
-        if (response.error && isShowMessageGeolocation) {
-          vm.hideLoading();
-          HomeService.ionicPopupAlertAttention(response.message).then(function() {
-            vm.showLoading();
-            listCompanies();
-          });
-        } else {
-          listCompanies(response.data);
-        }
-      });
-    }
-    */
-
     function listSuggestions() {
+      vm.message.suggestions = '';
       vm.suggestions = [];
       HomeService.listSuggestions().then(function(response) {
         if (!response.error) {
@@ -57,10 +37,8 @@
             });
           }, 500);
         } else {
-          console.log(response.message);
+          vm.message.suggestions = response.message;
         }
-
-        vm.timeoutHideLoading();
       });
     }
 
@@ -87,10 +65,8 @@
                 }, 500);
               }
             } else {
-              console.log(response.message);
+              vm.message.nextToMe = response.message;
             }
-
-            vm.timeoutHideLoading();
           });
         } else {
           vm.message.nextToMe = response.message;
@@ -99,54 +75,8 @@
     }
 
     function initialize() {
-      vm.showLoading();
       listSuggestions();
       listNextToMe();
     }
-
-    /*
-    function listCompanies(longitudeLatitude) {
-      HomeService.get(longitudeLatitude).then(function(response) {
-        var suggestions = [];
-        var nextToMe = [];
-
-        if (!response.error) {
-          suggestions = response.data.suggestions;
-          nextToMe = response.data.nextToMe;
-
-          if (suggestions.length === 0 && nextToMe.length === 0) {
-            vm.hideLoading();
-            HomeService.ionicPopupAlertAttention('Nenhum estabelecimento encontrado.');
-          }
-        } else {
-          vm.hideLoading();
-          HomeService.ionicPopupAlertError(response.message);
-        }
-        vm.suggestions = suggestions;
-        //vm.nextToMe = nextToMe;
-        vm.message.nextToMe = "Nenhum estabelecimento encontrado.";
-        
-        $timeout(function() {
-          new Swiper(angular.element(document.querySelector('.swiper-container-gallery')), {
-            prevButton: '.swiper-button-prev-gallery',
-            nextButton: '.swiper-button-next-gallery',
-            spaceBetween: 30,
-            effect: 'slide',
-            loop: true
-          });
-          new Swiper(angular.element(document.querySelector('.swiper-container-nexttome')), {
-            slidesPerView: 4,
-            centeredSlides: true,
-            spaceBetween: 10,
-            grabCursor: true
-          });
-          vm.isShowNextToMe = true;
-        }, 600);
-        vm.timeoutHideLoading();
-      }).finally(function() {
-        $scope.$broadcast('scroll.refreshComplete');
-      });
-    }
-    */
   }
 })();

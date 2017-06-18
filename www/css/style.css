@@ -556,6 +556,48 @@ input{
 
 .kf-color { background-color: #F0FFF0; }
 
+/* OVERRIDE IONIC */
+.popup {
+  width: 80vw !important;
+}
+.popup-head {
+  background-color: #FFF !important;
+  border-bottom: none !important;
+}
+.popup-title {
+  font-family: 'Raleway Bold' !important;
+  font-size: 1em;
+  text-align: left !important;
+  color: #F44F0F !important;
+}
+.popup-body {
+  font-family: 'Raleway Regular Light' !important;
+  font-size: 1em;
+  background-color: #FFF !important;
+  color: #F44F0F !important;
+  text-align: center;
+  border-style: solid !important;
+  border-width: 2px !important;
+  border-image: linear-gradient(to left, #fff 1%, #F44F0F 50%, #fff 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
+  -webkit-border-image: -webkit-linear-gradient(left, #FFF 1%, #F44F0F 50%, #FFF 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
+  -moz-border-image: -moz-linear-gradient(left, #FFF 1%, #F44F0F 50%, #FFF 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
+  -o-border-image: -o-linear-gradient(left, #FFF 1%, #F44F0F 50%, #FFF 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
+}
+.popup-buttons {
+  background-color: #FFF !important;
+}
+.popup-buttons .button {
+  font-family: 'Raleway Bold' !important;
+  background-color: #F44F0F;
+  color: #FFF;
+}
+
+.popup-buttons .button.activated {
+  background-color: #F44F0F;
+  opacity: 0.5;
+}
+/* END */
+
 /* NOVA IMPLEMENTAÇÃO DO KIDFRIENDLY */
 * {
   box-sizing: border-box !important;
@@ -650,7 +692,7 @@ input{
   color: #000;
 }
 .ion-kid-home:before {
-  content: url('../images/svg/kid-home.svg');
+  content: url('../images/svg/kid.svg');
   display: inline-block;
   width: 5rem;
 }
@@ -662,8 +704,8 @@ input{
   border-width: 2px !important;
   border-image: linear-gradient(to left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
   -webkit-border-image: -webkit-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
-  -moz-border-image: -moz-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 0 0 100% 0/2px 0 2px 0 stretch !important;
-  -o-border-image: -o-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 0 0 100% 0/2px 0 2px 0 stretch !important;
+  -moz-border-image: -moz-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
+  -o-border-image: -o-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
   background-color: #D4D4D4 !important;
   height: 20vh !important;
 }

@@ -104,15 +104,15 @@
       };
 
       this.ionicPopupAlertError = function(message) {
-        return this.ionicPopupAlert('Erro', message, 'kf-popup-error');
+        return this.ionicPopupAlert('ERRO', message);
       };
 
       this.ionicPopupAlertAttention = function(message) {
-        return this.ionicPopupAlert('Atenção', message, 'kf-popup-attention');
+        return this.ionicPopupAlert('ATENÇÃO', message);
       };
 
       this.ionicPopupAlertSuccess = function(message) {
-        return this.ionicPopupAlert('Sucesso', angular.isUndefined(message) ? 'Operação realizada com sucesso.' : message, 'kf-popup-success');
+        return this.ionicPopupAlert('SUCESSO', angular.isUndefined(message) ? 'Operação realizada com sucesso.' : message);
       };
 
       /* COOKIES METHODS */
