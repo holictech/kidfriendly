@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'Ebrima Bold';
+  src: url('fonts/ebrima-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ebrima Regular';
+  src: url('fonts/ebrima-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato Bold';
+  src: url('fonts/lato-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato Regular';
+  src: url('fonts/lato-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Myriad Set Pro Thin';
+  src: url('fonts/myriad-set-pro-thin.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Raleway Bold';
+  src: url('fonts/raleway-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Raleway ExtraBold';
+  src: url('fonts/raleway-extrabold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Raleway Light';
+  src: url('fonts/raleway-light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Raleway Regular';
+  src: url('fonts/raleway-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.font-ebrima-bold {
+  font-family: 'Ebrima Bold' !important;
+}
+.font-ebrima-regular {
+  font-family: 'Ebrima Regular' !important;
+}
+.font-lato-bold {
+  font-family: 'Lato Bold' !important;
+}
+.font-lato-regular {
+  font-family: 'Lato Regular' !important;
+}
+.font-myriad-set-pro-thin {
+  font-family: 'Myriad Set Pro Thin' !important;
+}
+.font-raleway-bold {
+  font-family: 'Raleway Bold' !important;
+}
+.font-raleway-extrabold {
+  font-family: 'Raleway ExtraBold' !important;
+}
+.font-raleway-light {
+  font-family: 'Raleway Light' !important;
+}
+.font-raleway-regular {
+  font-family: 'Raleway Regular' !important;
+}

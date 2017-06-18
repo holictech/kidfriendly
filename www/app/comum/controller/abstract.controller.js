@@ -7,7 +7,30 @@
 
   function AbstractController($ionicLoading, $timeout, $ionicHistory, $state, AbstractService, $ionicModal, $scope, EVENT_USER_LOGGED, ngFB) {
     var vm = this;
-    var abstractService = new AbstractService();
+    
+    vm.showLoading = function() {
+      $ionicLoading.show();
+    };
+
+    vm.hideLoading = function() {
+      $ionicLoading.hide();
+    };
+
+    vm.timeoutHideLoading = function() {
+      $timeout(function() {
+        vm.hideLoading();
+      }, 1000);
+    };
+
+    vm.go = function(state, parameter, loading) {
+      if (!angular.isUndefined(loading) && loading && !$state.is(state)) {
+        vm.showLoading();
+      }
+
+      $state.go(state, (angular.isUndefined(parameter) ? null : parameter));
+    };
+    
+    /*var abstractService = new AbstractService();
     var keyLocalStorageUser = 'keyLocalStorageUser';
     var modalLogin = null;
     vm.state = undefined;
@@ -34,12 +57,12 @@
       $ionicHistory.goBack(-1);
     };
 
-    vm.go = function(state, loading, params) {
+    vm.go = function(state, loading, parameter) {
       if (!angular.isUndefined(loading) && loading && !$state.is(state)) {
         vm.showLoading();
       }
 
-      $state.go(state, (angular.isUndefined(params) ? null : {'params': params}));
+      $state.go(state, (angular.isUndefined(parameter) ? null : parameter));
     };
 
     vm.isUserLogged = function() {
@@ -196,5 +219,6 @@
       abstractService.setLocalStorage(keyLocalStorageUser, user);
       $scope.$broadcast(EVENT_USER_LOGGED);
     }
+    */
   }
 })();

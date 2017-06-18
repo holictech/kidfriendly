@@ -24,7 +24,14 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.holictechnology.kidfriendly"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
+        }
+    }
 }

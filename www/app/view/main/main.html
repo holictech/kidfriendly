@@ -1,24 +1,17 @@
-<ion-header-bar align-title="center" class="kf-header-logo">
-  <div class="buttons" ng-if="vm.isShowBackButtonIOS();">
-    <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.goBack();"></button>
-  </div>
-  <h1 class="title">
-    <img src="images/logo_marca.png" height="20" width="160">
-  </h1>
-  <div class="buttons" ng-if="vm.isShowButtonLogInAvatar();">
-    <button class="button" ng-class="{'button-icon icon ion-log-in': !vm.isUserLogged() , 'button-clear': vm.isUserLogged()}"
-      ng-click="((vm.isUserLogged()) ? vm.logout() : vm.openLogin())">
-      <img ng-if="vm.isUserLogged() && vm.getUserLogged().mgUser !== null"
-        ng-src="data:image/*;base64,{{vm.getUserLogged().mgUser}}" class="kf-avatar-header">
-      <img ng-if="vm.isUserLogged() && vm.getUserLogged().mgUser === null"
-        ng-src="images/empty-avatar.jpg" class="kf-avatar-header">
-    </button>
-  </div>
-</ion-header-bar>
-<ion-nav-view name="main-view" class="kf-background-page"></ion-nav-view>
-<ion-footer-bar class="kf-footer-menu">
-  <h1 class="title"></h1>
-  <div class="buttons">
-    <button id="menuPopover" class="button button-icon icon ion-navicon" ng-click="vm.showMenu($event);"></button>
-  </div>
-</ion-footer-bar>
+<ion-tabs class="tab">
+  <ion-tab icon-on="ion-home-on" icon-off="ion-home-off">
+    <ion-nav-view name="home-view"></ion-nav-view>
+  </ion-tab>
+  <ion-tab icon-on="ion-user-on" icon-off="ion-user-off">
+    <ion-nav-view name="user-view"></ion-nav-view>
+  </ion-tab>
+  <ion-tab icon-on="ion-magnifying-glass-on" icon-off="ion-magnifying-glass-off">
+    <ion-nav-view name="search-view"></ion-nav-view>
+  </ion-tab>
+  <ion-tab icon-on="ion-indicate-on" icon-off="ion-indicate-off">
+    <ion-nav-view name="indicate-view"></ion-nav-view>
+  </ion-tab>
+  <ion-tab icon-on="ion-contact-us-on" icon-off="ion-contact-us-off">
+    <ion-nav-view name="contact-view"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>

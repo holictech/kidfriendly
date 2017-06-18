@@ -1,42 +1,44 @@
 <ion-view>
-  <ion-content class="padding has-header has-footer kf-background-page">
-    <section ng-if="vm.suggestions.length > 0" class="kf-background-information">
-      <div class="padding-left kf-title-black kf-background-information">Sugestões</div>
-      <div class="list card kf-background-information">
-        <a class="item item-thumbnail-left item-icon-right item-text-wrap kf-background-miolo" href="#" ng-repeat="item in vm.suggestions track by item.idCompany"
-          ng-click="vm.detailsCompany(item);">
-          <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
-          <img ng-if="item.imgLogo === null" ng-src="images/default-logo.png">
-          <h2>{{item.desName}}</h2>
-          <h4 ng-if="item.addressDto.cityDto.desCity !== null && item.addressDto.cityDto.desState !== null">
-            {{item.addressDto.cityDto.desCity}}/{{item.addressDto.cityDto.desState}}
-          </h4>
-          <i class="icon">
-            <img ng-if="item.numRate !== null" ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-list-icon-rate">
-            <img ng-if="item.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-list-icon-rate">
-          </i>
-        </a>
+  <ion-nav-title>
+    <img src="images/png/kidfriendly.png" style="width: 70vw; margin-top: 4px;">
+  </ion-nav-title>
+  <ion-content>
+    <div layout="row">
+      <div flex="66" flex-offset="10" class="align-self-center">
+        <span style="font-size: 2.5rem" class="font-raleway-light color-orange">Bem vindo!</span>
       </div>
-    </section>
-    <section ng-if="vm.nextToMe.length > 0" class="kf-background-information">
-      <div class="padding-left padding-top kf-title-black kf-background-information">Próximos a mim</div>
-      <div class="list card kf-background-information">
-        <a class="item item-thumbnail-left item-icon-right item-text-wrap kf-background-miolo" href="#" ng-repeat="item in vm.nextToMe track by item.idCompany"
-          ng-click="vm.detailsCompany(item);">
-          <img ng-if="item.imgLogo !== null" ng-src="data:image/*;base64,{{item.imgLogo}}">
-          <img ng-if="item.imgLogo === null" ng-src="images/default-logo.png">
-          <h2>{{item.desName}}</h2>
-          <h4 ng-if="item.addressDto.cityDto.desCity !== null && item.addressDto.cityDto.desState !== null">
-            {{item.addressDto.cityDto.desCity}}/{{item.addressDto.cityDto.desState}}
-          </h4>
-          <i class="icon">
-            <img ng-if="item.numRate !== null" ng-src="images/status-kidfriendly-{{item.numRate}}.png" class="kf-list-icon-rate">
-            <img ng-if="item.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-list-icon-rate">
-          </i>
-        </a>
+      <div flex>
+        <i class="ion-kid-home"></i>
       </div>
-    </section>
-    <ion-refresher on-refresh="vm.refresh();" spinner="none">
-    </ion-refresher>
+    </div>
+    <div layout="row">
+      <div flex flex-offset="10">
+        <h5 class="font-raleway-light color-orange">Sugestões</h5>
+      </div>
+    </div>
+    <div class="swiper-container swiper-container-gallery">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide-gallery" ng-repeat="item in vm.suggestions track by item.idCompany">
+          <img ng-src="data:image/*;base64,{{item.imgLogo}}" ng-click="vm.details(item);">
+        </div>
+      </div>
+      <div class="swiper-button-prev swiper-button-prev-gallery" ng-class="{'swiper-button-disabled': vm.suggestions.length === 0}"></div>
+      <div class="swiper-button-next swiper-button-next-gallery" ng-class="{'swiper-button-disabled': vm.suggestions.length === 0}"></div>
+    </div>
+    <div layout="row">
+      <div flex flex-offset="10">
+        <h5 class="font-raleway-light color-orange">Proxímo a <span class="font-raleway-bold">você</span></h5>
+      </div>
+    </div>
+    <div layout="row" class="swiper-container swiper-container-nexttome">
+      <div class="swiper-wrapper" ng-if="vm.nextToMe.length > 0">
+        <div class="swiper-slide swiper-slide-nexttome align-self-center" ng-repeat="item in vm.nextToMe track by item.idCompany">
+          <img ng-src="data:image/*;base64,{{item.imgLogo}}" ng-show="vm.isShowNextToMe" ng-click="vm.details(item);">
+        </div>
+      </div>
+      <div flex class="align-self-center text-align-center font-raleway-light" ng-if="vm.nextToMe.length === 0">
+        {{vm.message.nextToMe}}
+      </div>
+    </div>
   </ion-content>
 </ion-view>

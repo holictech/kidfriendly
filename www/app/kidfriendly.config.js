@@ -9,10 +9,15 @@
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
 
+    $ionicConfigProvider.views.transition('ios');
+    $ionicConfigProvider.spinner.icon('ios');
+    $ionicConfigProvider.tabs.style('standard');
+    $ionicConfigProvider.tabs.position('bottom');
+    $ionicConfigProvider.backButton.text('');
     $httpProvider.interceptors.push(function() {
       return {
         'request': function(config) {
-          config.timeout = 50000;
+          config.timeout = 120000;
 
           return config;
         }
@@ -20,26 +25,32 @@
     });
 
     $stateProvider
-    .state('main', {
-      url: "/main",
-      params: {
-        params: null
-      },
-      abstract: true,
-      templateUrl: 'app/view/main/main.html',
-      controller: 'MainController',
-      controllerAs: 'vm'
-    })
-    .state('main.home', {
+      .state('main', {
+        url: "/main",
+        abstract: true,
+        templateUrl: 'app/view/main/main.html',
+        controller: 'MainController',
+        controllerAs: 'vm'
+    }).state('main.home', {
       url: "/home",
       views: {
-        'main-view': {
+        'home-view': {
           templateUrl: 'app/view/home/home.html',
           controller: 'HomeController',
           controllerAs: 'vm'
         }
       }
-    })
+    }).state('main.home-company', {
+      url: '/home/company/:primarykey',
+      views: {
+        'home-view': {
+          templateUrl: 'app/view/company/company.html',
+          controller: 'CompanyController',
+          controllerAs: 'vm'
+        }
+      }
+    });
+    /*
     .state('main.search', {
       url: '/search',
       views: {
@@ -69,7 +80,7 @@
       }
     })
     .state('main.company', {
-      url: '/company',
+      url: '/company/:idCompany/:idCategory',
       views: {
         'main-view': {
           templateUrl: 'app/view/company/company.html',
@@ -111,7 +122,7 @@
           }
         }
       }
-    });
+    })*/;
 
     $urlRouterProvider.otherwise("/main/home");
   }

@@ -16,18 +16,6 @@
       if (window.StatusBar) {
         StatusBar.styleDefault();
       }
-
-      $ionicPlatform.registerBackButtonAction(function(event) {
-        if ($state.is('main.home')) {
-          ionic.Platform.exitApp();
-        } else {
-          $ionicHistory.goBack(-1);
-        }
-      }, 100);
-
-      if (navigator && navigator.app) {
-        navigator.app.overrideButton("menubutton", true);
-      }
     });
   }
 })();

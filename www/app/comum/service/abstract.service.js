@@ -2,33 +2,29 @@
   'use strict';
 
   angular.module('comum.service').service('AbstractService', AbstractService);
-  AbstractService.$inject = ['Upload', '$http', '$cordovaGeolocation', '$ionicPopup', '$cookies', '$q'];
+  AbstractService.$inject = ['Upload', '$http', '$ionicPopup', '$cookies', '$q'];
 
-  function AbstractService(Upload, $http, $cordovaGeolocation, $ionicPopup, $cookies, $q) {
+  function AbstractService(Upload, $http, $ionicPopup, $cookies, $q) {
     var AbstractService = function(uri) {
-      //var _uri = 'http://localhost:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
+      var _uri = 'http://localhost:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.2.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.3.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://192.168.0.14:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://kidfriendly.servehttp.com:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
-      var _uri = 'http://kidfriendly.com.br/kf' + (angular.isUndefined(uri) ? '' : uri);
+      //var _uri = 'http://kidfriendly.com.br/kf' + (angular.isUndefined(uri) ? '' : uri);
       var method = {
         success: function(response) {
-          var _response = {
+          return {
             error: false,
             data: ((angular.isString(response.data) && response.data.trim().length === 0) ? null : response.data)
           };
-
-          return _response;
         },
 
         error: function(response) {
-          var _response = {
+          return {
             error: true,
             message: ((angular.isUndefined(response.data) || response.data === null || angular.isUndefined(response.data.message) || response.data.message === null) ? "Serviço indisponível.<br/>Tente mais tarde." : response.data.message)
           };
-
-          return _response;
         },
 
         upload: function (uri, method, data) {
@@ -38,27 +34,6 @@
               headers: {'Content-Type': undefined},
               data: data
             });
-        },
-
-        geolocationSuccess: function(response) {
-          var _response = {
-            error: false,
-            data: {
-              longitude: response.coords.longitude,
-              latitude: response.coords.latitude
-            }
-          };
-
-          return _response;
-        },
-
-        geolocationError: function() {
-          var _response = {
-            error: true,
-            message: 'Não foi possível encontrar nenhuma localização.'
-          };
-
-          return _response;
         }
       };
 
@@ -66,6 +41,7 @@
         return _uri;
       };
 
+      /* HTTP METHODS */
       this.get = function(params) {
         return this.httpGet(this.getURI(), params);
       };
@@ -117,12 +93,8 @@
           params: ((!angular.isUndefined(params) && angular.isObject(params)) ? params : {})
         }).then(method.success, method.error);
       };
-
-      this.getGeolocation = function() {
-        return $cordovaGeolocation.getCurrentPosition({timeout: 5000, enableHighAccuracy: true})
-          .then(method.geolocationSuccess, method.geolocationError);
-      };
-
+      
+      /* MESSAGE METHODS */
       this.ionicPopupAlert = function(title, message, cssClass) {
         return $ionicPopup.alert({
           title: title,
@@ -143,6 +115,7 @@
         return this.ionicPopupAlert('Sucesso', angular.isUndefined(message) ? 'Operação realizada com sucesso.' : message, 'kf-popup-success');
       };
 
+      /* COOKIES METHODS */
       this.getCookies = function(key) {
         return $cookies.getObject(key);
       };
@@ -165,6 +138,7 @@
         $cookies.putObject(key, value, {expires: expire});
       };
 
+      /* LOCAL/SESSION METHODS */
       this.setLocalStorage = function(key, value) {
         localStorage.setItem(key, angular.toJson(value));
       };
@@ -185,6 +159,7 @@
         return angular.fromJson(sessionStorage[key]);
       };
 
+      /* IMAGE METHODS */
       this.urlToBase64 = function(url) {
         var defer = $q.defer();
         var vm = this;
@@ -209,6 +184,7 @@
         return defer.promise;
       };
 
+      /* COLOCAR ESSE METODO NO SEU DEVIDO LUGAR */
       this.createToken = function(value) {
         return sha256_digest("fRiEnDlY" + sha256_digest(value) + "KiD");
       };

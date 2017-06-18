@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-  CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService', 'EVENT_USER_LOGGED'];
+  CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService', 'EVENT_USER_LOGGED', '$stateParams'];
 
-  function CompanyController(CompanyService, $scope, $state, $controller, maskFilter, RatingService, $ionicModal, ImageService, EVENT_USER_LOGGED) {
+  function CompanyController(CompanyService, $scope, $state, $controller, maskFilter, RatingService, $ionicModal, ImageService, EVENT_USER_LOGGED, $stateParams) {
     var vm = this;
     var paginatorDto = null;
     var idCompany = null;
@@ -165,13 +165,15 @@
     };
 
     function initialize() {
-      $scope.$on('$ionicView.beforeEnter', function () {
+      $scope.$on('$ionicView.beforeEnter', function() {
+        console.log('entrei no controler da company');
         vm.isVisible = false;
-        var company = $state.params.params.company;
-        var idCategory = $state.params.params.idCategory;
+        console.log($state.params);
+        var idCompany = $stateParams.primarykey;
+        var idCategory = $stateParams.idCategory;
 
-        if (angular.isObject(company)) {
-          CompanyService.details(company.idCompany, idCategory).then(function(response) {
+        if (idCompany !== "") {
+          CompanyService.details(idCompany, idCategory).then(function(response) {
             if (response.error) {
               vm.hideLoading();
               CompanyService.ionicPopupAlertError(response.message).then(function() {

@@ -39,10 +39,11 @@
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
-        filters = $state.params.params.filters;
+        /*filters = $state.params.params.filters;
         paginatorDto = $state.params.params.response.data.paginatorDto;
         vm.results = $state.params.params.response.data.results;
         vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
+        */
         vm.timeoutHideLoading();
       });
     }
