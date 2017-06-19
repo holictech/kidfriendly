@@ -27,15 +27,20 @@
       HomeService.listSuggestions().then(function(response) {
         if (!response.error) {
           vm.suggestions.concat(response.data);
-          $timeout(function() {
-            new Swiper(angular.element(document.querySelector('.swiper-container-gallery')), {
-              prevButton: '.swiper-button-prev-gallery',
-              nextButton: '.swiper-button-next-gallery',
-              spaceBetween: 30,
-              effect: 'slide',
-              loop: true
-            });
-          }, 500);
+
+          if (vm.suggestions.length === 0) {
+            vm.message.suggestions = 'Nenhum estabelecimento.'
+          } else {
+            $timeout(function() {
+              new Swiper(angular.element(document.querySelector('.swiper-container-gallery')), {
+                prevButton: '.swiper-button-prev-gallery',
+                nextButton: '.swiper-button-next-gallery',
+                spaceBetween: 30,
+                effect: 'slide',
+                loop: true
+              });
+            }, 500);
+          }
         } else {
           vm.message.suggestions = response.message;
         }
