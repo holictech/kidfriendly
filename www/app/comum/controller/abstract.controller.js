@@ -2,10 +2,9 @@
   'use strict';
 
   angular.module('comum.controller').controller('AbstractController', AbstractController);
-  AbstractController.$inject = ['$ionicLoading', '$timeout', '$ionicHistory', '$state', 'AbstractService', '$ionicModal', '$scope',
-    'EVENT_USER_LOGGED', 'ngFB'];
+  AbstractController.$inject = ['$ionicLoading', '$timeout', '$state'];
 
-  function AbstractController($ionicLoading, $timeout, $ionicHistory, $state, AbstractService, $ionicModal, $scope, EVENT_USER_LOGGED, ngFB) {
+  function AbstractController($ionicLoading, $timeout, $state) {
     var vm = this;
     
     vm.showLoading = function() {
@@ -23,7 +22,7 @@
     };
 
     vm.go = function(state, parameter, loading) {
-      if (!angular.isUndefined(loading) && loading && !$state.is(state)) {
+      if (!$state.is(state) && !angular.isUndefined(loading) && loading) {
         vm.showLoading();
       }
 

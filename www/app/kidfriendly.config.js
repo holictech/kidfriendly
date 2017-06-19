@@ -49,6 +49,33 @@
           controllerAs: 'vm'
         }
       }
+    }).state('main.user-login', {
+      url: '/user/login',
+      views: {
+        'user-view': {
+          templateUrl: 'app/view/login/login.html',
+          controller: 'LoginController',
+          controllerAs: 'vm'
+        }
+      }
+    }).state('main.user-perfil', {
+      url: '/user/perfil',
+      views: {
+        'user-view': {
+          templateUrl: 'app/view/user/perfil.html'/*,
+          controller: 'PerfilController',
+          controllerAs: 'vm'*/
+        }
+      }
+    }).state('main.user-register', {
+      url: '/user/register',
+      views: {
+        'user-view': {
+          templateUrl: 'app/view/user/register.html'/*,
+          controller: 'RegisterController',
+          controllerAs: 'vm'*/
+        }
+      }
     });
     /*
     .state('main.search', {

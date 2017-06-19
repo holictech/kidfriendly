@@ -557,6 +557,14 @@ input{
 .kf-color { background-color: #F0FFF0; }
 
 /* OVERRIDE IONIC */
+.header {
+  background-color: #F44F0F !important;
+  color: #FFF;
+}
+.header .title {
+  font-family: 'Myriad Set Pro Thin' !important;
+  font-size: 1.6rem !important;
+}
 .popup {
   width: 80vw !important;
 }
@@ -571,7 +579,7 @@ input{
   color: #F44F0F !important;
 }
 .popup-body {
-  font-family: 'Raleway Regular Light' !important;
+  font-family: 'Myriad Set Pro Thin' !important;
   font-size: 1em;
   background-color: #FFF !important;
   color: #F44F0F !important;
@@ -586,15 +594,34 @@ input{
 .popup-buttons {
   background-color: #FFF !important;
 }
-.popup-buttons .button {
+.button {
   font-family: 'Raleway Bold' !important;
-  background-color: #F44F0F;
-  color: #FFF;
+  background-color: #F44F0F !important;
+  color: #FFF !important;
 }
-
-.popup-buttons .button.activated {
-  background-color: #F44F0F;
-  opacity: 0.5;
+.button.activated {
+  opacity: 0.8 !important;
+}
+.button-small {
+  min-width: 25vw !important;
+}
+.item-input {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.input-label {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Lato Regular' !important;
+  color: #F44F0F !important;
+}
+input {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Ebrima Regular' !important;
+  color: rgba(0,0,0,0.54) !important;
+  border-bottom: 1px solid #F44F0F !important;
+  height: 1.5rem !important;
 }
 /* END */
 
@@ -603,10 +630,6 @@ input{
   box-sizing: border-box !important;
   -webkit-box-sizing: border-box !important;
   -moz-box-sizing: border-box !important;
-}
-.header {
-  background-color: #F44F0F !important;
-  color: #FFF;
 }
 .tab > .tabs, .tabs.tab {
   border-color: #F44F0F;
@@ -691,6 +714,9 @@ input{
 .color-black {
   color: #000;
 }
+.color-back-054 {
+  color: rgba(0,0,0,0.54) !important;
+}
 .ion-kid-home:before {
   content: url('../images/svg/kid.svg');
   display: inline-block;
@@ -717,6 +743,18 @@ input{
   width: 100% !important;
   height: 100% !important;
 }
+.text-align-left {
+  text-align: left !important;
+}
 .text-align-center {
   text-align: center !important;
+}
+.text-align-right {
+  text-align: right !important;
+}
+.button-facebook {
+  background-color: #4767AB !important;
+}
+.link {
+  color: #4BB2E4 !important;
 }

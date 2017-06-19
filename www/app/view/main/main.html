@@ -1,17 +1,17 @@
 <ion-tabs class="tab">
-  <ion-tab icon-on="ion-home-on" icon-off="ion-home-off">
+  <ion-tab icon-on="ion-home-on" icon-off="ion-home-off" ng-click="vm.go('main.home');">
     <ion-nav-view name="home-view"></ion-nav-view>
   </ion-tab>
-  <ion-tab icon-on="ion-user-on" icon-off="ion-user-off">
+  <ion-tab icon-on="ion-user-on" icon-off="ion-user-off" ng-click="vm.clickIconUser();">
     <ion-nav-view name="user-view"></ion-nav-view>
   </ion-tab>
-  <ion-tab icon-on="ion-magnifying-glass-on" icon-off="ion-magnifying-glass-off">
+  <ion-tab icon-on="ion-magnifying-glass-on" icon-off="ion-magnifying-glass-off" ng-click="vm.go('main.search');">
     <ion-nav-view name="search-view"></ion-nav-view>
   </ion-tab>
-  <ion-tab icon-on="ion-indicate-on" icon-off="ion-indicate-off">
+  <ion-tab icon-on="ion-indicate-on" icon-off="ion-indicate-off" ng-click="vm.go('main.indicate');">
     <ion-nav-view name="indicate-view"></ion-nav-view>
   </ion-tab>
-  <ion-tab icon-on="ion-contact-us-on" icon-off="ion-contact-us-off">
+  <ion-tab icon-on="ion-contact-us-on" icon-off="ion-contact-us-off" ng-click="vm.go('main.contact');">
     <ion-nav-view name="contact-view"></ion-nav-view>
   </ion-tab>
 </ion-tabs>

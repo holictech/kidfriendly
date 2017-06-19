@@ -1,6 +1,6 @@
 <ion-view>
   <ion-nav-title>
-    <img src="images/png/kidfriendly.png" style="width: 70vw; margin-top: 4px;">
+    <img src="images/png/kidfriendly.png" style="width: 100%; height: 80%; margin-top: 4px;">
   </ion-nav-title>
   <ion-content>
     <div layout="row">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="swiper-container swiper-container-gallery">
-      <div flex class="align-self-center text-align-center font-raleway-light" ng-if="vm.nextToMe.length === 0">
+      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.nextToMe.length === 0">
         <ion-spinner ng-if="vm.message.suggestions === ''"></ion-spinner>
         <span ng-bind-html="vm.message.suggestions"></span>
       </div>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div layout="row" class="swiper-container swiper-container-nexttome">
-      <div flex class="align-self-center text-align-center font-raleway-light" ng-if="vm.nextToMe.length === 0">
+      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.nextToMe.length === 0">
         <ion-spinner ng-if="vm.message.nextToMe === ''"></ion-spinner>
         <span ng-bind-html="vm.message.nextToMe"></span>
       </div>
