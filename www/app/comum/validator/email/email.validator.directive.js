@@ -5,10 +5,10 @@
 
   function EmailValidator() {
     var method = {
-      isEmail: function(email) {
+      isEmail: function(value) {
         var expression = /^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2,3}/g;
 
-        return expression.test(email);
+        return expression.test(value);
       }
     };
 
@@ -16,9 +16,9 @@
       restrict: 'A',
       require: 'ngModel',
       link: function(scope, element, attributes, ngModel) {
-        ngModel.$validators.email = function(modelValue) {
-          if (modelValue) {
-            return method.isEmail(modelValue);
+        ngModel.$validators.email = function(value) {
+          if (value) {
+            return method.isEmail(value);
           }
 
           return true;

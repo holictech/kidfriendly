@@ -1,5 +1,4 @@
-
-<ion-view>
+<ion-view hide-back-button="true">
   <ion-nav-title style="width: 100% !important; text-align: left !important;">
     Log in
   </ion-nav-title>
@@ -15,87 +14,41 @@
       </div>
     </div>
     <div layout="row">
-      <div flex class="text-align-center" style="margin: 0 10vw 1vh 10vw;">
-        <button class="button button-block button-facebook icon-left ion-social-facebook">
+      <div flex class="text-align-center" style="margin: 1vh 10vw 1vh 10vw;">
+        <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="vm.authenticateFB();">
           Entrar com o Facebook
         </button>
       </div>
     </div>
-    <div layout="row">
-      <div flex style="margin: 0 5vw 1vh 5vw;">
-        <label class="item-input item-stacked-label">
-          <span class="input-label" for="email">E-mail:</span>
-          <input id="email" type="email">
-        </label>
+    <form name="vm.formLogin" novalidate>
+      <div layout="row">
+        <div flex style="margin: 0 5vw 1vh 5vw;">
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="email">E-mail:</span>
+            <input id="email" name="email" type="email" data-ng-model="vm.login.email" autocomplete="off" required email-validator>
+          </label>
+        </div>
       </div>
-    </div>
-    <div layout="row">
-      <div flex style="margin: 0 5vw 1vh 5vw;">
-        <label class="item-input item-stacked-label">
-          <span class="input-label" for="password">Senha:</span>
-          <input id="password" type="password">
-        </label>
+      <div layout="row">
+        <div flex style="margin: 0 5vw 1vh 5vw;">
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="password">Senha:</span>
+            <input id="password" name="password" type="password" data-ng-model="vm.login.token" autocomplete="off" required disallow-spaces>
+          </label>
+        </div>
       </div>
-    </div>
-    <div layout="row">
-      <div flex style="margin: 2vh 5vw 1vh 5vw;" class="text-align-center">
-        <button class="button button-small">
-          ENTRAR
-        </button>
+      <div layout="row">
+        <div flex style="margin-top: 2vh;" class="text-align-center" >
+          <button class="button button-small" type="button" ng-disabled="vm.formLogin.$invalid" ng-click="vm.authenticate();">
+            ENTRAR
+          </button>
+        </div>
       </div>
-    </div>
-    <div layout="row">
-      <div flex style="margin: 2vh 5vw 0 5vw;" class="text-align-center font-myriad-set-pro-thin color-back-054">
-        Ainda não tem conta?<br/>Cadastre-se <strong class="link" ng-click="vm.go('main.user-register');">aqui</strong>.
+      <div layout="row">
+        <div flex style="margin-top: 2vh;" class="text-align-center font-myriad-set-pro-thin color-back-054">
+          Ainda não tem conta?<br/>Cadastre-se <strong class="link" ng-click="vm.go('main.user-register');">aqui</strong>.
+        </div>
       </div>
-    </div>
+    </form>
   </ion-content>
 </ion-view>
-<!--
-<ion-modal-view class="kf-background-page">
-  <ion-header-bar align-title="center" class="kf-header-logo">
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-icon icon ion-ios-close-empty" ng-click="vm.closeLogin();"></button>
-    </div>
-  </ion-header-bar>
-  <ion-content class="padding" scroll="false" style="top:33.33% !important; right: 2% !important; left: 2% !important">
-    <div class="padding" style="box-shadow: 1px 1px 5px #888888;">
-      <div>
-        <button class="button button-block button-positive kf-no-margin-bottom" ng-click="vm.authenticateFB();">
-          Facebook
-        </button>
-      </div>
-      <div class="kf-display-flex kf-align-itens-center margin-top margin-bottom" style="height: 2em;">
-        <div class="kf-width-45-porcent">
-          <hr />
-        </div>
-        <div class="kf-width-10-porcent margin-left margin-right text-center">ou</div>
-        <div class="kf-width-45-porcent">
-          <hr />
-        </div>
-      </div>
-      <div>
-        <form name="vm.formLogin" novalidate ng-submit="vm.authenticate();">
-          <label class="item item-input">
-            <i class="icon ion-person placeholder-icon"></i>
-            <input type="email" id="login" name="login" ng-model="vm.login.idLogin" placeholder="Insira o seu email."
-              autocomplete="off" maxlength="150" required email-validator>
-          </label>
-          <label class="item item-input">
-            <i class="icon ion-locked placeholder-icon"></i>
-            <input type="password" id="password" name="password" ng-model="vm.login.desPassword" placeholder="Insira a sua senha."
-              autocomplete="off" minlength="6" maxlength="10" required>
-          </label>
-          <button type="submit" class="button button-block button-balanced" ng-disabled="vm.formLogin.$invalid">
-            Entrar
-          </button>
-        </form>
-      </div>
-      <div class="text-right padding kf-width-100-porcent">
-        <a href="#" ng-click="vm.closeLogin(); vm.go('main.user', true, {isIncludeUser:true});" title="Registrar uma nova conta!">Registrar uma nova conta!</a>
-      </div>
-    </div>
-  </ion-content>
-</ion-modal-view>
--->

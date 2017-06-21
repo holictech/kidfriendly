@@ -7,14 +7,12 @@
   function LoginService(AbstractService) {
     AbstractService.call(this, '/login');
 
-    this.isLogged = function() {
-      return false;
+    this.authenticateUser = function(token, email) {
+      return this.httpGet(this.getURI() + '/authenticateuser/' + token + '/' + email);
     };
 
-    this.authenticateUser = function() {
-    };
-
-    this.authenticateUserSocialNetwork = function() {
+    this.authenticateUserSocialNetwork = function(idSocialNetwork) {
+      return this.httpGet(this.getURI() + '/authenticateusersocialnetwork/' + idSocialNetwork);
     };
   }
 })();

@@ -16,6 +16,14 @@
       if (window.StatusBar) {
         StatusBar.styleDefault();
       }
+
+      $ionicPlatform.registerBackButtonAction(function(event) {
+        if ($state.is('main.home')) {
+          ionic.Platform.exitApp();
+        } else {
+          event.preventDefault();
+        }
+      }, 100);
     });
   }
 })();
