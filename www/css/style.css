@@ -608,20 +608,35 @@ input{
 .item-input {
   margin: 0 !important;
   padding: 0 !important;
+  width: 100% !important;
 }
 .input-label {
   margin: 0 !important;
   padding: 0 !important;
   font-family: 'Lato Regular' !important;
   color: #F44F0F !important;
+  width: 100% !important;
 }
-input {
+select,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="number"]  {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 1px 0 1px !important;
+  border-image: 0;
+  border-color: transparent !important;
   font-family: 'Lato Regular' !important;
   color: rgba(0,0,0,0.54) !important;
   border-bottom: 1px solid #F44F0F !important;
   height: 1.5rem !important;
+  width: 100% !important;
+}
+select {
+  background-color: #FFF !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
 }
 /* END */
 
@@ -754,8 +769,11 @@ input {
 }
 .button-facebook {
   background-color: #4767AB !important;
-  min-width: 45vw !important;
+  min-width: 50vw !important;
 }
 .link {
   color: #4BB2E4 !important;
+}
+.avatar {
+  border-radius: 50%;
 }

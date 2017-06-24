@@ -6,6 +6,7 @@
 
   function AbstractService(Upload, $http, $ionicPopup, $cookies, $q) {
     var AbstractService = function(uri) {
+      //var _uri = 'http://localhost:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://192.168.0.10:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.2.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);
       //var _uri = 'http://10.0.3.2:8080/kf' + (angular.isUndefined(uri) ? '' : uri);

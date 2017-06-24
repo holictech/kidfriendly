@@ -2,6 +2,8 @@
   'use strict';
 
   angular.module('comum.directive').directive('disallowSpaces', function() {
+    var expression = /\s/g;
+
     return {
       require: 'ngModel',
       restrict: 'A',
@@ -11,7 +13,7 @@
             return '';
           }
 
-          let newValue = value.replace(/\s/gi, '');
+          var newValue = value.replace(expression, '');
 
           if (value != newValue) {
             controller.$setViewValue(newValue);

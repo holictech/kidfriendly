@@ -29,5 +29,17 @@
     this.getMinMaxDtBirthday = function() {
       return this.httpGet(this.getURI() + '/minmaxdtbirthday');
     };
+
+    this.getGenders = function() {
+      return [
+        {
+          value: 'FEMALE',
+          label: 'Feminimo'
+        }, {
+          value: 'MALE',
+          label: 'Masculino'
+        }
+      ];
+    }
   }
 })();

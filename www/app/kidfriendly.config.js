@@ -4,7 +4,7 @@
   angular.module('kidfriendly').config(Config);
   Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
-  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, LocalityService, CategoryService, UserService) {
+  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, LocalityService, UserService, CategoryService) {
     if (ionic.Platform.isAndroid()) {
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
@@ -71,9 +71,17 @@
       url: '/user/register',
       views: {
         'user-view': {
-          templateUrl: 'app/view/user/register.html'/*,
+          templateUrl: 'app/view/user/register.html',
           controller: 'RegisterController',
-          controllerAs: 'vm'*/
+          controllerAs: 'vm',
+          resolve: {
+            StatesPrepService: function(LocalityService) {
+              return LocalityService.listStateWithCityByCountry();
+            },
+            MinMaxDtBirthdayPrepService: function(UserService) {
+              return UserService.getMinMaxDtBirthday();
+            }
+          }
         }
       }
     });

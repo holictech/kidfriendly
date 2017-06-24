@@ -14,39 +14,39 @@
       </div>
     </div>
     <div layout="row">
-      <div flex class="text-align-center" style="margin: 1vh 10vw 1vh 10vw;">
+      <div flex class="text-align-center" style="margin: 2.5vh 10vw 1vh 10vw;">
         <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="vm.authenticateFB();">
           Entrar com o Facebook
         </button>
       </div>
     </div>
     <form name="vm.formLogin" novalidate>
-      <div layout="row">
-        <div flex style="margin: 0 5vw 1vh 5vw;">
+      <div layout="row" style="margin: 2.5vh 5vw 1vh 5vw;">
+        <div flex>
           <label class="item-input item-stacked-label">
-            <span class="input-label" for="email">E-mail:</span>
+            <span class="input-label" for="email">E-mail</span>
             <input id="email" name="email" type="email" data-ng-model="vm.login.email" autocomplete="off" required email-validator>
           </label>
         </div>
       </div>
-      <div layout="row">
-        <div flex style="margin: 0 5vw 1vh 5vw;">
+      <div layout="row" style="margin: 0 5vw 1vh 5vw;">
+        <div flex>
           <label class="item-input item-stacked-label">
-            <span class="input-label" for="password">Senha:</span>
-            <input id="password" name="password" type="password" data-ng-model="vm.login.token" autocomplete="off" required disallow-spaces>
+            <span class="input-label" for="password">Senha</span>
+            <input id="password" name="password" type="password" data-ng-model="vm.login.token" autocomplete="off" minlength="6" maxlength="12" required disallow-spaces>
           </label>
         </div>
       </div>
-      <div layout="row">
-        <div flex style="margin-top: 2vh;" class="text-align-center" >
+      <div layout="row" style="margin-top: 2vh;">
+        <div flex class="text-align-center" >
           <button class="button button-small" type="button" ng-disabled="vm.formLogin.$invalid" ng-click="vm.authenticate();">
             ENTRAR
           </button>
         </div>
       </div>
-      <div layout="row">
-        <div flex style="margin-top: 2vh;" class="text-align-center font-myriad-set-pro-thin color-back-054">
-          Ainda não tem conta?<br/>Cadastre-se <strong class="link" ng-click="vm.go('main.user-register');">aqui</strong>.
+      <div layout="row" style="margin-top: 2vh;">
+        <div flex class="text-align-center font-myriad-set-pro-thin color-back-054">
+          Ainda não tem conta?<br/>Cadastre-se <strong class="link" ng-click="vm.go('main.user-register', null, true);">aqui</strong>.
         </div>
       </div>
     </form>
