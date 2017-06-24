@@ -50,7 +50,7 @@
               <span class="input-label" for="state">Estado</span>
               <select id="state" data-ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states"
                 ng-change="vm.listCityByState(vm.idState);">
-                <option value="">Selecione</option>
+                <option value=""></option>
               </select>
             </label>
           </div>
@@ -60,7 +60,7 @@
             <label class="item-input item-stacked-label">
               <span class="input-label" for="gender">Gênero</span>
               <select id="gender" data-ng-model="vm.user.genderEnum" ng-options="item.value as item.label for item in vm.genders">
-                <option value="">Selecione</option>
+                <option value=""></option>
               </select>
             </label>
           </div>
@@ -68,7 +68,7 @@
             <label class="item-input item-stacked-label">
               <span class="input-label" for="city">Cidade <span ng-if="vm.idState !== null">*</span></span>
               <select id="city" data-ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities" ng-required="vm.idState !== null">
-                <option value="">Selecione</option>
+                <option value=""></option>
               </select>
             </label>
           </div>
