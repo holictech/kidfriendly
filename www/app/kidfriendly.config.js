@@ -62,9 +62,17 @@
       url: '/user/perfil',
       views: {
         'user-view': {
-          templateUrl: 'app/view/user/perfil.html'/*,
+          templateUrl: 'app/view/user/perfil.html',
           controller: 'PerfilController',
-          controllerAs: 'vm'*/
+          controllerAs: 'vm',
+          resolve: {
+            StatesPrepService: function(LocalityService) {
+              return LocalityService.listStateWithCityByCountry();
+            },
+            MinMaxDtBirthdayPrepService: function(UserService) {
+              return UserService.getMinMaxDtBirthday();
+            }
+          }
         }
       }
     }).state('main.user-register', {

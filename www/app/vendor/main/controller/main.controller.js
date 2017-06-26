@@ -10,12 +10,14 @@
     
     vm.clickIconUser = function() {
       var state = 'main.user-login';
+      var loading = false;
 
       if (UserService.isLogged()) {
         state = 'main.user-perfil';
+        loading = true;
       }
       
-      vm.go(state);
+      vm.go(state, null, loading);
     };
   }
 })();

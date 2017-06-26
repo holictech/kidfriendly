@@ -23,7 +23,7 @@
     };
 
     this.includeSocialNetwork = function(user) {
-      return this.httpPost(this.getURI() + '/includeSocialNetwork', user);
+      return this.httpPost(this.getURI() + '/includesocialnetwork', user);
     };
 
     this.getMinMaxDtBirthday = function() {
@@ -40,6 +40,10 @@
           label: 'Masculino'
         }
       ];
-    }
+    };
+
+    this.logout = function() {
+      this.removeLocalStorage(KEY_USER);
+    };
   }
 })();

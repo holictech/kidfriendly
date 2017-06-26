@@ -4,11 +4,11 @@
   </ion-nav-title>
   <ion-content>
     <div layout="row">
-      <div flex="66" flex-offset="10" class="align-self-center">
-        <span style="font-size: 2.5rem" class="font-raleway-light color-orange">Bem vindo!</span>
+      <div flex-offset="10" class="align-self-center">
+        <span style="font-size: 2.5rem !important;" class="font-raleway-light color-orange">Bem vindo!</span>
       </div>
-      <div flex>
-        <i class="ion-kid-home"></i>
+      <div>
+        <i class="ion-kid"></i>
       </div>
     </div>
     <div layout="row">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="swiper-container swiper-container-gallery">
-      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.nextToMe.length === 0">
+      <div class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.nextToMe.length === 0">
         <ion-spinner ng-if="vm.message.suggestions === ''"></ion-spinner>
         <span ng-bind-html="vm.message.suggestions"></span>
       </div>

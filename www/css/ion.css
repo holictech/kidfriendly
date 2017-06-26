@@ -1,0 +1,65 @@
+.ion-home-on:before {
+  content: url('../images/svg/home-on.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-home-off:before {
+  content: url('../images/svg/home-off.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-user-on:before {
+  content: url('../images/svg/user-on.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-user-off:before {
+  content: url('../images/svg/user-off.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-magnifying-glass-on:before {
+  content: url('../images/svg/magnifying-glass-on.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-magnifying-glass-off:before {
+  content: url('../images/svg/magnifying-glass-off.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-indicate-on:before {
+  content: url('../images/svg/indicate-on.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-indicate-off:before {
+  content: url('../images/svg/indicate-off.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-contact-us-on:before {
+  content: url('../images/svg/contact-us-on.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-contact-us-off:before {
+  content: url('../images/svg/contact-us-off.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-contact-us-off:before {
+  content: url('../images/svg/contact-us-off.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-kid:before {
+  content: url('../images/svg/kid.svg');
+  display: inline-block;
+  width: 5rem;
+}
+.ion-edit-off-small:before {
+  content: url('../images/svg/edit.svg');
+  display: inline-block;
+  width: 2rem;
+}

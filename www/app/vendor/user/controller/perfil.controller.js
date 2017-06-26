@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  angular.module('kidfriendly').controller('RegisterController', RegisterController);
-  RegisterController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera'];
+  angular.module('kidfriendly').controller('PerfilController', PerfilController);
+  PerfilController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera', '$state', 'ngFB'];
 
-  function RegisterController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera) {
+  function PerfilController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera, $state, ngFB) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     initialize();
@@ -34,7 +34,6 @@
       vm.cities = [];
 
       if (idState !== null) {
-        vm.showLoading();
         LocalityService.listCityByState(idState).then(function(response) {
           vm.cities = response.data;
           vm.hideLoading();
@@ -45,12 +44,19 @@
       }
     };
 
-    vm.save = function() {
-      if (vm.password.length < 6) {
-        UserService.ionicPopupAlertAttention('Senha deve conter no mínimo 6 caracteres.');
-        return;
+    vm.logout = function() {
+      if (vm.user.idSocialNetwork !== null) {
+        ngFB.logout().then(function() {
+          _logout();
+        }, function(error) {
+          UserService.ionicPopupAlertError(error.message);
+        });
+      } else {
+        _logout();
       }
+    }
 
+    vm.save = function() {
       vm.showLoading();
       vm.user.dtBirthDay = ((vm.dtBirthDay === null || angular.isUndefined(vm.dtBirthDay)) ? null : moment(vm.dtBirthDay).format());
       vm.user.city = ((vm.idCity === null || angular.isUndefined(vm.idCity)) ? null : {
@@ -59,47 +65,44 @@
           idState: vm.idState
         }
       });
-      vm.user.login = {
-        idLogin: vm.email,
-        desPassword: sha256_digest(vm.email.concat(sha256_digest(vm.password))),
-        stActive: true
-      };
-      UserService.include(vm.user).then(function(response) {
+      UserService.update(vm.user).then(function(response) {
         if (response.error) {
           UserService.ionicPopupAlertError(response.message);
         } else {
           UserService.includeLocalStorage(response.data);
-          UserService.ionicPopupAlertSuccess('Suas informações foram salvas.').then(function() {
-            vm.go('main.home');
-          });
+          UserService.ionicPopupAlertSuccess('Suas informações foram salvas.');
+          vm.readonlyName = true;
         }
 
         vm.hideLoading();
       });
     }
 
+    function _logout() {
+      UserService.logout();
+      vm.go('main.user-login');
+    }
+
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
-        vm.email = null;
-        vm.password = null
-        vm.user = {
-          idUser: null,
-          mgUser: null,
-          dsName: null,
-          dtBirthDay: null,
-          genderEnum: null,
-          nmChildren: null,
-          idSocialNetwork: null
-        };
+        vm.readonlyName = true;
+        vm.user = angular.copy(UserService.getUserLogged());
         vm.minDtBirthDay = MinMaxDtBirthdayPrepService.data.minDate;
         vm.maxDtBirthDay = MinMaxDtBirthdayPrepService.data.maxDate;
-        vm.dtBirthDay = null;
+        vm.dtBirthDay = (vm.user.dtBirthDay === null) ? null : new Date(moment(vm.user.dtBirthDay));
         vm.states = StatesPrepService.data;
-        vm.idState = null;
+        vm.idState = ((vm.user.city === null || vm.user.city.state === null) ? null : vm.user.city.state.idState);
         vm.cities = [];
         vm.idCity = null;
+
+        if (vm.idState !== null) {
+          vm.listCityByState(vm.idState);
+          vm.idCity = vm.user.city.idCity;
+        } else {
+          vm.timeoutHideLoading();
+        }
+
         vm.genders = UserService.getGenders();
-        vm.timeoutHideLoading();
       });
     }
   }

@@ -2,15 +2,12 @@
   'use strict';
 
   angular.module('kidfriendly').controller('LoginController', LoginController);
-  LoginController.$inject = ['LoginService', 'UserService', 'ngFB', '$controller'];
+  LoginController.$inject = ['LoginService', 'UserService', 'ngFB', '$controller', '$scope'];
 
-  function LoginController(LoginService, UserService, ngFB, $controller) {
+  function LoginController(LoginService, UserService, ngFB, $controller, $scope) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
-    vm.login = {
-      email: null,
-      token: null
-    }
+    initialize();
 
     vm.authenticate = function() {
       vm.showLoading();
@@ -32,9 +29,9 @@
       ngFB.login().then(function(response) {
         if (response.status === 'connected') {
           vm.showLoading();
-          ngFB.api({path: '/me',params: {fields: 'id, name, gender, picture, email'}}).then(function(response) {
+          ngFB.api({path: '/me', params: {fields: 'id, name, gender, picture, email'}}).then(function(response) {
             authenticateUserFB(response);
-          }, function(response) {
+          }, function() {
             LoginService.ionicPopupAlertError('Falha ao se comunicar com o facebook.<br/>Tente mais tarde.');
             vm.hideLoading();
           });
@@ -42,16 +39,31 @@
       });
     };
 
+    function initialize() {
+      $scope.$on('$ionicView.beforeEnter', function() {
+        vm.login = {
+          email: null,
+          token: null
+        }
+      });
+    }
+
     function authenticateUserFB(userFB) {
       LoginService.authenticateUserSocialNetwork(userFB.id).then(function(response) {
         if (response.error) {
           LoginService.ionicPopupAlertError(response.message);
           vm.hideLoading();
         } else if (response.data !== null) {
-          finishAuthenticateUser(response.data);
+          finishAuthenticate(response.data);
           vm.hideLoading();
         } else {
-          includeUserFB(userFB);
+          ngFB.api({path: '/' + userFB.id + '/picture', params: {type:'large', width: 300, height: 300, redirect: false}}).then(function(response) {
+            userFB.picture.data = response.data;
+            includeUserFB(userFB);
+          }, function() {
+            LoginService.ionicPopupAlertError('Falha ao se comunicar com o facebook.<br/>Tente mais tarde.');
+            vm.hideLoading();
+          });
         }
       });
     }
@@ -72,7 +84,7 @@
 
     function includeUserSocicalNetwork(user) {
       UserService.includeSocialNetwork(user).then(function(response) {
-        if (!reponse.error) {
+        if (!response.error) {
           finishAuthenticate(response.data);
         } else {
           UserService.ionicPopupAlertError(response.message);
@@ -84,6 +96,7 @@
 
     function finishAuthenticate(user) {
       UserService.includeLocalStorage(user);
+      vm.go('main.home');
     }
   }
 })();
