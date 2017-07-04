@@ -196,16 +196,16 @@ a:active {
 .camera-avatar-perfil {
   position: absolute !important;
   top: 85% !important;
-  width: 27px !important;
+  width: 44px !important;
   height: 44px !important;
   margin-top: -22px !important;
   z-index: 10 !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  background-image: url('../images/svg/prev.svg') !important;
+  background-image: url('../images/svg/camera.svg') !important;
   background-size: 2.5rem !important;
   left: 50%;
-  margin-left: -15px;
+  margin-left: -22.5px;
 }
 .cursor-pointer {
   cursor: pointer !important;

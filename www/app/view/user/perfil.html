@@ -9,7 +9,7 @@
   <ion-content>
     <from name="vm.formPerfil" novalidate>
       <div class="container-avatar-perfil text-align-center">
-        <img ng-src="images/svg/user-empty.svg" class="avatar" style="height: 30vh;" ng-if="vm.user.mgUser === null" ng-click="vm.getPicture(1);">
+        <img ng-src="images/svg/user-empty.svg" class="avatar" style="height: 35vh;" ng-if="vm.user.mgUser === null" ng-click="vm.getPicture(1);">
         <img ng-src="data:image/*;base64,{{vm.user.mgUser}}" class="avatar" style="height: 30vh;" ng-if="vm.user.mgUser !== null" ng-click="vm.getPicture(1);">
         <div class="camera-avatar-perfil cursor-pointer" ng-click="vm.getPicture(1);"></div>
       </div>
