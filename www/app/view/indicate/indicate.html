@@ -1,26 +1,21 @@
-<ion-view hide-back-button="true">
+<ion-view cache-view="false">
   <ion-nav-title>
-    Log in
+    Indique
   </ion-nav-title>
   <ion-content>
     <div layout="row">
       <div flex class="text-align-center">
-        <img ng-src="images/svg/kid.svg" style="height: 30vh !important;">
+        <img ng-src="images/svg/kid-indicate.svg" style="height: 30vh !important;">
       </div>
     </div>
     <div layout="row">
       <div flex class="text-align-center font-myriad-set-pro-thin color-back-054">
-        Você ainda não está conectado.
+        <span>
+        Indique um restaurante <strong class="color-orange">Kid Friendly</strong><br/>para adicionarmos ao aplicativo!
       </div>
     </div>
-    <div layout="row">
-      <div flex class="text-align-center" style="margin: 2.5vh 10vw 1vh 10vw;">
-        <button class="button button-small button-facebook icon-left ion-social-facebook" ng-click="vm.authenticateFB();">
-          Entrar com o Facebook
-        </button>
-      </div>
-    </div>
-    <form name="vm.formLogin" novalidate>
+    <!--
+    <form name="vm.formIndicate" novalidate>
       <div layout="row" style="margin: 2.5vh 5vw 1vh 5vw;">
         <div flex>
           <label class="item-input item-stacked-label">
@@ -33,23 +28,23 @@
         <div flex>
           <label class="item-input item-stacked-label">
             <span class="input-label" for="password">Senha</span>
-            <input id="password" name="password" type="password" data-ng-model="vm.login.token" autocomplete="off" minlength="6" maxlength="12" 
-              required disallow-spaces>
+            <input id="password" name="password" type="password" data-ng-model="vm.login.token" autocomplete="off" minlength="6" maxlength="12" required disallow-spaces>
           </label>
         </div>
       </div>
-      <div layout="row" style="margin-bottom: 1vh;">
+      <div layout="row" style="margin-top: 2vh;">
         <div flex class="text-align-center" >
           <button class="button button-small" type="button" ng-disabled="vm.formLogin.$invalid" ng-click="vm.authenticate();">
             ENTRAR
           </button>
         </div>
       </div>
-      <div layout="row">
+      <div layout="row" style="margin-top: 2vh;">
         <div flex class="text-align-center font-myriad-set-pro-thin color-back-054">
           Ainda não tem conta?<br/>Cadastre-se <strong><a href ng-click="vm.go('main.user-register', null, true);">aqui</a></strong>.
         </div>
       </div>
     </form>
+    -->
   </ion-content>
 </ion-view>

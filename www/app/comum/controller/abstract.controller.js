@@ -26,7 +26,7 @@
         vm.showLoading();
       }
 
-      $state.go(state, (angular.isUndefined(parameter) ? null : parameter));
+      $state.go(state, ((angular.isUndefined(parameter) || parameter === null) ? null : {object: angular.toJson(parameter)}));
     };
     
     /*var abstractService = new AbstractService();

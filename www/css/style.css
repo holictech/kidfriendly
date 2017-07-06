@@ -60,6 +60,7 @@
   width: 100% !important;
   font-size: 0.85rem;
 }
+textarea,
 select,
 input[type="text"],
 input[type="password"],
@@ -67,7 +68,7 @@ input[type="email"],
 input[type="date"],
 input[type="number"]  {
   margin: 0 !important;
-  padding: 0 1px 0 1px !important;
+  padding: 0 5px 0 5px !important;
   border-image: 0;
   border-color: transparent !important;
   font-family: 'Raleway Light' !important;
@@ -90,6 +91,10 @@ textarea[disabled],
 textarea[readonly]:not(.cloned-text-input) {
   background-color: #FFF !important;
 }
+textarea {
+  height: 20vh !important;
+  border: 1px solid #F44F0F !important;
+}
 a:link, a:visited {
   text-decoration: none !important;
   color: #4BB2E4 !important;
@@ -104,7 +109,7 @@ a:active {
 }
 /* END */
 
-/* NOVA IMPLEMENTAÇÃO DO KIDFRIENDLY */
+/* NOVA IMPLEMENTAÇÃO DO KID FRIENDLY */
 * {
   box-sizing: border-box !important;
   -webkit-box-sizing: border-box !important;
@@ -176,6 +181,9 @@ a:active {
 .text-align-right {
   text-align: right !important;
 }
+.text-align-justify {
+  text-align: justify;
+}
 .button-facebook {
   background-color: #4767AB !important;
   min-width: 50vw !important;
@@ -209,4 +217,10 @@ a:active {
 }
 .cursor-pointer {
   cursor: pointer !important;
+}
+.border-top-orange {
+  border-top: 1px solid #F44F0F;
+}
+.border-bottom-orange {
+  border-bottom: 1px solid #F44F0F;
 }

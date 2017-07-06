@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('HomeController', HomeController);
-  HomeController.$inject = ['HomeService', 'LocalityService', '$controller', '$state', '$timeout'];
+  HomeController.$inject = ['HomeService', 'LocalityService', '$controller', '$state', '$timeout', '$scope'];
 
-  function HomeController(HomeService, LocalityService, $controller, $state, $timeout) {
+  function HomeController(HomeService, LocalityService, $controller, $state, $timeout, $scope) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.suggestions = [];
@@ -83,5 +83,11 @@
       listSuggestions();
       listNextToMe();
     }
+
+    $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (toState.name === 'main.home' && fromState.name !== 'main.home-company') {
+        initialize();
+      }
+    });
   }
 })();

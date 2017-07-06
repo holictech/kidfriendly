@@ -41,7 +41,7 @@
         }
       }
     }).state('main.home-company', {
-      url: '/home/company/:primarykey',
+      url: '/home/company/:object',
       views: {
         'home-view': {
           templateUrl: 'app/view/company/company.html',
@@ -92,80 +92,28 @@
           }
         }
       }
+    }).state('main.indicate', {
+      url: '/indicate',
+      views: {
+        'indicate-view': {
+          templateUrl: 'app/view/indicate/indicate.html'
+        }
+      }
+    }).state('main.contact', {
+      url: '/contact',
+      views: {
+        'contact-view': {
+          templateUrl: 'app/view/contact/contact.html'
+        }
+      }
+    }).state('main.contact-termsofuser', {
+      url: '/contact/termsofuser',
+      views: {
+        'contact-view': {
+          templateUrl: 'app/view/contact/termsofuse.html'
+        }
+      }
     });
-    /*
-    .state('main.search', {
-      url: '/search',
-      views: {
-        'main-view': {
-          templateUrl: 'app/view/search/search.html',
-          controller: 'SearchController',
-          controllerAs: 'vm',
-          resolve: {
-            statesPrepService: function(LocalityService) {
-              return LocalityService.listStateWithCityByCountry();
-            },
-            categoriesPrepService: function(CategoryService) {
-              return CategoryService.listAll();
-            }
-          }
-        }
-      }
-    })
-    .state('main.result', {
-      url: '/result',
-      views: {
-        'main-view': {
-          templateUrl: 'app/view/result/result.html',
-          controller: 'ResultController',
-          controllerAs: 'vm'
-        }
-      }
-    })
-    .state('main.company', {
-      url: '/company/:idCompany/:idCategory',
-      views: {
-        'main-view': {
-          templateUrl: 'app/view/company/company.html',
-          controller: 'CompanyController',
-          controllerAs: 'vm'
-        }
-      }
-    })
-    .state('main.about', {
-      url: '/about',
-      views: {
-        'main-view': {
-          templateUrl: 'app/view/template/about.html'
-        }
-      }
-    })
-    .state('main.termsofuse', {
-      url: '/termsofuse',
-      views: {
-        'main-view': {
-          templateUrl: 'app/view/template/termsofuse.html'
-        }
-      }
-    })
-    .state('main.user', {
-      url: '/user',
-      views: {
-        'main-view': {
-          templateUrl: 'app/view/user/user.html',
-          controller: 'UserController',
-          controllerAs: 'vm',
-          resolve: {
-            statesPrepService: function(LocalityService) {
-              return LocalityService.listStateWithCityByCountry();
-            },
-            minMaxDtBirthdayPrepService: function(UserService) {
-              return UserService.getMinMaxDtBirthday();
-            }
-          }
-        }
-      }
-    })*/;
 
     $urlRouterProvider.otherwise("/main/home");
   }
