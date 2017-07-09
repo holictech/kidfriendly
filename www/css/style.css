@@ -92,8 +92,10 @@ textarea[readonly]:not(.cloned-text-input) {
   background-color: #FFF !important;
 }
 textarea {
-  height: 20vh !important;
-  border: 1px solid #F44F0F !important;
+  height: 15vh !important;
+  border: 1.5px solid #F44F0F !important;
+  background-color: #EDEDED !important;
+  padding: 5px !important;
 }
 a:link, a:visited {
   text-decoration: none !important;
@@ -162,6 +164,7 @@ a:active {
   -moz-border-image: -moz-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
   -o-border-image: -o-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
   background-color: #D4D4D4 !important;
+  /*background-color: #EDEDED !important;*/
   height: 20vh !important;
 }
 .swiper-slide-nexttome {
