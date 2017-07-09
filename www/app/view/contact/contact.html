@@ -15,7 +15,7 @@
     </div>
     <form name="vm.formContact" novalidate style="margin: 0vh 5vw 0 5vw;">
       <div layout="column" style="margin-bottom: 1vh; padding-top: 1vh">
-        <div flex style="margin-bottom: 1vh;" ng-if="!vm.isLogged() || vm.isLoggedSocialNetwork()">
+        <div flex style="margin-bottom: 1vh;" ng-if="!vm.isLogged() || vm.isLoggedSocialNetworkNotEmail()">
           <label class="item-input item-stacked-label">
             <span class="input-label" for="email">Email *</span>
             <input id="email" name="email" type="email" data-ng-model="vm.emailDto.fromEmail" autocomplete="off" required email-validator>

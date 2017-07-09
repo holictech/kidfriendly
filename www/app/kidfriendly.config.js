@@ -50,7 +50,7 @@
         }
       }
     }).state('main.user-login', {
-      url: '/user/login',
+      url: '/user/login/:object',
       views: {
         'user-view': {
           templateUrl: 'app/view/login/login.html',
@@ -76,7 +76,7 @@
         }
       }
     }).state('main.user-register', {
-      url: '/user/register',
+      url: '/user/register/:object',
       views: {
         'user-view': {
           templateUrl: 'app/view/user/register.html',
@@ -96,7 +96,9 @@
       url: '/indicate',
       views: {
         'indicate-view': {
-          templateUrl: 'app/view/indicate/indicate.html'
+          templateUrl: 'app/view/indicate/indicate.html',
+          controller: 'IndicateController',
+          controllerAs: 'vm'
         }
       }
     }).state('main.contact', {

@@ -54,7 +54,7 @@
       } else {
         _logout();
       }
-    }
+    };
 
     vm.save = function() {
       vm.showLoading();
@@ -71,12 +71,11 @@
         } else {
           UserService.includeLocalStorage(response.data);
           UserService.ionicPopupAlertSuccess('Suas informações foram salvas.');
-          vm.readonlyName = true;
         }
 
         vm.hideLoading();
       });
-    }
+    };
 
     function _logout() {
       UserService.logout();
@@ -86,7 +85,6 @@
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
-        vm.readonlyName = true;
         vm.user = angular.copy(UserService.getUserLogged());
         vm.minDtBirthDay = MinMaxDtBirthdayPrepService.data.minDate;
         vm.maxDtBirthDay = MinMaxDtBirthdayPrepService.data.maxDate;

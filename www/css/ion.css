@@ -58,7 +58,7 @@
   display: inline-block;
   width: 5rem;
 }
-.ion-edit-off-small:before {
+.ion-edit:before {
   content: url('../images/svg/edit.svg');
   display: inline-block;
   width: 2rem;

@@ -25,8 +25,8 @@
       if (!$state.is(state) && !angular.isUndefined(loading) && loading) {
         vm.showLoading();
       }
-
-      $state.go(state, ((angular.isUndefined(parameter) || parameter === null) ? null : {object: angular.toJson(parameter)}));
+      
+      $state.go(state, ((angular.isUndefined(parameter) || parameter === null) ? {object: 'null'} : {object: angular.toJson(parameter)}));
     };
 
     vm.isLogged = function() {
@@ -35,6 +35,10 @@
 
     vm.isLoggedSocialNetwork = function() {
       return UserService.isLoggedSocialNetwork();
+    };
+
+    vm.isLoggedSocialNetworkNotEmail = function() {
+      return UserService.isLoggedSocialNetworkNotEmail();
     };
   }
 })();

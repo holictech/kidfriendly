@@ -7,7 +7,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <from name="vm.formPerfil" novalidate>
+    <form name="vm.formPerfil" novalidate>
       <div class="container-avatar-perfil text-align-center">
         <img ng-src="images/svg/user-empty.svg" class="avatar" style="height: 35vh;" ng-if="vm.user.mgUser === null" ng-click="vm.getPicture(1);">
         <img ng-src="data:image/*;base64,{{vm.user.mgUser}}" class="avatar" style="height: 30vh;" ng-if="vm.user.mgUser !== null" ng-click="vm.getPicture(1);">
@@ -15,11 +15,8 @@
       </div>
       <div layout="row" style="margin: 0 14vw 0 14vw;">
         <div flex class="align-self-center">
-          <input id="name" name="name" type="text" data-ng-model="vm.user.dsName" autocomplete="off" required ng-readonly="vm.readonlyName"
+          <input id="name" name="name" type="text" data-ng-model="vm.user.dsName" autocomplete="off" required 
             class="text-align-center" style="color: #F44F0F !important; font-size: 1.5rem;">
-        </div>
-        <div>
-          <i class="ion-edit-off-small cursor-pointer" ng-click="vm.readonlyName = !vm.readonlyName;"></i>
         </div>
       </div>
       <div layout="column" style="margin: 5vh 5vw 0 5vw;">
@@ -73,54 +70,6 @@
           </div>
         </div>
       </div>
-    </from>
+    </form>
   </ion-content>
 </ion-view>
-<!--
-<ion-modal-view class="kf-background-page">
-  <ion-header-bar align-title="center" class="kf-header-logo">
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-icon icon ion-ios-close-empty" ng-click="vm.closeLogin();"></button>
-    </div>
-  </ion-header-bar>
-  <ion-content class="padding" scroll="false" style="top:33.33% !important; right: 2% !important; left: 2% !important">
-    <div class="padding" style="box-shadow: 1px 1px 5px #888888;">
-      <div>
-        <button class="button button-block button-positive kf-no-margin-bottom" ng-click="vm.authenticateFB();">
-          Facebook
-        </button>
-      </div>
-      <div class="kf-display-flex kf-align-itens-center margin-top margin-bottom" style="height: 2em;">
-        <div class="kf-width-45-porcent">
-          <hr />
-        </div>
-        <div class="kf-width-10-porcent margin-left margin-right text-center">ou</div>
-        <div class="kf-width-45-porcent">
-          <hr />
-        </div>
-      </div>
-      <div>
-        <form name="vm.formLogin" novalidate ng-submit="vm.authenticate();">
-          <label class="item item-input">
-            <i class="icon ion-person placeholder-icon"></i>
-            <input type="email" id="login" name="login" ng-model="vm.login.idLogin" placeholder="Insira o seu email."
-              autocomplete="off" maxlength="150" required email-validator>
-          </label>
-          <label class="item item-input">
-            <i class="icon ion-locked placeholder-icon"></i>
-            <input type="password" id="password" name="password" ng-model="vm.login.desPassword" placeholder="Insira a sua senha."
-              autocomplete="off" minlength="6" maxlength="10" required>
-          </label>
-          <button type="submit" class="button button-block button-balanced" ng-disabled="vm.formLogin.$invalid">
-            Entrar
-          </button>
-        </form>
-      </div>
-      <div class="text-right padding kf-width-100-porcent">
-        <a href="#" ng-click="vm.closeLogin(); vm.go('main.user', true, {isIncludeUser:true});" title="Registrar uma nova conta!">Registrar uma nova conta!</a>
-      </div>
-    </div>
-  </ion-content>
-</ion-modal-view>
--->

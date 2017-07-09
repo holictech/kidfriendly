@@ -2,10 +2,11 @@
   'use strict';
 
   angular.module('kidfriendly').controller('RegisterController', RegisterController);
-  RegisterController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera', '$ionicScrollDelegate'];
+  RegisterController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera', '$ionicScrollDelegate', '$stateParams'];
 
-  function RegisterController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera, $ionicScrollDelegate) {
+  function RegisterController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera, $ionicScrollDelegate, $stateParams) {
     var vm = this;
+    var back = null;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     initialize();
 
@@ -70,7 +71,17 @@
         } else {
           UserService.includeLocalStorage(response.data);
           UserService.ionicPopupAlertSuccess('Suas informações foram salvas.').then(function() {
-            vm.go('main.home');
+            var view = 'main.home';
+            var parameter = null;
+            var loading = false;
+
+            if (back !== null) {
+              view = back.view;
+              parameter = back.parameter;
+              loading = back.loading;
+            }
+
+            vm.go(view, parameter, loading);
           });
         }
 
@@ -81,6 +92,7 @@
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
+        back = angular.fromJson($stateParams.object);
         vm.email = null;
         vm.password = null
         vm.user = {

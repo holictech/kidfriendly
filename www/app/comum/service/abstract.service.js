@@ -178,11 +178,6 @@
 
         return defer.promise;
       };
-
-      /* COLOCAR ESSE METODO NO SEU DEVIDO LUGAR */
-      this.createToken = function(value) {
-        return sha256_digest("fRiEnDlY" + sha256_digest(value) + "KiD");
-      };
     };
 
     return AbstractService;

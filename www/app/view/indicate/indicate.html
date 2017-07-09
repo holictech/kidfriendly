@@ -14,37 +14,48 @@
         Indique um restaurante <strong class="color-orange">Kid Friendly</strong><br/>para adicionarmos ao aplicativo!
       </div>
     </div>
-    <!--
-    <form name="vm.formIndicate" novalidate>
-      <div layout="row" style="margin: 2.5vh 5vw 1vh 5vw;">
+    <form name="vm.formIndicate" novalidate style="margin: 0vh 5vw 0 5vw;">
+      <div layout="column" style="margin-bottom: 1vh; padding-top: 1vh">
+        <div flex style="margin-bottom: 1vh;" ng-if="vm.isLoggedSocialNetworkNotEmail()">
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="email">Email *</span>
+            <input id="email" name="email" type="email" data-ng-model="vm.emailDto.fromEmail" autocomplete="off" required email-validator>
+          </label>
+        </div>
+        <div flex  style="margin-bottom: 1vh;">
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="establishment">Estabelecimento *</span>
+            <input id="establishment" name="establishment" type="text" data-ng-model="vm.establishment" autocomplete="off" minlength="5" maxlength="300" required>
+          </label>
+        </div>
+        <div flex layout="row" style="margin-bottom: 1vh;">
+          <div flex>
+            <label class="item-input item-stacked-label">
+              <span class="input-label" for="address">Endereço *</span>
+              <input id="address" name="address" type="text" data-ng-model="vm.address" autocomplete="off" minlength="5" maxlength="500" required>
+            </label>
+          </div>
+          <div class="align-self-center" style="padding: 0 1vw 0 1vw" ng-click="vm.getLocation()">
+            <i class="icon ion-location cursor-pointer color-orange" style="font-size: 3rem;"></i>
+          </div>
+          <div class="align-self-center font-myriad-set-pro-thin color-back-054 cursor-pointer" ng-click="vm.getLocation()">
+            Anexar<br/>localização
+          </div>
+        </div>
         <div flex>
           <label class="item-input item-stacked-label">
-            <span class="input-label" for="email">E-mail</span>
-            <input id="email" name="email" type="email" data-ng-model="vm.login.email" autocomplete="off" required email-validator>
+            <span class="input-label" for="comment">Comentário</span>
+            <textarea id="comment" name="comment" data-ng-model="vm.comment" autocomplete="off" minlength="20" maxlength="1000"></textarea>
           </label>
         </div>
       </div>
-      <div layout="row" style="margin: 0 5vw 1vh 5vw;">
-        <div flex>
-          <label class="item-input item-stacked-label">
-            <span class="input-label" for="password">Senha</span>
-            <input id="password" name="password" type="password" data-ng-model="vm.login.token" autocomplete="off" minlength="6" maxlength="12" required disallow-spaces>
-          </label>
-        </div>
-      </div>
-      <div layout="row" style="margin-top: 2vh;">
-        <div flex class="text-align-center" >
-          <button class="button button-small" type="button" ng-disabled="vm.formLogin.$invalid" ng-click="vm.authenticate();">
-            ENTRAR
+      <div layout="row" style="padding-bottom: 1vh">
+        <div flex class="text-align-right">
+          <button class="button button-small" type="button" ng-disabled="vm.formIndicate.$invalid" ng-click="vm.send();">
+            ENVIAR
           </button>
         </div>
       </div>
-      <div layout="row" style="margin-top: 2vh;">
-        <div flex class="text-align-center font-myriad-set-pro-thin color-back-054">
-          Ainda não tem conta?<br/>Cadastre-se <strong><a href ng-click="vm.go('main.user-register', null, true);">aqui</a></strong>.
-        </div>
-      </div>
     </form>
-    -->
   </ion-content>
 </ion-view>

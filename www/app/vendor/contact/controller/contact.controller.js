@@ -18,6 +18,8 @@
 
         if (!vm.isLoggedSocialNetwork()) {
           vm.emailDto.fromEmail = user.login.idLogin;
+        } else if (!vm.isLoggedSocialNetworkNotEmail()) {
+          vm.emailDto.fromEmail = user.emailSocialNetwork;
         }
       }
       
@@ -25,8 +27,8 @@
         if (response.error) {
           ContactService.ionicPopupAlertError(response.message);
         } else {
-          ContactService.ionicPopupAlertSuccess('Mensagem enviada.').then(function() {
-            vm.emailDto = createEmailDto();
+          ContactService.ionicPopupAlertSuccess('Agradecemos ao seu contato.').then(function() {
+            toClean();
           });
         }
 
@@ -36,14 +38,13 @@
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
-        vm.emailDto = createEmailDto();
+        toClean();
       });
     }
 
-    function createEmailDto() {
+    function toClean() {
       $ionicScrollDelegate.scrollTop();
-      
-      return {
+      vm.emailDto = {
         fromEmail: null,
         fromName: null,
         recipients: [],

@@ -22,6 +22,12 @@
       return (isLoggedInternal(user) && user.idSocialNetwork !== null);
     };
 
+    this.isLoggedSocialNetworkNotEmail = function() {
+      var user = this.getUserLogged();
+
+      return this.isLoggedSocialNetwork() && (angular.isUndefined(user.emailSocialNetwork) || user.emailSocialNetwork === null || user.emailSocialNetwork === '');
+    };
+
     this.logout = function() {
       this.removeLocalStorage(KEY_USER);
     };

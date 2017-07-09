@@ -7,12 +7,12 @@
   function ContactService(AbstractService) {
     AbstractService.call(this, '/contact');
 
-    this.send = function(data) {
-      return this.httpPost(this.getURI() + '/send', data);
+    this.contactUs = function(parameter) {
+      return this.httpPost(this.getURI() + '/contact-us', parameter);
     };
 
-    this.contactUs = function(data) {
-      return this.httpPost(this.getURI() + '/contact-us', data);
+    this.indicate = function(parameter) {
+      return this.httpPost(this.getURI() + '/indicate', parameter);
     };
   }
 })();

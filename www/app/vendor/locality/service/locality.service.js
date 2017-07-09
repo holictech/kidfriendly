@@ -9,7 +9,20 @@
     var coordinates = null;
 
     this.getGeolocation = function() {
-      return $cordovaGeolocation.getCurrentPosition({timeout: 3000, enableHighAccuracy: true}).then(geolocationSuccess, geolocationError);
+      return $cordovaGeolocation.getCurrentPosition({timeout: 3000, enableHighAccuracy: true}).then(function(response) {
+        return {
+          error: false,
+          data: {
+            longitude: response.coords.longitude,
+            latitude: response.coords.latitude
+          }
+        };
+      }, function() {
+        return {
+          error: true,
+          message: 'Não foi possível encontrar sua localização.'
+        };
+      });
     };
 
     this.watchPosition = function() {
@@ -47,34 +60,32 @@
       return execute(this, this.getURI() + '/listcitybystate/' + idState, 'kf_cities_state_' + idState);
     };
 
-    function geolocationSuccess(response) {
-      return {
-        error: false,
-        data: {
-          longitude: response.coords.longitude,
-          latitude: response.coords.latitude
+    this.formattedAddress = function() {
+      var vm = this;
+      return this.getGeolocation().then(function(response) {
+        if (!response.error) {
+          return vm.formattedAddressByLongitudeLatitude(response.data);
+        } else {
+          return response;
         }
-      };
-    }
+      });
+    };
 
-    function geolocationError() {
-      return {
-        error: true,
-        message: 'Não foi possível encontrar sua localização.'
-      };
-    }
+    this.formattedAddressByLongitudeLatitude = function(parameter) {
+      return this.httpGet(this.getURI() + '/formattedaddress', parameter);
+    };
 
-    function execute(_this, uri, key) {
+    function execute(vm, uri, key) {
       var defer = $q.defer();
-      var _response = _this.getSessionStorage(key);
+      var _response = vm.getSessionStorage(key);
 
       if (angular.isUndefined(_response)) {
-        _this.httpGet(uri).then(function(response) {
+        vm.httpGet(uri).then(function(response) {
           if (response.error) {
             defer.reject(response);
           } else {
             defer.resolve(response);
-            _this.setSessionStorage(key, response);
+            vm.setSessionStorage(key, response);
           }
         });
       } else {
