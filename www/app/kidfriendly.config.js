@@ -103,7 +103,9 @@
       url: '/contact',
       views: {
         'contact-view': {
-          templateUrl: 'app/view/contact/contact.html'
+          templateUrl: 'app/view/contact/contact.html',
+          controller: 'ContactController',
+          controllerAs: 'vm'
         }
       }
     }).state('main.contact-termsofuser', {

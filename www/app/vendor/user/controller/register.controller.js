@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('RegisterController', RegisterController);
-  RegisterController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera'];
+  RegisterController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera', '$ionicScrollDelegate'];
 
-  function RegisterController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera) {
+  function RegisterController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera, $ionicScrollDelegate) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     initialize();
@@ -80,6 +80,7 @@
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
+        $ionicScrollDelegate.scrollTop();
         vm.email = null;
         vm.password = null
         vm.user = {

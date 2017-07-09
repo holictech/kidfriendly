@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('LoginController', LoginController);
-  LoginController.$inject = ['LoginService', 'UserService', 'ngFB', '$controller', '$scope'];
+  LoginController.$inject = ['LoginService', 'UserService', 'ngFB', '$controller', '$scope', '$ionicScrollDelegate'];
 
-  function LoginController(LoginService, UserService, ngFB, $controller, $scope) {
+  function LoginController(LoginService, UserService, ngFB, $controller, $scope, $ionicScrollDelegate) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     initialize();
@@ -41,6 +41,7 @@
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
+        $ionicScrollDelegate.scrollTop();
         vm.login = {
           email: null,
           token: null

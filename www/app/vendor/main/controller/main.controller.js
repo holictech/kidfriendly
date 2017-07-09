@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('MainController', MainController);
-  MainController.$inject = ['UserService', '$controller'];
+  MainController.$inject = ['$controller'];
 
-  function MainController(UserService, $controller) {
+  function MainController($controller) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     
@@ -12,7 +12,7 @@
       var state = 'main.user-login';
       var loading = false;
 
-      if (UserService.isLogged()) {
+      if (vm.isLogged()) {
         state = 'main.user-perfil';
         loading = true;
       }

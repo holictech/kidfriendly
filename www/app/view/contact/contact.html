@@ -13,18 +13,30 @@
         Algum problema, dica ou dúvida?<br/>Deixe-nos uma mensagem!
       </div>
     </div>
-    <form name="vm.formContact" novalidate style="margin: 2.5vh 5vw 0 5vw;">
-      <div layout="row" style="margin-bottom: 1vh; padding-top: 1vh" class="border-top-orange">
+    <form name="vm.formContact" novalidate style="margin: 0vh 5vw 0 5vw;">
+      <div layout="column" style="margin-bottom: 1vh; padding-top: 1vh">
+        <div flex style="margin-bottom: 1vh;" ng-if="!vm.isLogged() || vm.isLoggedSocialNetwork()">
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="email">Email *</span>
+            <input id="email" name="email" type="email" data-ng-model="vm.emailDto.fromEmail" autocomplete="off" required email-validator>
+          </label>
+        </div>
+        <div flex style="margin-bottom: 1vh;" ng-if="!vm.isLogged()">
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="name">Nome *</span>
+            <input id="name" name="name" type="text" data-ng-model="vm.emailDto.fromName" autocomplete="off" minlength="5" maxlength="150" required >
+          </label>
+        </div>
         <div flex>
           <label class="item-input item-stacked-label">
-            <span class="input-label" for="email">Mensagem *</span>
-            <textarea id="message" name="message" data-ng-model="vm.message" autocomplete="off" minlength="10" maxlength="1000" required></textarea>
+            <span class="input-label" for="message">Mensagem *</span>
+            <textarea id="message" name="message" data-ng-model="vm.emailDto.message" autocomplete="off" minlength="10" maxlength="1000" required></textarea>
           </label>
         </div>
       </div>
       <div layout="row" class="border-bottom-orange" style="padding-bottom: 1vh">
         <div flex class="text-align-right" >
-          <button class="button button-small" type="button" ng-disabled="vm.formContact.$invalid" ng-click="vm.authenticate();">
+          <button class="button button-small" type="button" ng-disabled="vm.formContact.$invalid" ng-click="vm.send();">
             ENVIAR
           </button>
         </div>

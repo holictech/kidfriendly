@@ -6,20 +6,28 @@
 
   function UserService(AbstractService) {
     AbstractService.call(this, '/user');
-    var KEY_USER = 'KEY_USER'
-
-    this.includeLocalStorage = function(user) {
-      this.setLocalStorage(KEY_USER, user);
-    };
+    var KEY_USER = 'KEY_USER';
 
     this.getUserLogged = function() {
       return this.getLocalStorage(KEY_USER);
-    }
+    };
 
     this.isLogged = function() {
-      var user = this.getUserLogged();
+      return isLoggedInternal(this.getUserLogged());
+    };
 
-      return (user !== null && !angular.isUndefined(user) && !angular.isString(user) && angular.isObject(user));
+    this.isLoggedSocialNetwork = function() {
+      var user = this.getUserLogged();
+      
+      return (isLoggedInternal(user) && user.idSocialNetwork !== null);
+    };
+
+    this.logout = function() {
+      this.removeLocalStorage(KEY_USER);
+    };
+
+    this.includeLocalStorage = function(user) {
+      this.setLocalStorage(KEY_USER, user);
     };
 
     this.includeSocialNetwork = function(user) {
@@ -41,9 +49,9 @@
         }
       ];
     };
-
-    this.logout = function() {
-      this.removeLocalStorage(KEY_USER);
-    };
+    
+    function isLoggedInternal(user) {
+      return (user !== null && !angular.isUndefined(user) && !angular.isString(user) && angular.isObject(user));
+    }
   }
 })();

@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('PerfilController', PerfilController);
-  PerfilController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera', '$state', 'ngFB'];
+  PerfilController.$inject = ['UserService', 'StatesPrepService', 'MinMaxDtBirthdayPrepService', 'LocalityService', '$scope', '$controller', '$cordovaCamera', '$state', 'ngFB', '$ionicScrollDelegate'];
 
-  function PerfilController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera, $state, ngFB) {
+  function PerfilController(UserService, StatesPrepService, MinMaxDtBirthdayPrepService, LocalityService, $scope, $controller, $cordovaCamera, $state, ngFB, $ionicScrollDelegate) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     initialize();
@@ -85,6 +85,7 @@
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
+        $ionicScrollDelegate.scrollTop();
         vm.readonlyName = true;
         vm.user = angular.copy(UserService.getUserLogged());
         vm.minDtBirthDay = MinMaxDtBirthdayPrepService.data.minDate;
