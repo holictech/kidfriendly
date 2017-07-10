@@ -30,7 +30,7 @@
       ngFB.login().then(function(response) {
         if (response.status === 'connected') {
           vm.showLoading();
-          ngFB.api({path: '/me', params: {fields: 'id, name, gender, email'}}).then(function(response) {
+          ngFB.api({path: '/me', params: {fields: 'id, name, picture, gender, email'}}).then(function(response) {
             authenticateUserFB(response);
           }, function() {
             LoginService.ionicPopupAlertError('Falha ao se comunicar com o facebook.<br/>Tente mais tarde.');
