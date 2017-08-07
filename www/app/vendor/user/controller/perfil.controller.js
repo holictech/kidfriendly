@@ -34,6 +34,7 @@
       vm.cities = [];
 
       if (idState !== null) {
+        vm.showLoading();
         LocalityService.listCityByState(idState).then(function(response) {
           vm.cities = response.data;
           vm.hideLoading();

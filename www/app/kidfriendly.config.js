@@ -92,6 +92,23 @@
           }
         }
       }
+    }).state('main.search', {
+      url: '/search',
+      views: {
+        'search-view': {
+          templateUrl: 'app/view/search/search.html',
+          controller: 'SearchController',
+          controllerAs: 'vm',
+          resolve: {
+            StatesPrepService: function(LocalityService) {
+              return LocalityService.listStateWithCityByCountry();
+            },
+            CategoryPrepService: function(CategoryService) {
+              return CategoryService.listAll();
+            }
+          }
+        }
+      }
     }).state('main.indicate', {
       url: '/indicate',
       views: {

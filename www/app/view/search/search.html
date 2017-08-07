@@ -1,3 +1,102 @@
+<ion-view hide-back-button="true" hide-nav-bar="true">
+  <ion-header-bar class="header align-self-center">
+    <form class="header notBorder item item-input" name="vm.formFastSearch" novalidate>
+      <label class="item-input-wrapper border-bottom-white header">
+        <input id="establishment" name="establishment" type="search" data-ng-model="vm.establishment" autocomplete="off" minlength="3" maxlength="150" 
+          style="color: #FFF !important;" required>
+      </label>
+      <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$invalid" style="opacity: 0.5;"></i>
+      <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$valid" ng-click="vm.fastSearch();"></i>
+    </form>
+  </ion-header-bar>
+  <form name="vm.formSearch" novalidate>
+    <ion-content style="bottom: 108px !important;">
+      <div layout="column" style="margin: 5vh 5vw 0vh 5vw;">
+        <div flex>
+          <span style="font-size: 2.5rem !important;" class="font-raleway-light color-orange">Pesquisar</span>
+        </div>
+        <div flex layout="row" style="margin-top: 10vh;">
+          <div flex style="padding-right: 2.5vw;">
+            <label class="item-input item-stacked-label">
+              <span class="input-label" for="state">Estado</span>
+              <select id="state" data-ng-model="vm.idState" ng-options="item.idState as item.desState for item in vm.states"
+                ng-change="vm.listCityByState(vm.idState);">
+                <option value=""></option>
+              </select>
+            </label>
+          </div>
+          <div flex style="padding-left: 2.5vw;">
+            <label class="item-input item-stacked-label">
+              <span class="input-label" for="city">Cidade</span>
+              <select id="city" data-ng-model="vm.idCity" ng-options="item.idCity as item.desCity for item in vm.cities">
+                <option value=""></option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div flex layout="row" style="margin-top: 1vh;">
+          <div flex="50" style="padding-right: 2.5vw;">
+            <label class="item-input item-stacked-label">
+              <span class="input-label" for="category">Categoria</span>
+              <select id="category" data-ng-model="vm.idCategory" ng-options="item.idCategory as item.desCategory for item in vm.categories"
+                ng-change="vm.listCharacteristicByCategory(vm.idCategory);">
+                <option value=""></option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div flex layout="row" style="margin-top: 1vh;" ng-if="vm.characteristics.length > 0">
+          <div flex>
+            <label class="item-input item-stacked-label" style="margin-bottom: 1.5vh !important;">
+              <span class="input-label">Característica</span>
+            </label>
+            <section ng-repeat="item in vm.characteristics track by item.idCharacteristic" style="padding: 0 8px 0 8px !important;">
+              <input id="characteristics{{$index}}" type="checkbox" 
+                ng-checked="vm.isExists(item.idCharacteristic);"
+                ng-click="vm.toggle(item.idCharacteristic);">
+              <label for="characteristics{{$index}}"><span><span></span></span><section class="color-orange float-right" style="font-size: 0.85rem;">{{item.desCharacteristic}}</section></label>
+            </section>  
+          </div>
+        </div>
+      </div>
+    </ion-content>
+    <div class="bar bar-subfooter" style="height: 64px !important">
+      <div layout="row" class="border-top-orange" style="margin: 0vh 5vw 0vh 5vw; padding: 1vh 0vw 1vh 0vw">
+        <div flex layout="column" class="align-self-center">
+          <div flex="70">
+            <input id="nexttome" type="checkbox" ng-model="vm.isNextToMe">
+            <label for="nexttome"><span><span></span></span><section class="color-orange float-right" style="font-size: 0.85rem;">Próximos a mim</section></label>
+          </div>
+          <div flex>
+            <input id="superkidfriendly" type="checkbox" ng-model="vm.isSuperKidFriendly">
+            <label for="superkidfriendly"><span><span></span></span><section class="color-orange float-right" style="font-size: 0.85rem;">Super Kid Friendly</section></label>
+          </div>
+        </div>
+        <div flex class="align-self-center text-align-right">
+          <button class="button button-small" type="button" ng-disabled="vm.idState === null && vm.idCity === null && vm.idCategory === null && vm.characteristcsSelected.length === 0 && !vm.isSuperKidFriendly && !vm.isNextToMe" ng-click="vm.search();">
+            PESQUISAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ion-view>
+
+<!--
+<ion-view hide-back-button="true">
+  <ion-nav-buttons>
+        
+            <label class="item-input-wrapper textbox-search">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="search" placeholder="Search">
+            </label>
+        
+    </ion-nav-buttons>
+  <ion-content>
+  </ion-content>
+</ion-view>
+-->
+<!--
 <ion-view class="kf-background-page">
   <section ng-if="vm.isVisible">
     <form name="vm.formSearch" novalidate ng-submit="vm.search();">
@@ -98,3 +197,4 @@
     </form>
   </section>
 </ion-view>
+-->

@@ -66,7 +66,8 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="date"],
-input[type="number"]  {
+input[type="number"],
+input[type="search"]  {
   margin: 0 !important;
   padding: 0 5px 0 5px !important;
   border-image: 0;
@@ -108,6 +109,60 @@ a:hover {
 a:active {
 	text-decoration: none !important;
   color: #4BB2E4 !important;
+}
+input[type=checkbox]:not(old),
+input[type=radio]:not(old) {
+  width: 1.5rem;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+}
+input[type=checkbox]:not(old) + label,
+input[type=radio]:not(old) + label {
+  display: inline-block;
+  margin-left: -2rem;
+  font-family: 'Raleway Light';
+}
+input[type=checkbox]:not(old) + label > span,
+input[type=radio]:not(old) + label > span {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: 0.25rem 0.5rem 0.25rem 0.25rem;
+  border: 0.0625rem solid rgb(192,192,192);
+  background: rgb(224,224,224);
+  background-image: -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image: -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image: -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image: -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image: linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align: bottom;
+  margin-top: -2px;
+}
+input[type=checkbox]:not(old):checked + label > span,
+input[type=radio]:not(old):checked + label > span {
+  background-image: -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image: -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image: -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image: -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image: linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+input[type=checkbox]:not(old):checked + label > span > span,
+input[type=radio]:not(old):checked + label > span > span {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.125rem;
+  border: 0.0625rem solid #F44F0F;
+  background: #F44F0F;
+  background-image: -moz-linear-gradient(#F44F0F,#F44F0F);
+  background-image: -ms-linear-gradient(#F44F0F,#F44F0F);
+  background-image: -o-linear-gradient(#F44F0F,#F44F0F);
+  background-image: -webkit-linear-gradient(#F44F0F,#F44F0F);
+  background-image: linear-gradient(#F44F0F,#F44F0F);
+}
+input[type=checkbox]:not(old):checked + label ~ section {
+  margin-top: 2px !important;
 }
 /* END */
 
@@ -153,6 +208,9 @@ a:active {
 .color-back-054 {
   color: rgba(0,0,0,0.54) !important;
 }
+.color-white {
+  color: #FFF !important;
+}
 .align-self-center {
   align-self: center !important;
 }
@@ -164,7 +222,6 @@ a:active {
   -moz-border-image: -moz-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
   -o-border-image: -o-linear-gradient(left, #D4D4D4 1%, #F44F0F 50%, #D4D4D4 100%) 100% 0 100% 0/2px 0 2px 0 stretch !important;
   background-color: #D4D4D4 !important;
-  /*background-color: #EDEDED !important;*/
   height: 20vh !important;
 }
 .swiper-slide-nexttome {
@@ -222,8 +279,17 @@ a:active {
   cursor: pointer !important;
 }
 .border-top-orange {
-  border-top: 1px solid #F44F0F;
+  border-top: 1px solid #F44F0F !important;
 }
 .border-bottom-orange {
-  border-bottom: 1px solid #F44F0F;
+  border-bottom: 1px solid #F44F0F !important;
+}
+.border-bottom-white {
+  border-bottom: 1px solid white !important;
+}
+.notBorder {
+  border: 0px !important;
+}
+.float-right {
+  float: right !important;
 }
