@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').config(Config);
-  Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
+  Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', 'multiselectProvider'];
 
-  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, LocalityService, UserService, CategoryService) {
+  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, multiselectProvider, LocalityService, UserService, CategoryService) {
     if (ionic.Platform.isAndroid()) {
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
@@ -23,6 +23,8 @@
         }
       };
     });
+    multiselectProvider.setTemplateUrl('lib/ionic/multiselect/templates/item-template.html');
+    multiselectProvider.setModalTemplateUrl('lib/ionic/multiselect/templates/modal-template.html');
 
     $stateProvider
       .state('main', {

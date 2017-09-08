@@ -1,0 +1,17 @@
+<ion-modal-view>
+  <ion-header-bar align-title="left" class="header">
+    <h1 class="title">{{headerText}}</h1>
+    <div class="buttons">
+      <!--<button class="button button button-icon icon ion-ios-close-empty" ng-click="clean();"></button>-->
+      <button class="button button button-icon icon ion-ios-checkmark-empty" ng-click="validate();"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <ion-checkbox ng-repeat="item in items" ng-model="item.checked" ng-checked="item.checked" class="checkbox-orange font-raleway-light color-orange" style="font-size: 0.85rem !important;">
+        <section ng-if="isTranslate">{{ item | translateItem:this }}</section>
+        <section ng-if="!isTranslate">{{ $eval('item.' + textProperty) }}</section>
+      </ion-checkbox>
+    </div>
+  </ion-content>
+</ion-modal-view>

@@ -6,6 +6,7 @@
 .header .title {
   font-family: 'Raleway Light' !important;
   font-size: 1.6rem !important;
+  color: #FFF;
 }
 .popup {
   width: 80vw !important;
@@ -84,11 +85,11 @@ select {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
 }
-input[disabled], 
-input[readonly]:not(.cloned-text-input), 
-select[disabled], 
-select[readonly], 
-textarea[disabled], 
+input[disabled],
+input[readonly]:not(.cloned-text-input),
+select[disabled],
+select[readonly],
+textarea[disabled],
 textarea[readonly]:not(.cloned-text-input) {
   background-color: #FFF !important;
 }
@@ -163,6 +164,18 @@ input[type=radio]:not(old):checked + label > span > span {
 }
 input[type=checkbox]:not(old):checked + label ~ section {
   margin-top: 2px !important;
+}
+.checkbox-orange input:before,
+.checkbox-orange .checkbox-icon:before {
+  border-color: #F44F0F;
+  font-family: 'Raleway Light';
+}
+
+.checkbox-orange input:checked:before,
+.checkbox-orange input:checked + .checkbox-icon:before {
+  background: #F44F0F;
+  border-color: #F44F0F;
+  font-family: 'Raleway Light';
 }
 /* END */
 
@@ -292,4 +305,9 @@ input[type=checkbox]:not(old):checked + label ~ section {
 }
 .float-right {
   float: right !important;
+}
+.button-disabled {
+  opacity: 0.4 !important;
+  cursor: default !important;
+  pointer-events: none !important;
 }
