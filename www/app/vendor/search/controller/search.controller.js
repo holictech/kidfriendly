@@ -78,15 +78,15 @@
 
       if (vm.isNextToMe) {
         vm.showLoading();
-        SearchService.getGeolocation().then(function(response) {
+        LocalityService.getGeolocation().then(function(response) {
           if (response.error) {
             vm.hideLoading();
-            SearchService.ionicPopupAlertAttention(response.message).then(function() {
+            LocalityService.ionicPopupAlertAttention(response.message).then(function() {
               executeSearch(filters);
             });
           } else {
-            params.longitude = response.data.longitude;
-            params.latitude = response.data.latitude;
+            filters.longitude = response.data.longitude;
+            filters.latitude = response.data.latitude;
             executeSearch(filters);
           }
         });
