@@ -38,17 +38,17 @@
       });
 
       return watchPosition;
-    }
+    };
 
     this.clearWatch = function(watchPosition) {
       if (!angular.isUndefined(watchPosition)) {
         $cordovaGeolocation.clearWatch(watchPosition);
       }
-    }
+    };
 
     this.getCoordinates = function() {
       return coordinates;
-    }
+    };
 
     this.listStateWithCityByCountry = function(idCountry) {
       idCountry = idCountry || ID_BRAZIL;
