@@ -1,0 +1,21 @@
+<ion-view>
+  <ion-nav-title>
+    Resultado
+  </ion-nav-title>
+  <ion-content>
+    <div class="list card" ng-repeat="item in vm.results track by item.idCompany">
+      <div class="item item-image" style="height: 50vh; width: 100wh;" ng-if="item.mgHome !== null">
+        <img ng-src="data:image/*;base64,{{item.mgHome}}" style="width: 100% !important; height:100% !important;">
+      </div>
+      <div class="item item-icon-right">
+        <h2 class="font-raleway-extrabold color-orange white-space-normal" ng-if="item.mgHome === null">{{item.desName}}</h2>
+        <h3 class="font-raleway-light color-orange white-space-normal" ng-if="vm.isFilterState">{{item.addressDto.cityDto.desCity}} - {{item.addressDto.cityDto.desState}}</h3>
+        <a href="#" ng-click="vm.details(item.idCompany);">
+          <i class="icon ion-eye color-orange"></i>
+        </a>
+      </div>
+    </div>
+    <ion-infinite-scroll ng-if="vm.isInfiniteScroll" on-infinite="vm.infiniteScroll();" spinner="none" icon="none">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

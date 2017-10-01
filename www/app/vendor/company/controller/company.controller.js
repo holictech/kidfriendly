@@ -2,6 +2,26 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
+  CompanyController.$inject = ['CompanyService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams'];
+
+  function CompanyController(CompanyService, $controller, $scope, $ionicScrollDelegate, $stateParams) {
+    var vm = this;
+    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
+
+    initialize();
+
+    function initialize() {
+      $scope.$on('$ionicView.beforeEnter', function() {
+        $ionicScrollDelegate.scrollTop();
+        var object = angular.fromJson($stateParams.object);
+        CompanyService.ionicPopupAlertAttention('Em breve!');
+        //vm.timeoutHideLoading();
+        vm.hideLoading()
+      });
+    }
+  }
+
+/*
   CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService', 'EVENT_USER_LOGGED', '$stateParams'];
 
   function CompanyController(CompanyService, $scope, $state, $controller, maskFilter, RatingService, $ionicModal, ImageService, EVENT_USER_LOGGED, $stateParams) {
@@ -272,4 +292,5 @@
         }
       };
     }
+*/
 })();

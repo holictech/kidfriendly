@@ -1,21 +1,35 @@
-<ion-view hide-back-button="true" hide-nav-bar="true">
-  <ion-header-bar class="header align-self-center">
-    <form class="header notBorder item item-input" name="vm.formFastSearch" novalidate>
-      <label class="item-input-wrapper border-bottom-white header">
-        <input id="establishment" name="establishment" type="search" data-ng-model="vm.establishment" autocomplete="off" minlength="3" maxlength="150"
-          style="color: #FFF !important;" required>
-      </label>
-      <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$invalid" style="opacity: 0.5;"></i>
-      <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$valid" ng-click="vm.fastSearch();"></i>
-    </form>
-  </ion-header-bar>
+<ion-view hide-back-button="true">
+  <ion-nav-title>
+    Pesquisa
+  </ion-nav-title>
+  <!--
+  <ion-view hide-back-button="true" hide-nav-bar="true">
+    <ion-header-bar class="header align-self-center">
+      <form class="header notBorder item item-input" name="vm.formFastSearch" novalidate>
+        <label class="item-input-wrapper border-bottom-white header">
+          <input id="establishment" name="establishment" type="search" data-ng-model="vm.establishment" autocomplete="off" minlength="3" maxlength="150"
+            style="color: #FFF !important;" required>
+        </label>
+        <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$invalid" style="opacity: 0.5;"></i>
+        <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$valid" ng-click="vm.fastSearch();"></i>
+      </form>
+    </ion-header-bar>
+  -->
   <form name="vm.formSearch" novalidate>
     <ion-content style="bottom: 108px !important;">
       <div layout="column" style="margin: 5vh 5vw 0vh 5vw;">
+        <!--
         <div flex>
           <span style="font-size: 2.5rem !important;" class="font-raleway-light color-orange">Pesquisar</span>
         </div>
-        <div flex layout="row" style="margin-top: 10vh;">
+        -->
+        <div flex>
+          <label class="item-input item-stacked-label">
+            <span class="input-label" for="establishment">Estabelecimento</span>
+            <input id="establishment" name="establishment" type="text" data-ng-model="vm.establishment" autocomplete="off" minlength="3" maxlength="150" required>
+          </label>
+        </div>
+        <div flex layout="row" style="margin-top: 1vh;">
           <div flex style="padding-right: 2.5vw;">
             <label class="item-input item-stacked-label">
               <span class="input-label" for="state">Estado</span>
@@ -75,7 +89,7 @@
           </div>
         </div>
         <div flex class="align-self-center text-align-right">
-          <button class="button button-small" type="button" ng-disabled="vm.idState === null && vm.idCity === null && vm.idCategory === null && vm.characteristcsSelected.length === 0 && !vm.isSuperKidFriendly && !vm.isNextToMe" ng-click="vm.search();">
+          <button class="button button-small" type="button" ng-disabled="(vm.establishment === null || vm.formSearch.$invalid) && vm.idState === null && vm.idCity === null && vm.idCategory === null && vm.characteristcsSelected.length === 0 && !vm.isSuperKidFriendly && !vm.isNextToMe" ng-click="vm.search();">
             PESQUISAR
           </button>
         </div>

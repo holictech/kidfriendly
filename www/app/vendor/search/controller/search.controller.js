@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('SearchController', SearchController);
-  SearchController.$inject = ['SearchService', 'StatesPrepService', 'LocalityService', 'CategoryPrepService', 'CharacteristicService', '$controller', '$scope', '$ionicScrollDelegate'];
+  SearchController.$inject = ['SearchService', 'StatesPrepService', 'LocalityService', 'CategoryPrepService', 'CharacteristicService', '$controller', '$scope', '$ionicScrollDelegate', '$rootScope'];
 
-  function SearchController(SearchService, StatesPrepService, LocalityService, CategoryPrepService, CharacteristicService, $controller, $scope, $ionicScrollDelegate) {
+  function SearchController(SearchService, StatesPrepService, LocalityService, CategoryPrepService, CharacteristicService, $controller, $scope, $ionicScrollDelegate, $rootScope) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.establishment = null;
@@ -15,12 +15,13 @@
     vm.characteristcsSelected = [];
     vm.isNextToMe = false;
     vm.isSuperKidFriendly = false;
-
     initialize();
 
+    /*
     vm.fastSearch = function() {
       executeSearch({desNameCompany: vm.establishment === null || angular.isUndefined(vm.establishment) ? null : vm.establishment.trim()});
     };
+    */
 
     vm.listCityByState = function(idState) {
       vm.cities = [];
@@ -67,6 +68,7 @@
 
     vm.search = function() {
       var filters = {
+        desNameCompany: (vm.establishment === null || angular.isUndefined(vm.establishment) ? null : vm.establishment.trim()),
         idState: vm.idState,
         idCity: vm.idCity,
         idCategory: vm.idCategory,
@@ -99,7 +101,7 @@
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
 
-        if (!StatesPrepService.error || CategoryPrepService.error) {
+        if (StatesPrepService.error || CategoryPrepService.error) {
           vm.hideLoading();
           SearchService.ionicPopupAlertError(StatesPrepService.error ? StatesPrepService.message : CategoryPrepService.message).then(function() {
             vm.go('main.home');
@@ -124,13 +126,13 @@
           vm.hideLoading();
           SearchService.ionicPopupAlertAttention('Nenhum estabelecimento.');
         } else {
-          vm.go('main.result', false, {'filters': filters, 'response': response});
+          vm.go('main.result', {'filters': filters, 'response': response}, true);
         }
       });
     }
 
-    $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      if (toState.name === 'main.search' && fromState.name !== 'main.search-result') {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (toState.name === 'main.search' && fromState.name !== 'main.result') {
         vm.establishment = null;
         vm.idState = null;
         vm.idCity = null;

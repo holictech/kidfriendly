@@ -106,6 +106,24 @@
           }
         }
       }
+    }).state('main.result', {
+      url: '/result/:object',
+      views: {
+        'search-view': {
+          templateUrl: 'app/view/search/result.html',
+          controller: 'ResultController',
+          controllerAs: 'vm'
+        }
+      }
+    }).state('main.result-company', {
+      url: '/result/company/:object',
+      views: {
+        'search-view': {
+          templateUrl: 'app/view/company/company.html',
+          controller: 'CompanyController',
+          controllerAs: 'vm'
+        }
+      }
     }).state('main.indicate', {
       url: '/indicate',
       views: {
@@ -134,23 +152,23 @@
     });
 
     $urlRouterProvider.otherwise("/main/home");
+  }
 
-    function listStateWithCityByCountry($q, LocalityService) {
-      var defer = $q.defer();
-      LocalityService.listStateWithCityByCountry().then(function(response) {
-        defer.resolve(response);
-      });
+  function listStateWithCityByCountry($q, LocalityService) {
+    var defer = $q.defer();
+    LocalityService.listStateWithCityByCountry().then(function(response) {
+      defer.resolve(response);
+    });
 
-      return defer.promise;
-    }
+    return defer.promise;
+  }
 
-    function getMinMaxDtBirthday($q, UserService) {
-      var defer = $q.defer();
-      UserService.getMinMaxDtBirthday().then(function(response) {
-        defer.resolve(response);
-      });
+  function getMinMaxDtBirthday($q, UserService) {
+    var defer = $q.defer();
+    UserService.getMinMaxDtBirthday().then(function(response) {
+      defer.resolve(response);
+    });
 
-      return defer.promise;
-    }
+    return defer.promise;
   }
 })();
