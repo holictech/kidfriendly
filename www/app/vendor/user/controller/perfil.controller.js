@@ -86,6 +86,16 @@
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
+
+        if (StatesPrepService.error || MinMaxDtBirthdayPrepService.error) {
+          vm.hideLoading();
+          UserService.ionicPopupAlertError(StatesPrepService.error ? StatesPrepService.message : MinMaxDtBirthdayPrepService.message).then(function() {
+            vm.go('main.home');
+          });
+
+          return;
+        }
+
         vm.user = angular.copy(UserService.getUserLogged());
         vm.minDtBirthDay = MinMaxDtBirthdayPrepService.data.minDate;
         vm.maxDtBirthDay = MinMaxDtBirthdayPrepService.data.maxDate;

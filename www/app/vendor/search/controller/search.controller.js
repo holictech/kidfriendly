@@ -98,6 +98,16 @@
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
+
+        if (!StatesPrepService.error || CategoryPrepService.error) {
+          vm.hideLoading();
+          SearchService.ionicPopupAlertError(StatesPrepService.error ? StatesPrepService.message : CategoryPrepService.message).then(function() {
+            vm.go('main.home');
+          });
+
+          return;
+        }
+
         vm.states = StatesPrepService.data;
         vm.categories = CategoryPrepService.data;
         vm.timeoutHideLoading();

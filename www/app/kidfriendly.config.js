@@ -4,7 +4,7 @@
   angular.module('kidfriendly').config(Config);
   Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', 'multiselectProvider'];
 
-  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, multiselectProvider, LocalityService, UserService, CategoryService) {
+  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, multiselectProvider, $q, LocalityService, UserService, CategoryService) {
     if (ionic.Platform.isAndroid()) {
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
@@ -68,12 +68,8 @@
           controller: 'PerfilController',
           controllerAs: 'vm',
           resolve: {
-            StatesPrepService: function(LocalityService) {
-              return LocalityService.listStateWithCityByCountry();
-            },
-            MinMaxDtBirthdayPrepService: function(UserService) {
-              return UserService.getMinMaxDtBirthday();
-            }
+            StatesPrepService: listStateWithCityByCountry,
+            MinMaxDtBirthdayPrepService: getMinMaxDtBirthday
           }
         }
       }
@@ -85,12 +81,8 @@
           controller: 'RegisterController',
           controllerAs: 'vm',
           resolve: {
-            StatesPrepService: function(LocalityService) {
-              return LocalityService.listStateWithCityByCountry();
-            },
-            MinMaxDtBirthdayPrepService: function(UserService) {
-              return UserService.getMinMaxDtBirthday();
-            }
+            StatesPrepService: listStateWithCityByCountry,
+            MinMaxDtBirthdayPrepService: getMinMaxDtBirthday
           }
         }
       }
@@ -102,11 +94,14 @@
           controller: 'SearchController',
           controllerAs: 'vm',
           resolve: {
-            StatesPrepService: function(LocalityService) {
-              return LocalityService.listStateWithCityByCountry();
-            },
-            CategoryPrepService: function(CategoryService) {
-              return CategoryService.listAll();
+            StatesPrepService: listStateWithCityByCountry,
+            CategoryPrepService: function($q, CategoryService) {
+              var defer = $q.defer();
+              CategoryService.listAll().then(function(response) {
+                defer.resolve(response);
+              });
+
+              return defer.promise;
             }
           }
         }
@@ -139,5 +134,23 @@
     });
 
     $urlRouterProvider.otherwise("/main/home");
+
+    function listStateWithCityByCountry($q, LocalityService) {
+      var defer = $q.defer();
+      LocalityService.listStateWithCityByCountry().then(function(response) {
+        defer.resolve(response);
+      });
+
+      return defer.promise;
+    }
+
+    function getMinMaxDtBirthday($q, UserService) {
+      var defer = $q.defer();
+      UserService.getMinMaxDtBirthday().then(function(response) {
+        defer.resolve(response);
+      });
+
+      return defer.promise;
+    }
   }
 })();

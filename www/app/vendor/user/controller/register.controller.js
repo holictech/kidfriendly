@@ -92,6 +92,15 @@
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
+        if (StatesPrepService.error || MinMaxDtBirthdayPrepService.error) {
+          vm.hideLoading();
+          UserService.ionicPopupAlertError(StatesPrepService.error ? StatesPrepService.message : MinMaxDtBirthdayPrepService.message).then(function() {
+            vm.go('main.user-login');
+          });
+
+          return;
+        }
+
         back = angular.fromJson($stateParams.object);
         vm.email = null;
         vm.password = null
