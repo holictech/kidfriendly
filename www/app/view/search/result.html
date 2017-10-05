@@ -3,7 +3,7 @@
     Resultado
   </ion-nav-title>
   <ion-content>
-    <div class="list card" ng-repeat="item in vm.results track by item.idCompany">
+    <div class="list card" style="margin: 5vh 5vw !important;" ng-repeat="item in vm.results track by item.idCompany">
       <div class="item item-image" style="height: 50vh; width: 100wh;" ng-if="item.mgHome !== null">
         <img ng-src="data:image/*;base64,{{item.mgHome}}" style="width: 100% !important; height:100% !important;">
       </div>
