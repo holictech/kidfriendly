@@ -55,7 +55,7 @@
       url: '/user/login/:object',
       views: {
         'user-view': {
-          templateUrl: 'app/view/login/login.html',
+          templateUrl: 'app/view/user/login.html',
           controller: 'LoginController',
           controllerAs: 'vm'
         }

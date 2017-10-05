@@ -26,7 +26,7 @@
       vm.suggestions = [];
       HomeService.listSuggestions().then(function(response) {
         if (!response.error) {
-          vm.suggestions.concat(response.data);
+          vm.suggestions = vm.suggestions.concat(response.data);
 
           if (vm.suggestions.length === 0) {
             vm.message.suggestions = 'Nenhum estabelecimento.'
@@ -54,7 +54,7 @@
         if (!response.error) {
           HomeService.listNextToMe(response.data).then(function(response) {
             if (!response.error) {
-              vm.nextToMe.concat(response.data);
+              vm.nextToMe = vm.nextToMe.concat(response.data);
 
               if (vm.nextToMe.length === 0) {
                 vm.message.nextToMe = 'Nenhum estabelecimento.'

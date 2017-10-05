@@ -3,7 +3,33 @@
     Estabelecimento
   </ion-nav-title>
   <ion-content>
-
+    <div layout="column" class="padding">
+      <div flex>1</div>
+      <div flex>2</div>
+    </div>
+    <div layout="column" class="padding">
+      <div flex class="header display-flex align-items-center border-orange" style="height: 8vh; width: 100%;">
+        <span class="title" style="margin-left: 5vw;">Comentários</span>
+      </div>
+      <div flex class="list">
+        <div class="item item-avatar" ng-repeat="item in vm.ratings track by item.idRating" ng-if="vm.ratings.length > 0">
+          <img ng-src="data:image/*;base64,{{item.imgUser}}" ng-if="item.imgUser !== null">
+          <img ng-src="images/png/user-empty.png" ng-if="item.imgUser === null">
+          <h2>
+            <span class="font-lato-bold color-orange">{{item.desNameUser.split(' ')[0]}}</span>
+            <span class="font-lato-regular color-back"> comentou:</span>
+          </h2>
+          <p class="white-space-normal font-raleway-light text-align-justify color-back-054" style="font-size: 0.8rem !important;">{{item.desRating}}</p>
+        </div>
+        <div flex class="item text-align-center font-myriad-set-pro-thin color-back-054 padding" ng-if="vm.message.ratings !== '' || vm.loadingRating">
+          <ion-spinner ng-if="vm.loadingRating"></ion-spinner>
+          <span ng-bind-html="vm.message.ratings"></span>
+        </div>
+        <div flex class="item text-align-center font-myriad-set-pro-thin color-back-054 padding" ng-if="vm.isInfiniteScrollRating" ng-click="vm.findRatings();">
+          <strong><a href style="color: #F44F0F !important;">mais comentários</a></strong>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
 <!--

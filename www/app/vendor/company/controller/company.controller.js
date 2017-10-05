@@ -2,24 +2,58 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-  CompanyController.$inject = ['CompanyService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams'];
+  CompanyController.$inject = ['CompanyService', 'RatingService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout'];
 
-  function CompanyController(CompanyService, $controller, $scope, $ionicScrollDelegate, $stateParams) {
+  function CompanyController(CompanyService, RatingService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout) {
     var vm = this;
-    angular.extend(this, $controller('AbstractController', {'vm': vm, '$scope': $scope}));
+    angular.extend(this, $controller('AbstractController', {'vm': vm}));
+    var object = null;
 
+    var ratingPaginatorDto = {
+      currentPage: 0,
+      pageSize: 10
+    };
+    vm.message = {
+      'ratings': ''
+    };
+    vm.ratings = [];
+    vm.isInfiniteScrollRating = false;
+    vm.loadingRating = false;
     initialize();
+
+    vm.findRatings = function() {
+      vm.message.ratings = '';
+      vm.isInfiniteScrollRating = false;
+      vm.loadingRating = true;
+      ratingPaginatorDto.currentPage = ratingPaginatorDto.currentPage + 1;
+      RatingService.listByCompany(object.primarykey, ratingPaginatorDto).then(function(response) {
+        if (response.error) {
+          vm.message.ratings = response.message;
+        } else {
+          vm.ratings = vm.ratings.concat(response.data.results);
+          ratingPaginatorDto = response.data.paginatorDto;
+          vm.isInfiniteScrollRating = (angular.isDefined(ratingPaginatorDto) && ratingPaginatorDto.pagination);
+
+          if (vm.ratings.length === 0) {
+            vm.message.ratings = 'Nenhum comentário.';
+          }
+        }
+
+        vm.loadingRating = false;
+      });
+    };
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
-        var object = angular.fromJson($stateParams.object);
-        CompanyService.ionicPopupAlertAttention('Em breve!');
-        //vm.timeoutHideLoading();
-        vm.hideLoading()
+        object = angular.fromJson($stateParams.object);
+        vm.findRatings();
+        vm.hideLoading();
       });
     }
-  }
+}
+
+    
 
 /*
   CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService', 'EVENT_USER_LOGGED', '$stateParams'];

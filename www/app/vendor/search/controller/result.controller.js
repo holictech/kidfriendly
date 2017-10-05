@@ -46,7 +46,7 @@
         paginatorDto = object.response.data.paginatorDto;
         vm.results = object.response.data.results;
         vm.isFilterState = !angular.isDefined(filters.idState) || filters.idState === null;
-        vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.currentPage !== paginatorDto.pageTotal);
+        vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.pagination);
         vm.timeoutHideLoading();
       });
     }

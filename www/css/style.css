@@ -4,7 +4,8 @@
   color: #FFF;
 }
 .header .title {
-  font-family: 'Raleway Light' !important;
+  /*font-family: 'Raleway Light' !important;*/
+  font-family: 'Myriad Set Pro Thin' !important;
   font-size: 1.6rem !important;
   color: #FFF;
 }
@@ -226,6 +227,7 @@ input[type=checkbox]:not(old):checked + label ~ section {
 }
 .align-self-center {
   align-self: center !important;
+  -webkit-align-self: center !important;
 }
 .swiper-container-nexttome {
   border-style: solid !important;
@@ -313,4 +315,12 @@ input[type=checkbox]:not(old):checked + label ~ section {
 }
 .white-space-normal {
   white-space: normal !important;
+}
+.display-flex {
+  display: flex !important;
+  display: -webkit-flex !important;
+}
+.align-items-center {
+  align-items: center !important;
+  -webkit-align-items: center !important;
 }
