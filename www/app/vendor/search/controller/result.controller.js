@@ -14,7 +14,7 @@
     vm.isInfiniteScroll = false;
     initialize();
 
-    
+
     vm.infiniteScroll = function() {
       filters.currentPage = paginatorDto.currentPage + 1;
       filters.pageSize = paginatorDto.pageSize;
@@ -34,8 +34,8 @@
       });
     };
 
-    vm.details = function(primarykey) {
-      vm.go('main.result-company', {'primarykey': primarykey}, true);
+    vm.details = function(companyDto) {
+      vm.go('main.search-result-company', {idCompany: companyDto.idCompany, desName: companyDto.desName, imgLogo: companyDto.imgLogo, numRate: companyDto.numRate}, false);
     };
 
     function initialize() {

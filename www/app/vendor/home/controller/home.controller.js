@@ -17,8 +17,8 @@
 
     initialize();
 
-    vm.details = function(primarykey) {
-      vm.go('main.home-company', {'primarykey': primarykey}, true);
+    vm.details = function(companyDto) {
+      vm.go('main.home-company', {idCompany: companyDto.idCompany, desName: companyDto.desName, imgLogo: companyDto.imgLogo, numRate: companyDto.numRate}, false);
     };
 
     function listSuggestions() {

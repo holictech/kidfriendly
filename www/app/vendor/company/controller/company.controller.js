@@ -2,19 +2,20 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-  CompanyController.$inject = ['CompanyService', 'RatingService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout'];
+  CompanyController.$inject = ['CompanyService', 'ImageService', 'RatingService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout'];
 
-  function CompanyController(CompanyService, RatingService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout) {
+  function CompanyController(CompanyService, ImageService, RatingService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
-    var object = null;
+    vm.companyDto = null;
+    vm.message = {
+      'images': '',
+      'ratings': ''
+    };
+    vm.images = [];
 
     var ratingPaginatorDto = {
-      currentPage: 0,
-      pageSize: 10
-    };
-    vm.message = {
-      'ratings': ''
+      currentPage: 0
     };
     vm.ratings = [];
     vm.isInfiniteScrollRating = false;
@@ -26,7 +27,7 @@
       vm.isInfiniteScrollRating = false;
       vm.loadingRating = true;
       ratingPaginatorDto.currentPage = ratingPaginatorDto.currentPage + 1;
-      RatingService.listByCompany(object.primarykey, ratingPaginatorDto).then(function(response) {
+      RatingService.listByCompany(vm.companyDto.idCompany, ratingPaginatorDto).then(function(response) {
         if (response.error) {
           vm.message.ratings = response.message;
         } else {
@@ -43,17 +44,43 @@
       });
     };
 
+    function findImages() {
+      vm.message.images = '';
+      vm.images = [];
+      ImageService.listByCompany(vm.companyDto.idCompany).then(function(response) {
+        if (response.error) {
+          vm.message.images = response.message;
+        } else {
+          vm.images = vm.images.concat(response.data);
+
+          if (vm.images.length === 0) {
+            vm.message.images = 'Nenhuma imagem.';
+          } else {
+            $timeout(function() {
+              new Swiper(angular.element(document.querySelector('.swiper-container-gallery')), {
+                prevButton: '.swiper-button-prev-gallery',
+                nextButton: '.swiper-button-next-gallery',
+                spaceBetween: 30,
+                effect: 'slide',
+                loop: true
+              });
+            }, 500);
+          }
+        }
+      });
+    }
+
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
-        object = angular.fromJson($stateParams.object);
+        vm.companyDto = angular.fromJson($stateParams.object);
+        findImages();
         vm.findRatings();
-        vm.hideLoading();
       });
     }
 }
 
-    
+
 
 /*
   CompanyController.$inject = ['CompanyService', '$scope', '$state', '$controller', 'maskFilter', 'RatingService', '$ionicModal', 'ImageService', 'EVENT_USER_LOGGED', '$stateParams'];

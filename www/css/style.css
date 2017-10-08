@@ -178,6 +178,9 @@ input[type=checkbox]:not(old):checked + label ~ section {
   border-color: #F44F0F;
   font-family: 'Raleway Light';
 }
+.padding {
+  padding: 1vw !important;
+}
 /* END */
 
 /* NOVA IMPLEMENTAÇÃO DO KID FRIENDLY */

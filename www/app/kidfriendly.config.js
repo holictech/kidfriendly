@@ -106,7 +106,7 @@
           }
         }
       }
-    }).state('main.result', {
+    }).state('main.search-result', {
       url: '/result/:object',
       views: {
         'search-view': {
@@ -115,7 +115,7 @@
           controllerAs: 'vm'
         }
       }
-    }).state('main.result-company', {
+    }).state('main.search-result-company', {
       url: '/result/company/:object',
       views: {
         'search-view': {

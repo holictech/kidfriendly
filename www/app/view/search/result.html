@@ -10,7 +10,7 @@
       <div class="item item-icon-right">
         <h2 class="font-raleway-extrabold color-orange white-space-normal" ng-if="item.mgHome === null">{{item.desName}}</h2>
         <h3 class="font-raleway-light color-orange white-space-normal" ng-if="vm.isFilterState">{{item.addressDto.cityDto.desCity}} - {{item.addressDto.cityDto.desState}}</h3>
-        <a href="#" ng-click="vm.details(item.idCompany);">
+        <a href="#" ng-click="vm.details(item);">
           <i class="icon ion-eye color-orange"></i>
         </a>
       </div>

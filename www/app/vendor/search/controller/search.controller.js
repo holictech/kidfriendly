@@ -126,13 +126,13 @@
           vm.hideLoading();
           SearchService.ionicPopupAlertAttention('Nenhum estabelecimento.');
         } else {
-          vm.go('main.result', {'filters': filters, 'response': response}, true);
+          vm.go('main.search-result', {'filters': filters, 'response': response}, true);
         }
       });
     }
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      if (toState.name === 'main.search' && fromState.name !== 'main.result') {
+      if (toState.name === 'main.search' && fromState.name !== 'main.search-result') {
         vm.establishment = null;
         vm.idState = null;
         vm.idCity = null;

@@ -63,9 +63,13 @@
   display: inline-block;
   width: 2rem;
 }
-
 .ion-magnifying-glass-white:before {
   content: url('../images/svg/magnifying-glass-white.svg');
   display: inline-block;
   width: 2rem;
+}
+.ion-comments:before {
+  content: url('../images/svg/comments.svg');
+  display: inline-block;
+  width: 5rem;
 }
