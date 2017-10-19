@@ -36,7 +36,17 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.holictechnology.kidfriendly"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.holictechnology.kidfriendly"
+        }
+    }
 }
