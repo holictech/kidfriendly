@@ -14,6 +14,7 @@
       'ratings': ''
     };
     vm.images = [];
+    vm.rating = {};
     vm.foodTypes = [];
     var ratingPaginatorDto = {
       currentPage: 0,
@@ -27,19 +28,61 @@
     vm.characteristics = [];
     initialize();
 
-    vm.openDetails = function() {
-      $ionicModal.fromTemplateUrl('app/view/company/details-modal.html', {
-        scope: $scope,
-        backdropClickToClose: false,
-        hardwareBackButtonClose:false
-      }).then(function(modal) {
-        var stopListening = $scope.$on('modal.hidden', function() {
-          stopListening();
-          vm.modalDetails.remove();
+    vm.openRating = function() {
+      if (!vm.isLogged()) {
+        CompanyService.ionicPopupAlertAttention('É necessário estar logado para avaliar o estabelecimento.');
+      } else {
+        vm.rating = {
+          company: null,
+          statusKidFriendly: null,
+          user:null
+        }
+        vm.showLoading();
+        RatingService.hasPermission(vm.companyDto.idCompany, vm.getUserLogged().idUser).then(function(response) {
+          if (!response.error && response.data) {
+            openModal('app/view/company/rating-modal.html');
+          } else if (!response.error && !response.data) {
+            RatingService.ionicPopupAlertAttention('Você avaliou este estabelecimento a menos de um mês.');
+          } else {
+            RatingService.ionicPopupAlertError(response.message);
+          }
+
+          vm.hideLoading();
         });
-        vm.modalDetails = modal;
-        vm.modalDetails.show();
+      }
+    };
+
+    vm.selectedStatusRating = function($event, idStatusKidFriendly) {
+      vm.rating.statusKidFriendly = {
+        idStatusKidFriendly: idStatusKidFriendly
+      };
+
+      angular.forEach(document.querySelectorAll('.notSelectedStatusKidFriendly'), function(value, key) {
+        angular.element(value)[0].classList.remove('selectedStatusKidFriendly');
       });
+
+      event.srcElement.classList.add('selectedStatusKidFriendly');
+    };
+
+    vm.includeRating = function() {
+      vm.rating.company = {idCompany: vm.companyDto.idCompany};
+      vm.rating.user = {idUser: vm.getUserLogged().idUser};
+      vm.showLoading();
+      RatingService.include(vm.rating).then(function(response) {
+        vm.hideLoading();
+
+        if (response.error) {
+          RatingService.ionicPopupAlertError(response.message);
+        } else {
+          RatingService.ionicPopupAlertSuccess('Obrigado por avaliar. Em breve seu comentário estará disponível.').then(function() {
+            vm.closeModal();
+          });
+        }
+      });
+    }
+
+    vm.openDetails = function() {
+      openModal('app/view/company/details-modal.html');
     };
 
     vm.openSite = function(url) {
@@ -47,9 +90,11 @@
       $cordovaInAppBrowser.close();
     };
 
-    vm.closeDetails = function() {
-      vm.modalDetails.hide();
-    };
+    vm.closeModal = function() {
+      if (angular.isDefined(vm.modal)) {
+        vm.modal.hide();
+      }
+    }
 
     vm.launchNavigator = function($event) {
       vm.showLoading();
@@ -104,12 +149,11 @@
             vm.message.images = 'Nenhuma imagem.';
           } else {
             $timeout(function() {
-              new Swiper(angular.element(document.querySelector('.swiper-container-gallery')), {
+              new Swiper(angular.element(document.querySelector('.swiper-container-gallery-company')), {
                 prevButton: '.swiper-button-prev-gallery',
                 nextButton: '.swiper-button-next-gallery',
                 spaceBetween: 30,
-                effect: 'slide',
-                loop: true
+                effect: 'slide'
               });
             }, 500);
           }
@@ -156,6 +200,21 @@
         }, 500);
       });
     };
+
+    function openModal(fromTemplateUrl) {
+      $ionicModal.fromTemplateUrl(fromTemplateUrl, {
+        scope: $scope,
+        backdropClickToClose: false,
+        hardwareBackButtonClose:false
+      }).then(function(modal) {
+        var stopListening = $scope.$on('modal.hidden', function() {
+          stopListening();
+          vm.modal.remove();
+        });
+        vm.modal = modal;
+        vm.modal.show();
+      });
+    }
 
     function initialize() {
       $scope.$on('$ionicView.beforeEnter', function() {

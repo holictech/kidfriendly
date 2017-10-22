@@ -6,7 +6,7 @@
 
   function AbstractController($ionicLoading, $timeout, $state, UserService) {
     var vm = this;
-    
+
     vm.showLoading = function() {
       $ionicLoading.show();
     };
@@ -25,7 +25,7 @@
       if (!$state.is(state) && !angular.isUndefined(loading) && loading) {
         vm.showLoading();
       }
-      
+
       $state.go(state, ((angular.isUndefined(parameter) || parameter === null) ? {object: 'null'} : {object: angular.toJson(parameter)}));
     };
 
@@ -39,6 +39,10 @@
 
     vm.isLoggedSocialNetworkNotEmail = function() {
       return UserService.isLoggedSocialNetworkNotEmail();
+    };
+
+    vm.getUserLogged = function() {
+      return UserService.getUserLogged();
     };
   }
 })();

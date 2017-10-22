@@ -1,57 +1,48 @@
 <ion-modal-view class="transparent">
   <ion-pane class="transparent">
     <div class="body-modal border-radius-top border-radius-bottom">
-      <div class="header border-radius-top display-flex align-items-center" style="width: 100%; padding: 0 12px 0 10px;">
-        <span class="title margin">Endereços</span>
-        <div flex class="text-align-right" style="font-size: 2.5rem;">
-          <i class="ion-ios-close-empty" ng-click="vm.closeAddresses();"></i>
+      <form name="vm.formRating" novalidate>
+        <div class="border-radius-top display-flex align-items-center" style="width: 100%; padding: 0 12px 0 10px;">
+          <div flex class="text-align-right" style="font-size: 2.5rem;">
+            <i class="ion-rating" style="position: absolute; right: -15px; top: -25px;" ng-click="vm.closeModal();"></i>
+          </div>
         </div>
-      </div>
+        <div layout="column" class="padding" style="margin-top: 20px;">
+          <div flex layout="row" class="padding">
+            <div flex class="font-ebrima-regular text-align-center">
+              <span class="font-ebrima-regular color-orange" style="font-size: 0.85rem !important;">O QUÃO</span>
+              <span class="font-ebrima-bold color-orange" style="font-size: 0.85rem !important;">KID FRIENDLY</span>
+              <span class="font-ebrima-regular color-orange" style="font-size: 0.85rem !important;">FOI SUA EXPERIÊNCIA?</span>
+            </div>
+          </div>
+          <div flex layout="row" class="padding">
+            <div flex class="text-align-center">
+              <i class="ion-status-kid-friendly-1 notSelectedStatusKidFriendly" ng-click="vm.selectedStatusRating($event, 1);"></i>
+            </div>
+            <div flex class="text-align-center">
+              <i class="ion-status-kid-friendly-2 notSelectedStatusKidFriendly" ng-click="vm.selectedStatusRating($event, 2);"></i>
+            </div>
+            <div flex class="text-align-center">
+              <i class="ion-status-kid-friendly-3 notSelectedStatusKidFriendly" ng-click="vm.selectedStatusRating($event, 3);"></i>
+            </div>
+            <div flex class="text-align-center">
+              <i class="ion-status-kid-friendly-4 notSelectedStatusKidFriendly" ng-click="vm.selectedStatusRating($event, 4);"></i>
+            </div>
+          </div>
+          <div flex class="padding">
+            <label class="item-input item-stacked-label">
+              <span class="input-label" for="comment">Comentário *</span>
+              <textarea id="comment" name="comment" data-ng-model="vm.rating.desRating" autocomplete="off" minlength="10" maxlength="250" required></textarea>
+            </label>
+          </div>
+          <div layout="row" class="padding">
+            <div flex class="text-align-right">
+              <button class="button button-small" type="button" ng-disabled="vm.formRating.$invalid || vm.rating.statusKidFriendly === null" ng-click="vm.includeRating();">
+                AVALIAR
+              </button>
+            </div>
+          </div>
+        </div>
     </div>
   </ion-content>
 </ion-modal-view>
-<!--
-<ion-modal-view class="kf-background-page">
-  <ion-header-bar align-title="center" class="kf-header-logo">
-    <h1 class="title">Avaliação</h1>
-    <div class="buttons">
-      <button class="button button-icon icon ion-ios-close-empty" ng-click="vm.closeRating();"></button>
-    </div>
-  </ion-header-bar>
-  <ion-content class="padding" scroll="false">
-    <form name="vm.formRating" novalidate ng-submit="vm.includeRating();">
-      <div class="padding">
-        <div class="kf-title-black text-center">O local visitado é:</div>
-        <div class="row">
-          <div class="col text-center">
-            <img ng-src="images/status-kidfriendly-1.png" class="kf-rating-icon-rate"
-              ng-click="vm.selectedStatusRating($event, 1);">
-          </div>
-          <div class="col text-center">
-            <img ng-src="images/status-kidfriendly-2.png" class="kf-rating-icon-rate"
-              ng-click="vm.selectedStatusRating($event, 2);">
-          </div>
-          <div class="col text-center">
-            <img ng-src="images/status-kidfriendly-3.png" class="kf-rating-icon-rate"
-              ng-click="vm.selectedStatusRating($event, 3);">
-          </div>
-          <div class="col text-center">
-            <img ng-src="images/status-kidfriendly-4.png" class="kf-rating-icon-rate"
-              ng-click="vm.selectedStatusRating($event, 4);">
-          </div>
-        </div>
-      </div>
-      <div class="padding kf-title-black">Qual seu comentário sobre sua experiência no local?</div>
-      <div class="padding kf-width-100-porcent">
-        <textarea id="desRating" name="desRating" class="kf-border-back" maxlength="250" ng-model="vm.rating.desRating"
-          autocomplete="off" required></textarea>
-      </div>
-      <div class="padding">
-        <button type="submit" ng-class="vm.rating.desRating.length > 5 && vm.rating.statusKidFriendly != undefined ? 'kf-button-active' : 'kf-button-inative'" ng-disabled="vm.rating.desRating.length > 5 && vm.rating.statusKidFriendly != undefined ? false : true">
-          Avaliar
-        </button>
-      </div>
-    </form>
-  </ion-content>
-</ion-modal-view>
--->

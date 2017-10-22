@@ -12,17 +12,17 @@
     </md-fab-actions>
   </md-fab-speed-dial>
   <ion-content>
-    <div layout="row" style="position:relative; z-index: 10; top: 5vh; padding: 0 2.5vw;">
-      <div flex="30" style="width: 100%; height: 15vh; border:5px solid #F44F0F;">
+    <div layout="row" style="position:relative; z-index: 10; top: 5vh; padding: 0 4vw;">
+      <div flex="30" style="width: 100%; height: 15vh;" ng-style="vm.companyDto.imgLogo !== null ? {border:'5px solid #F44F0F'} : {}">
         <img ng-src="data:image/*;base64,{{vm.companyDto.imgLogo}}" style="width: 100%; height: 100%;" ng-if="vm.companyDto.imgLogo !== null">
       </div>
       <div flex class="font-raleway-bold color-orange display-flex align-items-center" style="padding-left: 2.5vw;">
-        <span class="font-raleway-bold" style="white-space: nowrap; overflow: hidden;">
+        <div flex class="font-raleway-bold text-align-right" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
           {{vm.companyDto.desName}}
-        </span>
+        </div>
       </div>
     </div>
-    <div layout="row" class="swiper-container swiper-container-gallery">
+    <div layout="row" class="swiper-container swiper-container-gallery-company">
       <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.images.length === 0">
         <ion-spinner ng-if="vm.message.images === ''"></ion-spinner>
         <span ng-bind-html="vm.message.images"></span>
@@ -32,8 +32,8 @@
           <img ng-src="data:image/*;base64,{{item.imgImage}}">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-gallery" ng-class="{'button-disabled': vm.images.length === 0}"></div>
-      <div class="swiper-button-next swiper-button-next-gallery" ng-class="{'button-disabled': vm.images.length === 0}"></div>
+      <div class="swiper-button-prev swiper-button-prev-gallery" ng-class="{'button-disabled': vm.images.length <= 1}"></div>
+      <div class="swiper-button-next swiper-button-next-gallery" ng-class="{'button-disabled': vm.images.length <= 1}"></div>
     </div>
 
     <!--

@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('ResultController', ResultController);
-  ResultController.$inject = ['SearchService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$filter'];
+  ResultController.$inject = ['SearchService', '$controller', '$scope', '$stateParams', '$filter'];
 
-  function ResultController(SearchService, $controller, $scope, $ionicScrollDelegate, $stateParams, $filter) {
+  function ResultController(SearchService, $controller, $scope, $stateParams, $filter) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     var filters = null;
@@ -55,7 +55,6 @@
     };
 
     function initialize() {
-      $ionicScrollDelegate.scrollTop();
       $scope.$on('$ionicView.beforeEnter', function() {
         var object = angular.fromJson($stateParams.object);
         filters = object.filters;

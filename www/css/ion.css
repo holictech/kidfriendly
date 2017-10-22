@@ -63,3 +63,29 @@
   display: inline-block;
   width: 5rem;
 }
+.ion-rating:before {
+  content: url('../images/svg/rating.svg');
+  display: inline-block;
+  width: 5rem;
+}
+.ion-status-kid-friendly-1:before {
+  content: url('../images/svg/status-kid-friendly-1.svg');
+  display: inline-block;
+  width: 5rem;
+}
+.ion-status-kid-friendly-2:before {
+  content: url('../images/svg/status-kid-friendly-2.svg');
+  display: inline-block;
+  width: 5rem;
+  margin-top: -1px;
+}
+.ion-status-kid-friendly-3:before {
+  content: url('../images/svg/status-kid-friendly-3.svg');
+  display: inline-block;
+  width: 5rem;
+}
+.ion-status-kid-friendly-4:before {
+  content: url('../images/svg/status-kid-friendly-4.svg');
+  display: inline-block;
+  width: 5rem;
+}

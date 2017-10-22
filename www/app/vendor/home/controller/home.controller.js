@@ -32,12 +32,11 @@
             vm.message.suggestions = 'Nenhum estabelecimento.'
           } else {
             $timeout(function() {
-              new Swiper(angular.element(document.querySelector('.swiper-container-gallery')), {
+              new Swiper(angular.element(document.querySelector('.swiper-container-gallery-home')), {
                 prevButton: '.swiper-button-prev-gallery',
                 nextButton: '.swiper-button-next-gallery',
                 spaceBetween: 30,
-                effect: 'slide',
-                loop: true
+                effect: 'slide'
               });
             }, 500);
           }

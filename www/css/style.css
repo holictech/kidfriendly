@@ -212,7 +212,7 @@ input[type=checkbox]:not(old):checked + label ~ section {
   background-color: #FFF !important;
   background-image:  linear-gradient(0deg, #F44F0F, #F44F0F 50%, transparent 50%) !important;
 }
-.swiper-container-gallery {
+.swiper-container-gallery-home, .swiper-container-gallery-company {
   width: 100vw !important;
   height: 30vh !important;
 }
@@ -221,7 +221,7 @@ input[type=checkbox]:not(old):checked + label ~ section {
   text-align: center !important;
 }
 .swiper-slide-gallery img {
-  width: 90vw !important;
+  width: 92.5vw !important;
   height: 100% !important;
 }
 .swiper-button-prev-gallery {
@@ -352,10 +352,10 @@ input[type=checkbox]:not(old):checked + label ~ section {
   position: fixed;
   background-color: #FFF;
   right: 1%;
-  bottom: 8%;
+  bottom: 1%;
   left: 1%;
   width: 98%;
-  max-height: 84%
+  max-height: 98%
 }
 .border-radius-top {
   border-top-left-radius: 1rem;
@@ -375,4 +375,10 @@ input[type=checkbox]:not(old):checked + label ~ section {
   border-right: 1px solid rgba(0,0,0,0.54);
   border-bottom: 1px solid rgba(0,0,0,0.54);
   border-left: 1px solid rgba(0,0,0,0.54);
+}
+.notSelectedStatusKidFriendly {
+  opacity: 0.2;
+}
+.selectedStatusKidFriendly {
+  opacity: 1;
 }
