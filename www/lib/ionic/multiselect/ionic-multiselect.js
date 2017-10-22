@@ -323,7 +323,7 @@
 
             scope.itemChecked = [];
             scope.value = [];
-            scope.hideItems();
+            /*scope.hideItems();*/
           };
 
           scope.quantitySelected = function() {

@@ -2,6 +2,15 @@
   <ion-nav-title>
     Estabelecimento
   </ion-nav-title>
+  <md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-right" style="right: 0 !important; bottom: 50px !important;">
+    <md-fab-trigger>
+      <md-icon md-svg-src="images/svg/more.svg" style="height:3em;width:3em;"></md-icon>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-icon md-svg-src="images/svg/launch-navigator.svg" style="height:3em;width:3em;" ng-click="vm.launchNavigator();"></md-icon>
+      <md-icon md-svg-src="images/svg/details.svg" style="height:3em;width:3em;" ng-click="vm.openDetails();"></md-icon>
+    </md-fab-actions>
+  </md-fab-speed-dial>
   <ion-content>
     <div layout="row" style="position:relative; z-index: 10; top: 5vh; padding: 0 2.5vw;">
       <div flex="30" style="width: 100%; height: 15vh; border:5px solid #F44F0F;">
@@ -28,31 +37,30 @@
     </div>
 
     <!--
-    <div layout="row" class="padding" style="margin: 2.5vh 0;">
-      <div flex layout="column" style="margin-right: 2.5vw;">
-        <div class="font-raleway-bold color-orange">
-          PALAVRAS CHAVE
+    <div layout="row" class="padding">
+      <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">PALAVRAS CHAVE</div>
+      <div flex class="font-raleway-bold color-orange" style="padding-left: 1vw;">NOTA GERAL</div>
+    </div>
+    <div layout="row" class="padding">
+      <div flex style="padding-top: 2.5vh;">
+        <div flex class="text-align-center font-myriad-set-pro-thin color-back padding" ng-if="vm.foodTypes.length === 0">
+          <ion-spinner ng-if="vm.message.foodTypes === ''"></ion-spinner>
+          <span ng-if="vm.message.foodTypes !== null && vm.message.foodTypes !== ''" ng-bind-html="vm.message.foodTypes"></span>
         </div>
-        <div style="border-left: 5px solid #717070; padding: 0 1vw 1vh 1vw; font-size: 0.8rem !important;"
-          class="font-raleway-light text-align-justify color-back-054">
-          sdkhfksjdh fkjhasdkjfh kjasdjkadf asdf asdf asd fa
-        </div>
-        <div style="border-left: 5px solid #717070; padding: 0 1vw 1vh 1vw; font-size: 0.8rem !important;"
-          class="font-raleway-light text-align-justify color-back-054">
-          sdkhfksjdh fkjhasdkjfh kjasdjkadf asdf asdf asd fa
+        <div flex class="font-raleway-light text-align-justify color-back-054" style="border-left: 5px solid #717070; font-size: 0.8rem !important;"
+          ng-repeat="item in vm.foodTypes track by item.idFoodType" ng-if="vm.foodTypes.length !== 0">
+          {{item.dsFoodType}};
         </div>
       </div>
-      <div flex layout="column" style="margin-left: 2.5vw;">
-        <div class="font-raleway-bold color-orange">
-          NOTA GERAL
-        </div>
-        <div>2</div>
+      <div flex layout="column" style="padding-left: 1vw; height: 5rem;" class="general-note">
+        <section class="font-raleway-extrabold" style="font-size: 0.7rem !important; position: absolute; margin-top: 4vh; margin-left: 20.4vw;">MUITO</section>
+        <section class="font-raleway-regular" style="font-size: 0.7rem !important; position: absolute; margin-top: 6.5vh; margin-left: 20.3vw;">KID FRIENDLY!</section>
       </div>
     </div>
     -->
 
-    <div layout="column" class="padding" style="margin-top: 2.5vh;">
-      <div flex class="header display-flex align-items-center border-orange" style="height: 12vh; width: 100%;">
+    <div layout="column" style="margin: 2vh 0 2vh 0;">
+      <div flex class="header display-flex align-items-center" style="width: 100%;">
         <i class="ion-comments"></i>
         <span class="title">Comentários</span>
       </div>
@@ -61,119 +69,24 @@
           <img ng-src="data:image/*;base64,{{item.imgUser}}" ng-if="item.imgUser !== null">
           <img ng-src="images/png/user-empty.png" ng-if="item.imgUser === null">
           <h2>
-            <span class="font-lato-bold color-orange">{{item.desNameUser.split(' ')[0]}}</span>
-            <span class="font-lato-regular color-back"> comentou:</span>
+            <span class="font-lato-bold color-orange">{{item.desNameUser.split(' ')[0]}} </span>
+            <span class="font-lato-regular color-back">comentou:</span>
           </h2>
-          <p class="white-space-normal font-raleway-light text-align-justify color-back-054" style="font-size: 0.8rem !important;">{{item.desRating}}</p>
+          <p class="white-space-normal font-raleway-light text-align-justify color-back-054"
+            style="font-size: 0.8rem !important;">
+            {{item.desRating}}
+          </p>
         </div>
-        <div flex class="item text-align-center font-myriad-set-pro-thin color-back-054 padding" ng-if="vm.message.ratings !== '' || vm.loadingRating">
+        <div flex class="item text-align-center font-myriad-set-pro-thin color-back-054 padding"
+          ng-if="vm.message.ratings !== '' || vm.loadingRating">
           <ion-spinner ng-if="vm.loadingRating"></ion-spinner>
           <span ng-bind-html="vm.message.ratings"></span>
         </div>
-        <div flex class="item text-align-center font-myriad-set-pro-thin color-back-054 padding" ng-if="vm.isInfiniteScrollRating" ng-click="vm.findRatings();">
+        <div flex class="item text-align-center font-myriad-set-pro-thin color-back-054 padding"
+          ng-if="vm.isInfiniteScrollRating" ng-click="vm.moreRatings();">
           <strong><a href style="color: #F44F0F !important;">mais comentários</a></strong>
         </div>
       </div>
     </div>
   </ion-content>
 </ion-view>
-
-<!--
-<ion-view>
-  <section ng-if="vm.isVisible">
-    <ion-content class="padding has-header has-footer kf-background-page" scroll="false">
-      <div id="companyData" class="row kf-no-padding-top kf-no-padding-rigth kf-no-padding-left padding-bottom">
-        <div class="col-80 kf-no-padding">
-          <h4 class="kf-no-margin">{{vm.company.desName}}</h4>
-          <h6 class="kf-no-margin" ng-if="vm.address !== null && vm.address.length > 0">{{vm.address}}</h6>
-          <h6 class="kf-no-margin" ng-if="vm.company.phones !== null && vm.company.phones.length > 0">
-            Tel:
-            <span ng-repeat="item in vm.company.phones track by item.idPhone">
-              {{$index > 0 ? ', ' : ''}}{{item.numPhone | mask:'(00) 000000009'}}
-            </span>
-          </h6>
-          <h6 class="kf-no-margin" ng-if="vm.company.desSite !== null && vm.company.desSite.length > 0">{{vm.company.desSite}}</h6>
-          <div ng-if="vm.characteristics.length > 0">
-            <div class="kf-wrap">
-              <ion-scroll direction="x" class="kf-scroll kf-width-100-porcent">
-                <div class="row padding-top">
-                  <div class="col-80" ng-repeat="item in vm.characteristics track by item.idCharacteristic">
-                    <h6 class="kf-no-margin">{{item.desCharacteristic}}</h6>
-                  </div>
-                </div>
-                <div class="row padding-top">
-                  <div class="col-80" ng-repeat="item in vm.halfCharacteristics track by item.idCharacteristic">
-                    <h6 class="kf-no-margin">{{item.desCharacteristic}}</h6>
-                  </div>
-                </div>
-              </ion-scroll>
-            </div>
-          </div>
-        </div>
-        <div class="col-20 kf-no-padding kf-display-flex text-center">
-          <i class="icon kf-width-100-porcent">
-            <img ng-if="vm.company.numRate !== null" ng-src="images/status-kidfriendly-{{vm.company.numRate}}.png" class="kf-company-icon-rate">
-            <img ng-if="vm.company.numRate === null" ng-src="images/status-kidfriendly-3.png" class="kf-company-icon-rate">
-          </i>
-        </div>
-      </div>
-      <div id="menu" class="row margin-top padding-top" style="border-top: 1px solid; border-bottom: 1px solid;">
-        <div class="col text-center kf-no-padding">
-          <button class="button button-icon kf-company-button" ng-click="vm.launchNavigator();">
-            <i class="icon ion-android-map kf-company-button-icon dark"></i>Como Chegar
-          </button>
-        </div>
-        <div class="col text-center kf-no-padding">
-          <button class="button button-icon kf-company-button kf-no-padding" ng-click="vm.showGallery();">
-            <i class="icon ion-images kf-company-button-icon"></i>Galeria
-          </button>
-        </div>
-        <!--
-        <div class="col text-center kf-no-padding">
-          <button class="button button-icon kf-company-button kf-no-padding">
-            <i class="icon ion-android-star kf-company-button-icon"></i>Favoritos
-          </button>
-        </div>
-        --
-        <div class="col text-center kf-no-padding">
-          <button class="button button-icon kf-company-button kf-no-padding" ng-click="vm.showRating();">
-            <i class="icon ion-ios-compose kf-company-button-icon"></i>Avaliar
-          </button>
-        </div>
-      </div>
-      <section ng-if="vm.ratings.length > 0">
-        <div id="lbRating" class="padding-top padding-left kf-title-black">Avaliações</div>
-        <ion-scroll id="scrollRating" kf-scroll-heigth>
-          <div class="list card">
-            <div class="item item-avatar item-text-wrap" ng-repeat="item in vm.ratings track by item.idRating">
-              <img ng-if="item.imgUser === null" ng-src="images/empty-avatar.jpg">
-              <img ng-if="item.imgUser !== null" ng-src="data:image/*;base64,{{item.imgUser}}">
-              <h3 class="kf-no-margin">
-                <div class="kf-float-left kf-width-80-porcent">
-                  <div>{{vm.getFirstLastName(item.desNameUser)}}</div>
-                  <h4 style="opacity: 0.5">{{item.dtRating | maskDate:'DD/MM/YYYY HH:mm:ss'}}</h4>
-                </div>
-                <div class="kf-float-right kf-width-20-porcent text-right">
-                  <img ng-src="images/status-kidfriendly-{{item.idStatusKidFriendly}}.png" class="kf-list-icon-rate">
-                </div>
-              </h3>
-              <h4 class="kf-clear kf-text-align-justify padding-top">
-                {{item.desRating}}
-              </h4>
-              <section ng-if="item.desAnswer !== null && item.desAnswer.length > 0">
-                <hr/>
-                <h4>{{item.desNameCompany}}</h4>
-                <h5 class="kf-text-align-justify" style="padding-left: 5%;">
-                  {{item.desAnswer}}
-                </h5>
-              </section>
-            </div>
-          </div>
-          <ion-infinite-scroll ng-if="vm.isInfiniteScroll" on-infinite="vm.infiniteScroll();" spinner="none" icon="none">
-          </ion-infinite-scroll>
-        </ion-scroll>
-      </section>
-    </ion-content>
-  </section>
-</ion-view>
--->

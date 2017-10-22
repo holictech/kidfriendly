@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('ResultController', ResultController);
-  ResultController.$inject = ['SearchService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams'];
+  ResultController.$inject = ['SearchService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$filter'];
 
-  function ResultController(SearchService, $controller, $scope, $ionicScrollDelegate, $stateParams) {
+  function ResultController(SearchService, $controller, $scope, $ionicScrollDelegate, $stateParams, $filter) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     var filters = null;
@@ -34,12 +34,20 @@
     };
 
     vm.details = function(companyDto) {
+      var formattedAddress = companyDto.addressDto.desStreet;
+      formattedAddress += ', nº ' + companyDto.addressDto.numStreet;
+      formattedAddress += companyDto.addressDto.desComplement === null ? '' : ', ' + companyDto.addressDto.desComplement;
+      formattedAddress += ', ' + companyDto.addressDto.desNeighborhood;
+      formattedAddress += ', ' + companyDto.addressDto.cityDto.desCity + '-' + companyDto.addressDto.cityDto.desState
+      formattedAddress += ', ' + $filter('mask')(companyDto.addressDto.descCode, '00000-000') + '.';
       vm.go('main.search-result-company', {
         idCompany: companyDto.idCompany,
         desName: companyDto.desName,
         imgLogo: companyDto.imgLogo,
         numRate: companyDto.numRate,
+        desSite: companyDto.desSite,
         addressDto: {
+          formattedAddress: formattedAddress,
           numLatitude: companyDto.addressDto.numLatitude,
           numLongitude: companyDto.addressDto.numLongitude
         }
@@ -47,8 +55,8 @@
     };
 
     function initialize() {
+      $ionicScrollDelegate.scrollTop();
       $scope.$on('$ionicView.beforeEnter', function() {
-        $ionicScrollDelegate.scrollTop();
         var object = angular.fromJson($stateParams.object);
         filters = object.filters;
         paginatorDto = object.response.data.paginatorDto;

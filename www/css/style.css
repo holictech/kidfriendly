@@ -6,7 +6,7 @@
 .header .title {
   /*font-family: 'Raleway Light' !important;*/
   font-family: 'Myriad Set Pro Thin' !important;
-  font-size: 1.6rem !important;
+  font-size: 1.5rem !important;
   color: #FFF;
 }
 .popup {
@@ -171,7 +171,6 @@ input[type=checkbox]:not(old):checked + label ~ section {
   border-color: #F44F0F;
   font-family: 'Raleway Light';
 }
-
 .checkbox-orange input:checked:before,
 .checkbox-orange input:checked + .checkbox-icon:before {
   background: #F44F0F;
@@ -180,6 +179,25 @@ input[type=checkbox]:not(old):checked + label ~ section {
 }
 .padding {
   padding: 1vw !important;
+}
+@media(min-width: 680px) {
+  .modal {
+    top: 0 !important;
+    right: 0 !important;
+    border: 0 !important;
+    left: 0 !important;
+    min-height: 100% !important;
+    width: 100% !important;
+  }
+}
+.modal-backdrop-bg {
+  transition: opacity 300ms ease-in-out;
+  -webkit-transition: opacity 300ms ease-in-out;
+  background-color: #000;
+  opacity: 0;
+}
+.active .modal-backdrop-bg {
+  opacity: 0.5;
 }
 /* END */
 
@@ -326,4 +344,35 @@ input[type=checkbox]:not(old):checked + label ~ section {
 .align-items-center {
   align-items: center !important;
   -webkit-align-items: center !important;
+}
+.transparent {
+  background: transparent !important;
+}
+.body-modal {
+  position: fixed;
+  background-color: #FFF;
+  right: 1%;
+  bottom: 8%;
+  left: 1%;
+  width: 98%;
+  max-height: 84%
+}
+.border-radius-top {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.border-radius-bottom {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+.border-schedule-top-bottom-left {
+  border-top: 1px solid rgba(0,0,0,0.54);
+  border-bottom: 1px solid rgba(0,0,0,0.54);
+  border-left: 1px solid rgba(0,0,0,0.54);
+}
+.border-schedule-top-right-bottom-left {
+  border-top: 1px solid rgba(0,0,0,0.54);
+  border-right: 1px solid rgba(0,0,0,0.54);
+  border-bottom: 1px solid rgba(0,0,0,0.54);
+  border-left: 1px solid rgba(0,0,0,0.54);
 }

@@ -2,8 +2,10 @@
   <ion-header-bar align-title="left" class="header">
     <h1 class="title">{{headerText}}</h1>
     <div class="buttons">
-      <!--<button class="button button button-icon icon ion-ios-close-empty" ng-click="clean();"></button>-->
-      <button class="button button button-icon icon ion-ios-checkmark-empty" ng-click="validate();"></button>
+      <div flex class="text-align-right" style="font-size: 2.5rem;">
+        <button class="button button-clear button-positive" style="font-family: 'Myriad Set Pro Thin' !important;" ng-click="clean();">Limpar</button>
+        <button class="button button-clear button-positive" style="font-family: 'Myriad Set Pro Thin' !important;" ng-click="validate();">Fechar</button>
+      </div>
     </div>
   </ion-header-bar>
   <ion-content>

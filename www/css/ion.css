@@ -53,23 +53,13 @@
   display: inline-block;
   width: 3rem;
 }
-.ion-kid:before {
-  content: url('../images/svg/kid.svg');
-  display: inline-block;
-  width: 5rem;
-}
-.ion-edit:before {
-  content: url('../images/svg/edit.svg');
-  display: inline-block;
-  width: 2rem;
-}
-.ion-magnifying-glass-white:before {
-  content: url('../images/svg/magnifying-glass-white.svg');
-  display: inline-block;
-  width: 2rem;
-}
 .ion-comments:before {
   content: url('../images/svg/comments.svg');
+  display: inline-block;
+  width: 3rem;
+}
+.ion-kid:before {
+  content: url('../images/svg/kid.svg');
   display: inline-block;
   width: 5rem;
 }

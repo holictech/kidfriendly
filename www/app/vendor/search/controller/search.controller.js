@@ -17,12 +17,6 @@
     vm.isSuperKidFriendly = false;
     initialize();
 
-    /*
-    vm.fastSearch = function() {
-      executeSearch({desNameCompany: vm.establishment === null || angular.isUndefined(vm.establishment) ? null : vm.establishment.trim()});
-    };
-    */
-
     vm.listCityByState = function(idState) {
       vm.cities = [];
 

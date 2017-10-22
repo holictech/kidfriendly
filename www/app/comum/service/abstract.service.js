@@ -88,7 +88,7 @@
           params: ((!angular.isUndefined(params) && angular.isObject(params)) ? params : {})
         }).then(method.success, method.error);
       };
-      
+
       /* MESSAGE METHODS */
       this.ionicPopupAlert = function(title, message, cssClass) {
         return $ionicPopup.alert({

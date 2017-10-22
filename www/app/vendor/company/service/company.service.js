@@ -6,5 +6,9 @@
 
   function CompanyService(AbstractService) {
     AbstractService.call(this, '/company');
+
+    this.details = function(idCompany) {
+      return this.httpGet(this.getURI() + '/details/' + idCompany);
+    };
   }
 })();

@@ -2,27 +2,9 @@
   <ion-nav-title>
     Pesquisa
   </ion-nav-title>
-  <!--
-  <ion-view hide-back-button="true" hide-nav-bar="true">
-    <ion-header-bar class="header align-self-center">
-      <form class="header notBorder item item-input" name="vm.formFastSearch" novalidate>
-        <label class="item-input-wrapper border-bottom-white header">
-          <input id="establishment" name="establishment" type="search" data-ng-model="vm.establishment" autocomplete="off" minlength="3" maxlength="150"
-            style="color: #FFF !important;" required>
-        </label>
-        <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$invalid" style="opacity: 0.5;"></i>
-        <i href class="ion-magnifying-glass-white cursor-pointer" ng-if="vm.formFastSearch.$valid" ng-click="vm.fastSearch();"></i>
-      </form>
-    </ion-header-bar>
-  -->
   <form name="vm.formSearch" novalidate>
     <ion-content style="bottom: 108px !important;">
       <div layout="column" style="margin: 5vh 5vw 0vh 5vw;">
-        <!--
-        <div flex>
-          <span style="font-size: 2.5rem !important;" class="font-raleway-light color-orange">Pesquisar</span>
-        </div>
-        -->
         <div flex>
           <label class="item-input item-stacked-label">
             <span class="input-label" for="establishment">Estabelecimento</span>
@@ -61,10 +43,10 @@
           <div flex style="padding-left: 2.5vw;">
             <section ng-show="vm.characteristics.length > 0">
               <label class="item-input item-stacked-label">
-                <span class="input-label">Característica</span>
+                <span class="input-label">Característica(s)</span>
               </label>
               <multiselect
-                header-text="Características"
+                header-text="Característica(s)"
                 items="vm.characteristics"
                 text-property="desCharacteristic"
                 value-property="idCharacteristic"
