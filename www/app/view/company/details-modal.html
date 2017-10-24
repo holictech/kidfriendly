@@ -11,16 +11,18 @@
         <div layout="column">
           <div flex layout="row" class="padding" ng-if="vm.companyDto.addressDto.formattedAddress !== null">
             <div flex=10 class="align-self-center text-align-center" style="font-size: 1.5rem;"><i class="ion-ios-home-outline"></i></div>
-            <div flex class="align-self-center" class="font-lato-regular color-back" style="font-size: 0.75rem !important; line-height: 1;">
-              {{vm.companyDto.addressDto.formattedAddress}}
+            <div style="line-height: 1.1;">
+              <span class="font-lato-regular color-back-054" style="font-size: 0.75rem !important;">
+                {{vm.companyDto.addressDto.formattedAddress}}
+              </span>
             </div>
           </div>
           <div flex layout="row" class="padding" ng-if="vm.phones.length !== 0">
             <div flex=10 class="align-self-center text-align-center" style="font-size: 1.5rem;"><i class="ion-ios-telephone-outline"></i></div>
             <div flex class="align-self-center">
-              <div style="line-height: 1;">
-                <span class="font-lato-regular color-back" style="font-size: 0.75rem !important;" ng-repeat="item in vm.phones track by item.idPhone">
-                  <a ng-href="tel: {{item.numPhone | mask:'(00) 9000-0000'}}" style="color: #000 !important;">{{item.numPhone | mask:'(00) 9000-0000'}};</a>
+              <div style="line-height: 1.1;">
+                <span class="font-lato-regular color-back-054" style="font-size: 0.75rem !important;" ng-repeat="item in vm.phones track by item.idPhone">
+                  <a ng-href="tel: {{item.numPhone | mask:'(00) 9000-0000'}}" style="color: rgba(0,0,0,0.54) !important;">{{item.numPhone | mask:'(00) 9000-0000'}};</a>
                 </span>
               </div>
             </div>
@@ -28,8 +30,8 @@
           <div flex layout="row" class="padding" ng-if="vm.companyDto.desSite !== null">
             <div flex=10 class="align-self-center text-align-center" style="font-size: 1.5rem;"><i class="ion-ios-world-outline"></i></div>
             <div flex class="align-self-center">
-              <span class="font-lato-regular color-back" style="font-size: 0.75rem !important;">
-                <a href ng-click="vm.openSite(vm.companyDto.desSite);" style="color: #000 !important;">{{vm.companyDto.desSite}}</a>
+              <span class="font-lato-regular color-back-054" style="font-size: 0.75rem !important;">
+                <a href ng-click="vm.openSite(vm.companyDto.desSite);" style="color: rgba(0,0,0,0.54) !important;">{{vm.companyDto.desSite}}</a>
               </span>
             </div>
           </div>
@@ -38,7 +40,7 @@
             <div flex layout="row" class="align-self-center">
               <div flex class="text-align-center border-schedule-top-bottom-left" ng-class="{'border-schedule-top-right-bottom-left': $last}" ng-repeat="item in vm.weeks track by $index">
                 <span class="font-lato-bold color-orange" style="font-size: 0.8rem !important;">{{item.dsWeek.charAt(0)}}</span><br/>
-                <div flex class="font-lato-regular color-back" style="border-top: 1px solid rgba(0,0,0,0.54); font-size: 0.75rem !important; line-height: 1.1;" ng-repeat="_item in item.schedules track by $index">
+                <div flex class="font-lato-regular color-back-054" style="border-top: 1px solid rgba(0,0,0,0.54); font-size: 0.75rem !important; line-height: 1.1;" ng-repeat="_item in item.schedules track by $index">
                   {{_item.scheduleInitial}}<br/>{{_item.scheduleFinish}}
                 </div>
               </div>
@@ -47,8 +49,8 @@
           <div flex layout="row" class="padding" ng-if="vm.characteristics.length !== 0">
             <div flex=10 class="align-self-center text-align-center" style="font-size: 1.5rem;"><i class="ion-ios-list-outline"></i></div>
             <div flex class="align-self-center">
-              <div style="line-height: 1;">
-                <span class="font-lato-regular color-back text-align-justify" style="font-size: 0.75rem !important;" ng-repeat="item in vm.characteristics track by item.idCharacteristic">
+              <div style="line-height: 1.1;">
+                <span class="font-lato-regular color-back-054 text-align-justify" style="font-size: 0.75rem !important;" ng-repeat="item in vm.characteristics track by item.idCharacteristic">
                   {{item.desCharacteristic}}; 
                 </span>
               </div>

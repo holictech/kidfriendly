@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-  CompanyController.$inject = ['CompanyService', 'ImageService', 'FoodTypeService', 'RatingService', 'LocalityService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout', '$ionicModal', '$cordovaInAppBrowser'];
+  CompanyController.$inject = ['CompanyService', 'ImageService', 'FoodTypeService', 'RatingService', 'LocalityService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout', '$ionicModal', '$cordovaInAppBrowser', '$filter'];
 
-  function CompanyController(CompanyService, ImageService, FoodTypeService, RatingService, LocalityService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout, $ionicModal, $cordovaInAppBrowser) {
+  function CompanyController(CompanyService, ImageService, FoodTypeService, RatingService, LocalityService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout, $ionicModal, $cordovaInAppBrowser, $filter) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.companyDto = null;
@@ -129,6 +129,18 @@
         if (response.error) {
           CompanyService.ionicPopupAlertError(response.message);
         } else {
+          var address = response.data.address;
+          var formattedAddress = address.desStreet;
+          formattedAddress += ', nº ' + address.numStreet;
+          formattedAddress += address.desComplement === null ? '' : ', ' + address.desComplement;
+          formattedAddress += ', ' + address.desNeighborhood;
+          formattedAddress += ', ' + address.city.desCity + '-' + address.city.state.desSigla
+          formattedAddress += ', ' + $filter('mask')(address.descCode, '00000-000') + '.';
+          vm.companyDto.addressDto = {
+            formattedAddress: formattedAddress,
+            numLatitude: address.numLatitude,
+            numLongitude: address.numLongitude
+          };
           vm.phones = vm.phones.concat(response.data.phones);
           vm.weeks = vm.weeks.concat(response.data.weeks);
           vm.characteristics = vm.characteristics.concat(response.data.characteristics);
@@ -224,6 +236,7 @@
         findImages();
         findFoodTypes();
         findRatings();
+        vm.hideLoading();
       });
     }
 }

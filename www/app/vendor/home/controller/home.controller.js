@@ -18,7 +18,13 @@
     initialize();
 
     vm.details = function(companyDto) {
-      vm.go('main.home-company', {idCompany: companyDto.idCompany, desName: companyDto.desName, imgLogo: companyDto.imgLogo, numRate: companyDto.numRate}, false);
+      vm.go('main.home-company', {
+        idCompany: companyDto.idCompany,
+        desName: companyDto.desName,
+        imgLogo: companyDto.imgLogo,
+        numRate: companyDto.numRate,
+        desSite: companyDto.desSite
+      }, true);
     };
 
     function listSuggestions() {

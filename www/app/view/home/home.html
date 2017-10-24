@@ -22,8 +22,8 @@
         <span ng-bind-html="vm.message.suggestions"></span>
       </div>
       <div class="swiper-wrapper" ng-if="vm.suggestions.length > 0">
-        <div class="swiper-slide swiper-slide-gallery" ng-repeat="item in vm.suggestions track by item.idCompany" ng-click="vm.details(item);">
-          <img ng-src="data:image/*;base64,{{item.mgHome}}">
+        <div class="swiper-slide swiper-slide-gallery" ng-repeat="item in vm.suggestions track by item.idCompany">
+          <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-click="vm.details(item);">
         </div>
       </div>
       <div class="swiper-button-prev swiper-button-prev-gallery" ng-class="{'button-disabled': vm.suggestions.length <= 1}"></div>

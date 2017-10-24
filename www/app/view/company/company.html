@@ -13,12 +13,16 @@
   </md-fab-speed-dial>
   <ion-content>
     <div layout="row" style="position:relative; z-index: 10; top: 5vh; padding: 0 4vw;">
-      <div flex="30" style="width: 100%; height: 15vh;" ng-style="vm.companyDto.imgLogo !== null ? {border:'5px solid #F44F0F'} : {}">
-        <img ng-src="data:image/*;base64,{{vm.companyDto.imgLogo}}" style="width: 100%; height: 100%;" ng-if="vm.companyDto.imgLogo !== null">
+      <div flex="30" class="text-align-center" style="border:5px solid #F44F0F; background-color: #FFF;">
+        <i class="ion-status-kid-friendly-1" ng-if="vm.companyDto.numRate === 1"></i>
+        <i class="ion-status-kid-friendly-2" ng-if="vm.companyDto.numRate === 2"></i>
+        <i class="ion-status-kid-friendly-3" ng-if="vm.companyDto.numRate === 3 || vm.companyDto.numRate === null"></i>
+        <i class="ion-status-kid-friendly-4" ng-if="vm.companyDto.numRate === 4"></i>
+        <!--<img ng-src="data:image/*;base64,{{vm.companyDto.imgLogo}}" style="width: 100%; height: 100%;" ng-if="vm.companyDto.imgLogo !== null">-->
       </div>
-      <div flex class="font-raleway-bold color-orange display-flex align-items-center" style="padding-left: 2.5vw;">
-        <div flex class="font-raleway-bold text-align-right" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-          {{vm.companyDto.desName}}
+      <div flex class="font-raleway-bold color-orange display-flex align-items-center" style="padding-left: 1vw;">
+        <div flex class="font-raleway-bold " style="overflow: hidden; font-size: 0.9rem !important; line-height: 1.1; margin-top: -2.5vh;">
+          {{vm.companyDto.desName.length > 55 ? vm.companyDto.desName.substring(0, 55).concat('...') : vm.companyDto.desName}}
         </div>
       </div>
     </div>
@@ -36,28 +40,31 @@
       <div class="swiper-button-next swiper-button-next-gallery" ng-class="{'button-disabled': vm.images.length <= 1}"></div>
     </div>
 
-    <!--
+    
     <div layout="row" class="padding">
       <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">PALAVRAS CHAVE</div>
+      <!--
       <div flex class="font-raleway-bold color-orange" style="padding-left: 1vw;">NOTA GERAL</div>
+      -->
     </div>
     <div layout="row" class="padding">
-      <div flex style="padding-top: 2.5vh;">
+      <div flex>
         <div flex class="text-align-center font-myriad-set-pro-thin color-back padding" ng-if="vm.foodTypes.length === 0">
           <ion-spinner ng-if="vm.message.foodTypes === ''"></ion-spinner>
           <span ng-if="vm.message.foodTypes !== null && vm.message.foodTypes !== ''" ng-bind-html="vm.message.foodTypes"></span>
         </div>
-        <div flex class="font-raleway-light text-align-justify color-back-054" style="border-left: 5px solid #717070; font-size: 0.8rem !important;"
+        <div flex class="font-raleway-light text-align-justify color-back-054 padding" style="border-left: 5px solid #717070; font-size: 0.8rem !important; line-height: 1.1;"
           ng-repeat="item in vm.foodTypes track by item.idFoodType" ng-if="vm.foodTypes.length !== 0">
           {{item.dsFoodType}};
         </div>
       </div>
+      <!--
       <div flex layout="column" style="padding-left: 1vw; height: 5rem;" class="general-note">
         <section class="font-raleway-extrabold" style="font-size: 0.7rem !important; position: absolute; margin-top: 4vh; margin-left: 20.4vw;">MUITO</section>
         <section class="font-raleway-regular" style="font-size: 0.7rem !important; position: absolute; margin-top: 6.5vh; margin-left: 20.3vw;">KID FRIENDLY!</section>
       </div>
+      -->
     </div>
-    -->
 
     <div layout="column" style="margin: 2vh 0 2vh 0;">
       <div flex class="header display-flex align-items-center" style="width: 100%;">
