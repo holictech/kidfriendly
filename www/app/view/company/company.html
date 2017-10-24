@@ -22,7 +22,7 @@
       </div>
       <div flex class="font-raleway-bold color-orange display-flex align-items-center" style="padding-left: 1vw;">
         <div flex class="font-raleway-bold " style="overflow: hidden; font-size: 0.9rem !important; line-height: 1.1; margin-top: -2.5vh;">
-          {{vm.companyDto.desName.length > 55 ? vm.companyDto.desName.substring(0, 55).concat('...') : vm.companyDto.desName}}
+          {{vm.companyDto.desName.length > 65 ? vm.companyDto.desName.substring(0, 65).trim().concat('...') : vm.companyDto.desName}}
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="swiper-button-next swiper-button-next-gallery" ng-class="{'button-disabled': vm.images.length <= 1}"></div>
     </div>
 
-    
+
     <div layout="row" class="padding">
       <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">PALAVRAS CHAVE</div>
       <!--
