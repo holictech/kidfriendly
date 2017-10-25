@@ -15,6 +15,7 @@
     };
     vm.images = [];
     vm.rating = {};
+    vm.visibleIconRating = true;
     vm.foodTypes = [];
     var ratingPaginatorDto = {
       currentPage: 0,
@@ -40,6 +41,9 @@
         vm.showLoading();
         RatingService.hasPermission(vm.companyDto.idCompany, vm.getUserLogged().idUser).then(function(response) {
           if (!response.error && response.data) {
+            $timeout(function() {
+              vm.visibleIconRating = false;
+            }, 400);
             openModal('app/view/company/rating-modal.html');
           } else if (!response.error && !response.data) {
             RatingService.ionicPopupAlertAttention('Você avaliou este estabelecimento a menos de um mês.');
@@ -75,11 +79,16 @@
           RatingService.ionicPopupAlertError(response.message);
         } else {
           RatingService.ionicPopupAlertSuccess('Obrigado por avaliar. Em breve seu comentário estará disponível.').then(function() {
-            vm.closeModal();
+            vm.closeModalRating();
           });
         }
       });
     }
+
+    vm.closeModalRating = function() {
+      vm.visibleIconRating = true;
+      vm.closeModal()
+    };
 
     vm.openDetails = function() {
       openModal('app/view/company/details-modal.html');
@@ -162,9 +171,9 @@
           } else {
             $timeout(function() {
               new Swiper(angular.element(document.querySelector('.swiper-container-gallery-company')), {
-                prevButton: '.swiper-button-prev-gallery',
-                nextButton: '.swiper-button-next-gallery',
-                spaceBetween: 30,
+                prevButton: '.swiper-button-prev-custom-gallery-company',
+                nextButton: '.swiper-button-next-custom-gallery-company',
+                spaceBetween: 10,
                 effect: 'slide'
               });
             }, 500);

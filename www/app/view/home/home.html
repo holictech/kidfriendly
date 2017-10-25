@@ -13,25 +13,25 @@
     </div>
     <div layout="row">
       <div flex flex-offset="10">
-        <h5 class="font-raleway-light color-orange">Sugestões</h5>
+        <h5 class="font-raleway-light color-orange" style="margin: 0 !important;">Sugestões</h5>
       </div>
     </div>
-    <div layout="row" class="swiper-container swiper-container-gallery-home">
+    <div layout="row" class="swiper-container swiper-container-suggestions">
       <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.suggestions.length === 0">
         <ion-spinner ng-if="vm.message.suggestions === ''"></ion-spinner>
         <span ng-bind-html="vm.message.suggestions"></span>
       </div>
       <div class="swiper-wrapper" ng-if="vm.suggestions.length > 0">
-        <div class="swiper-slide swiper-slide-gallery" ng-repeat="item in vm.suggestions track by item.idCompany">
+        <div class="swiper-slide swiper-slide-custom align-self-center" ng-repeat="item in vm.suggestions track by item.idCompany">
           <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-click="vm.details(item);">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-gallery" ng-class="{'button-disabled': vm.suggestions.length <= 1}"></div>
-      <div class="swiper-button-next swiper-button-next-gallery" ng-class="{'button-disabled': vm.suggestions.length <= 1}"></div>
+      <div class="swiper-button-prev swiper-button-prev-custom-suggestions" ng-if="vm.suggestions.length > 1"></div>
+      <div class="swiper-button-next swiper-button-next-custom-suggestions" ng-if="vm.suggestions.length > 1"></div>
     </div>
     <div layout="row">
       <div flex flex-offset="10">
-        <h5 class="font-raleway-light color-orange">Próximo a <span class="font-raleway-bold">você</span></h5>
+        <h5 class="font-raleway-light color-orange" style="margin-bottom: 0 !important;">Próximo a <span class="font-raleway-bold">você</span></h5>
       </div>
     </div>
     <div layout="row" class="swiper-container swiper-container-nexttome">
@@ -40,10 +40,12 @@
         <span ng-bind-html="vm.message.nextToMe"></span>
       </div>
       <div class="swiper-wrapper" ng-if="vm.nextToMe.length > 0">
-        <div class="swiper-slide swiper-slide-nexttome align-self-center" ng-repeat="item in vm.nextToMe track by item.idCompany">
-          <img ng-src="data:image/*;base64,{{item.imgLogo}}" ng-show="vm.isShowNextToMe" ng-click="vm.details(item);">
+        <div class="swiper-slide swiper-slide-custom align-self-center" ng-repeat="item in vm.nextToMe track by item.idCompany">
+          <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-show="vm.isShowNextToMe" ng-click="vm.details(item);">
         </div>
       </div>
+      <div class="swiper-button-prev swiper-button-prev-custom-nexttome" ng-if="vm.nextToMe.length > 1"></div>
+      <div class="swiper-button-next swiper-button-next-custom-nexttome" ng-if="vm.nextToMe.length > 1"></div>
     </div>
   </ion-content>
 </ion-view>

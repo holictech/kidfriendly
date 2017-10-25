@@ -21,7 +21,6 @@
       vm.go('main.home-company', {
         idCompany: companyDto.idCompany,
         desName: companyDto.desName,
-        imgLogo: companyDto.imgLogo,
         numRate: companyDto.numRate,
         desSite: companyDto.desSite
       }, true);
@@ -38,11 +37,11 @@
             vm.message.suggestions = 'Nenhum estabelecimento.'
           } else {
             $timeout(function() {
-              new Swiper(angular.element(document.querySelector('.swiper-container-gallery-home')), {
-                prevButton: '.swiper-button-prev-gallery',
-                nextButton: '.swiper-button-next-gallery',
-                spaceBetween: 30,
-                effect: 'slide'
+              new Swiper(angular.element(document.querySelector('.swiper-container-suggestions')), {
+                prevButton: '.swiper-button-prev-custom-suggestions',
+                nextButton: '.swiper-button-next-custom-suggestions',
+                spaceBetween: 10,
+                effect: 'slide',
               });
             }, 500);
           }
@@ -66,10 +65,10 @@
               } else {
                 $timeout(function() {
                   new Swiper(angular.element(document.querySelector('.swiper-container-nexttome')), {
-                    slidesPerView: 4,
-                    centeredSlides: true,
+                    prevButton: '.swiper-button-prev-custom-nexttome',
+                    nextButton: '.swiper-button-next-custom-nexttome',
                     spaceBetween: 10,
-                    grabCursor: true
+                    effect: 'slide'
                   });
                   vm.isShowNextToMe = true;
                 }, 500);
