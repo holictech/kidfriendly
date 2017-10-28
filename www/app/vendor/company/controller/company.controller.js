@@ -116,9 +116,11 @@
 
           launchnavigator.navigate(destination, {
             'start': start,
-            'appSelectionDialogHeader': 'Selecione o aplicativo para navegação.',
-            'appSelectionCancelButton': 'Cancelar',
-            'appSelectionList': [launchnavigator.APP.GOOGLE_MAPS, launchnavigator.APP.APPLE_MAPS, launchnavigator.APP.WAZE]
+            'appSelection': {
+              'dialogHeaderText': 'Qual aplicativo para navegação?',
+              'cancelButtonText': 'Cancelar',
+              'list': [launchnavigator.APP.GOOGLE_MAPS, launchnavigator.APP.APPLE_MAPS, launchnavigator.APP.WAZE]
+            }
           });
         }
 
