@@ -9,7 +9,6 @@
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.suggestions = [];
     vm.nextToMe = [];
-    vm.isShowNextToMe = false;
     vm.message = {
       suggestions: '',
       nextToMe: ''
@@ -29,6 +28,7 @@
     function listSuggestions() {
       vm.message.suggestions = '';
       vm.suggestions = [];
+      vm.prevNextSuggestions = false;
       HomeService.listSuggestions().then(function(response) {
         if (!response.error) {
           vm.suggestions = vm.suggestions.concat(response.data);
@@ -43,7 +43,8 @@
                 spaceBetween: 10,
                 effect: 'slide',
               });
-            }, 500);
+              vm.prevNextSuggestions = vm.suggestions.length > 1;
+            }, 100);
           }
         } else {
           vm.message.suggestions = response.message;
@@ -54,6 +55,7 @@
     function listNextToMe() {
       vm.message.nextToMe = '';
       vm.nextToMe = [];
+      vm.prevNextNextToMe = false;
       LocalityService.getGeolocation().then(function(response) {
         if (!response.error) {
           HomeService.listNextToMe(response.data).then(function(response) {
@@ -70,8 +72,8 @@
                     spaceBetween: 10,
                     effect: 'slide'
                   });
-                  vm.isShowNextToMe = true;
-                }, 500);
+                  vm.prevNextNextToMe = vm.nextToMe.length > 1;
+                }, 100);
               }
             } else {
               vm.message.nextToMe = response.message;

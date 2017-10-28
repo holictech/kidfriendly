@@ -14,6 +14,7 @@
     $ionicConfigProvider.tabs.style('standard');
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.backButton.text('');
+    $ionicConfigProvider.form.checkbox('circle');
     $httpProvider.interceptors.push(function() {
       return {
         'request': function(config) {

@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view cache-view="false">
   <ion-nav-title>
     Estabelecimento
   </ion-nav-title>
@@ -12,7 +12,7 @@
     </md-fab-actions>
   </md-fab-speed-dial>
   <ion-content>
-    <i class="ion-rating" style="position: absolute; z-index: 10; top: 38vh; right: 0; padding-right: 0.5vw;" ng-click="vm.openRating();" 
+    <i class="ion-rating" style="position: absolute; z-index: 10; top: 38vh; right: 0; padding-right: 0.5vw;" ng-click="vm.openRating();"
       ng-if="vm.visibleIconRating"></i>
     <div layout="row" style="position:relative; z-index: 10; top: 5vh; padding: 0 3.5vw;">
       <div flex="30" class="text-align-center" style="border:5px solid #F44F0F; background-color: #FFF;">
@@ -28,17 +28,17 @@
       </div>
     </div>
     <div layout="row" class="swiper-container swiper-container-gallery-company">
-      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.images.length === 0">
+      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-show="vm.images.length === 0">
         <ion-spinner ng-if="vm.message.images === ''"></ion-spinner>
         <span ng-bind-html="vm.message.images"></span>
       </div>
-      <div class="swiper-wrapper" ng-if="vm.images.length > 0">
+      <div class="swiper-wrapper" ng-show="vm.images.length > 0">
         <div class="swiper-slide swiper-slide-custom align-self-center" ng-repeat="item in vm.images track by item.idImage">
           <img ng-src="data:image/*;base64,{{item.imgImage}}">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-custom-gallery-company" ng-if="vm.images.length > 1"></div>
-      <div class="swiper-button-next swiper-button-next-custom-gallery-company" ng-if="vm.images.length > 1"></div>
+      <div class="swiper-button-prev swiper-button-prev-custom-gallery-company" ng-show="vm.prevNextVisibled"></div>
+      <div class="swiper-button-next swiper-button-next-custom-gallery-company" ng-show="vm.prevNextVisibled"></div>
     </div>
     <div layout="row" class="padding">
       <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">PALAVRAS CHAVE</div>

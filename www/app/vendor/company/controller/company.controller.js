@@ -160,6 +160,7 @@
     function findImages() {
       vm.message.images = '';
       vm.images = [];
+      vm.prevNextVisibled = false;
       ImageService.listByCompany(vm.companyDto.idCompany).then(function(response) {
         if (response.error) {
           vm.message.images = response.message;
@@ -176,7 +177,8 @@
                 spaceBetween: 10,
                 effect: 'slide'
               });
-            }, 500);
+              vm.prevNextVisibled = vm.images.length > 1;
+            }, 100);
           }
         }
       });

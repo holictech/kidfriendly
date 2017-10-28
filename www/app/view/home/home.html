@@ -17,17 +17,17 @@
       </div>
     </div>
     <div layout="row" class="swiper-container swiper-container-suggestions">
-      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.suggestions.length === 0">
+      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-show="vm.suggestions.length === 0">
         <ion-spinner ng-if="vm.message.suggestions === ''"></ion-spinner>
         <span ng-bind-html="vm.message.suggestions"></span>
       </div>
-      <div class="swiper-wrapper" ng-if="vm.suggestions.length > 0">
+      <div class="swiper-wrapper" ng-show="vm.suggestions.length > 0">
         <div class="swiper-slide swiper-slide-custom align-self-center" ng-repeat="item in vm.suggestions track by item.idCompany">
           <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-click="vm.details(item);">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-custom-suggestions" ng-if="vm.suggestions.length > 1"></div>
-      <div class="swiper-button-next swiper-button-next-custom-suggestions" ng-if="vm.suggestions.length > 1"></div>
+      <div class="swiper-button-prev swiper-button-prev-custom-suggestions" ng-show="vm.prevNextSuggestions"></div>
+      <div class="swiper-button-next swiper-button-next-custom-suggestions" ng-show="vm.prevNextSuggestions"></div>
     </div>
     <div layout="row">
       <div flex flex-offset="10">
@@ -35,17 +35,17 @@
       </div>
     </div>
     <div layout="row" class="swiper-container swiper-container-nexttome">
-      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-if="vm.nextToMe.length === 0">
+      <div flex class="align-self-center text-align-center font-myriad-set-pro-thin color-back-054" ng-show="vm.nextToMe.length === 0">
         <ion-spinner ng-if="vm.message.nextToMe === ''"></ion-spinner>
         <span ng-bind-html="vm.message.nextToMe"></span>
       </div>
-      <div class="swiper-wrapper" ng-if="vm.nextToMe.length > 0">
+      <div class="swiper-wrapper" ng-show="vm.nextToMe.length > 0">
         <div class="swiper-slide swiper-slide-custom align-self-center" ng-repeat="item in vm.nextToMe track by item.idCompany">
-          <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-show="vm.isShowNextToMe" ng-click="vm.details(item);">
+          <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-click="vm.details(item);">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-custom-nexttome" ng-if="vm.nextToMe.length > 1"></div>
-      <div class="swiper-button-next swiper-button-next-custom-nexttome" ng-if="vm.nextToMe.length > 1"></div>
+      <div class="swiper-button-prev swiper-button-prev-custom-nexttome" ng-show="vm.prevNextNextToMe"></div>
+      <div class="swiper-button-next swiper-button-next-custom-nexttome" ng-show="vm.prevNextNextToMe"></div>
     </div>
   </ion-content>
 </ion-view>
