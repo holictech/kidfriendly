@@ -12,8 +12,6 @@
     </md-fab-actions>
   </md-fab-speed-dial>
   <ion-content>
-    <i class="ion-rating" style="position: absolute; z-index: 10; top: 38vh; right: 0; padding-right: 0.5vw;" ng-click="vm.openRating();"
-      ng-if="vm.visibleIconRating"></i>
     <div layout="row" style="position:relative; z-index: 10; top: 5vh; padding: 0 3.5vw;">
       <div flex="30" class="text-align-center" style="border:5px solid #F44F0F; background-color: #FFF;">
         <i class="ion-status-kid-friendly-1" ng-if="vm.companyDto.numRate === 1"></i>
@@ -40,9 +38,15 @@
       <div class="swiper-button-prev swiper-button-prev-custom-gallery-company" ng-show="vm.prevNextVisibled"></div>
       <div class="swiper-button-next swiper-button-next-custom-gallery-company" ng-show="vm.prevNextVisibled"></div>
     </div>
+    <div style="margin: 0 auto; position: relative; z-index: 1;" flex>
+        <br/>
+        <i class="ion-rating" style="position: absolute; z-index: 10; top: -35px; right: 0;" ng-click="vm.openRating();" ng-if="vm.visibleIconRating"></i>
+    </div>
     <div layout="row" class="padding">
       <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">CARACTERÍSTICAS</div>
-      <div flex class="font-raleway-bold color-orange text-align-right" style="padding-left: 1vw; padding-right: 2.5vw">AVALIE!</div>
+      <div flex class="font-raleway-bold color-orange text-align-right" style="padding-left: 1vw; padding-right: 2vw">
+        AVALIE!
+      </div>
     </div>
     <div layout="row" class="padding">
       <div flex>
