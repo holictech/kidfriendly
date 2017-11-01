@@ -1,0 +1,10 @@
+ionic cordova build android --prod --release
+
+cmd = jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore [my-release-key].jks android-release-unsigned.apk [my-alias]
+my-release-key = kid-friendly-key
+my-alias = kid-friendly
+pw = @kidfriendly@holic
+
+/path/to/Android/sdk/build-tools/VERSION/zipalign
+zipalign -v 4 android-release-unsigned.apk KidFriendly.apk
+apksigner verify KidFriendly.apk
