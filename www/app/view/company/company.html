@@ -4,11 +4,11 @@
   </ion-nav-title>
   <md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-right" style="right: 0 !important; bottom: 50px !important;">
     <md-fab-trigger>
-      <md-icon md-svg-src="images/svg/more.svg" style="height:3em;width:3em;"></md-icon>
+      <md-icon md-svg-src="images/svg/more.svg" style="height:3.5em;width:3.5em;"></md-icon>
     </md-fab-trigger>
     <md-fab-actions>
-      <md-icon md-svg-src="images/svg/launch-navigator.svg" style="height:3em;width:3em;" ng-click="vm.launchNavigator();"></md-icon>
-      <md-icon md-svg-src="images/svg/details.svg" style="height:3em;width:3em;" ng-click="vm.openDetails();"></md-icon>
+      <md-icon md-svg-src="images/svg/launch-navigator.svg" style="height:3.5em;width:3.5em;" ng-click="vm.launchNavigator();"></md-icon>
+      <md-icon md-svg-src="images/svg/details.svg" style="height:3.5em;width:3.5em;" ng-click="vm.openDetails();"></md-icon>
     </md-fab-actions>
   </md-fab-speed-dial>
   <ion-content>
@@ -41,18 +41,18 @@
       <div class="swiper-button-next swiper-button-next-custom-gallery-company" ng-show="vm.prevNextVisibled"></div>
     </div>
     <div layout="row" class="padding">
-      <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">PALAVRAS CHAVE</div>
+      <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">CARACTERÍSTICAS</div>
       <div flex class="font-raleway-bold color-orange text-align-right" style="padding-left: 1vw; padding-right: 2.5vw">AVALIE!</div>
     </div>
     <div layout="row" class="padding">
       <div flex>
-        <div flex class="text-align-center font-myriad-set-pro-thin color-back padding" ng-if="vm.foodTypes.length === 0">
-          <ion-spinner ng-if="vm.message.foodTypes === ''"></ion-spinner>
-          <span ng-if="vm.message.foodTypes !== null && vm.message.foodTypes !== ''" ng-bind-html="vm.message.foodTypes"></span>
+        <div flex class="text-align-center font-myriad-set-pro-thin color-back padding" ng-if="vm.characteristics.length === 0">
+          <ion-spinner ng-if="vm.message.characteristics === ''"></ion-spinner>
+          <span ng-if="vm.message.characteristics !== null && vm.message.characteristics !== ''" ng-bind-html="vm.message.characteristics"></span>
         </div>
         <div flex class="font-raleway-light text-align-justify color-back-054 padding" style="border-left: 5px solid #717070; font-size: 0.8rem !important; line-height: 1.1;"
-          ng-repeat="item in vm.foodTypes track by item.idFoodType" ng-if="vm.foodTypes.length !== 0">
-          {{item.dsFoodType}};
+          ng-repeat="item in vm.characteristics track by item.idCharacteristic" ng-if="vm.characteristics.length !== 0">
+          {{item.desCharacteristic}};
         </div>
       </div>
     </div>

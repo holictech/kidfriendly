@@ -28,5 +28,9 @@
 
       return defer.promise;
     };
+
+    this.listByCompany = function(idCompany) {
+      return this.httpGet(this.getURI() + '/listbycompany/' + idCompany);
+    };
   }
 })();

@@ -46,12 +46,12 @@
               </div>
             </div>
           </div>
-          <div flex layout="row" class="padding" ng-if="vm.characteristics.length !== 0">
+          <div flex layout="row" class="padding" ng-if="vm.foodTypes.length !== 0">
             <div flex=10 class="align-self-center text-align-center" style="font-size: 1.5rem;"><i class="ion-ios-list-outline"></i></div>
             <div flex class="align-self-center">
               <div style="line-height: 1.1;">
-                <span class="font-lato-regular color-back-054 text-align-justify" style="font-size: 0.75rem !important;" ng-repeat="item in vm.characteristics track by item.idCharacteristic">
-                  {{item.desCharacteristic}}; 
+                <span class="font-lato-regular color-back-054 text-align-justify" style="font-size: 0.75rem !important;" ng-repeat="item in vm.foodTypes track by item.idFoodType">
+                  {{item.dsFoodType}};
                 </span>
               </div>
             </div>

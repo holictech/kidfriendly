@@ -2,21 +2,21 @@
   'use strict';
 
   angular.module('kidfriendly').controller('CompanyController', CompanyController);
-  CompanyController.$inject = ['CompanyService', 'ImageService', 'FoodTypeService', 'RatingService', 'LocalityService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout', '$ionicModal', '$cordovaInAppBrowser', '$filter'];
+  CompanyController.$inject = ['CompanyService', 'ImageService', 'CharacteristicService', 'RatingService', 'LocalityService', '$controller', '$scope', '$ionicScrollDelegate', '$stateParams', '$timeout', '$ionicModal', '$cordovaInAppBrowser', '$filter'];
 
-  function CompanyController(CompanyService, ImageService, FoodTypeService, RatingService, LocalityService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout, $ionicModal, $cordovaInAppBrowser, $filter) {
+  function CompanyController(CompanyService, ImageService, CharacteristicService, RatingService, LocalityService, $controller, $scope, $ionicScrollDelegate, $stateParams, $timeout, $ionicModal, $cordovaInAppBrowser, $filter) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.companyDto = null;
     vm.message = {
       'images': '',
-      'foodTypes': '',
+      'characteristics': '',
       'ratings': ''
     };
     vm.images = [];
+    vm.characteristics = [];
     vm.rating = {};
     vm.visibleIconRating = true;
-    vm.foodTypes = [];
     var ratingPaginatorDto = {
       currentPage: 0,
       pageSize: 5
@@ -26,7 +26,7 @@
     vm.loadingRating = false;
     vm.phones = []
     vm.weeks = [];
-    vm.characteristics = [];
+    vm.foodTypes = [];
     initialize();
 
     vm.openRating = function() {
@@ -135,7 +135,7 @@
     function findDetails() {
       vm.phones = []
       vm.weeks = [];
-      vm.characteristics = [];
+      vm.foodTypes = [];
       CompanyService.details(vm.companyDto.idCompany).then(function(response) {
         if (response.error) {
           CompanyService.ionicPopupAlertError(response.message);
@@ -154,7 +154,7 @@
           };
           vm.phones = vm.phones.concat(response.data.phones);
           vm.weeks = vm.weeks.concat(response.data.weeks);
-          vm.characteristics = vm.characteristics.concat(response.data.characteristics);
+          vm.foodTypes = vm.foodTypes.concat(response.data.foodTypes);
         }
       });
     }
@@ -186,18 +186,18 @@
       });
     }
 
-    function findFoodTypes() {
-      vm.message.foodTypes = '';
-      vm.foodTypes = [];
-      FoodTypeService.listByCompany(vm.companyDto.idCompany).then(function(response) {
+    function findCharacteristics() {
+      vm.message.characteristics = '';
+      vm.characteristics = [];
+      CharacteristicService.listByCompany(vm.companyDto.idCompany).then(function(response) {
         if (!response.error) {
-          vm.foodTypes = vm.foodTypes.concat(response.data);
+          vm.characteristics = vm.characteristics.concat(response.data);
 
-          if (vm.foodTypes.length === 0) {
-            vm.message.foodTypes = null;
+          if (vm.characteristics.length === 0) {
+            vm.message.characteristics = null;
           }
         } else {
-          vm.message.foodTypes = response.message;
+          vm.message.characteristics = response.message;
         }
       });
     }
@@ -247,7 +247,7 @@
         vm.companyDto = angular.fromJson($stateParams.object);
         findDetails();
         findImages();
-        findFoodTypes();
+        findCharacteristics();
         findRatings();
         vm.hideLoading();
       });
