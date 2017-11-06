@@ -44,7 +44,7 @@
                 effect: 'slide',
               });
               vm.prevNextSuggestions = vm.suggestions.length > 1;
-            }, 100);
+            }, 250);
           }
         } else {
           vm.message.suggestions = response.message;
@@ -73,7 +73,7 @@
                     effect: 'slide'
                   });
                   vm.prevNextNextToMe = vm.nextToMe.length > 1;
-                }, 100);
+                }, 250);
               }
             } else {
               vm.message.nextToMe = response.message;

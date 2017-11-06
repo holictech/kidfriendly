@@ -54,9 +54,12 @@
           <ion-spinner ng-if="vm.message.characteristics === ''"></ion-spinner>
           <span ng-if="vm.message.characteristics !== null && vm.message.characteristics !== ''" ng-bind-html="vm.message.characteristics"></span>
         </div>
-        <div flex class="font-raleway-light text-align-justify color-back-054 padding" style="border-left: 5px solid #717070; font-size: 0.8rem !important; line-height: 1.1;"
-          ng-repeat="item in vm.characteristics track by item.idCharacteristic" ng-if="vm.characteristics.length !== 0">
-          {{item.desCharacteristic}};
+        <div flex class="padding font-raleway-light color-back-054 text-align-justify" 
+          style="border-left: 5px solid #717070; font-size: 0.8rem !important; line-height: 1.1;"
+          ng-if="vm.characteristics.length !== 0">
+          <span style="font-size: 0.8rem !important;" ng-repeat="item in vm.characteristics track by item.idCharacteristic">
+            {{item.desCharacteristic}};
+          </span>
         </div>
       </div>
     </div>

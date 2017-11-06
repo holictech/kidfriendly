@@ -180,7 +180,7 @@
                 effect: 'slide'
               });
               vm.prevNextVisibled = vm.images.length > 1;
-            }, 100);
+            }, 250);
           }
         }
       });
