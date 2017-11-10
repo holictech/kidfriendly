@@ -31,7 +31,7 @@
       vm.prevNextSuggestions = false;
       HomeService.listSuggestions().then(function(response) {
         if (!response.error) {
-          vm.suggestions = vm.suggestions.concat(response.data);
+          vm.suggestions = response.data;
 
           if (vm.suggestions.length === 0) {
             vm.message.suggestions = 'Nenhum estabelecimento.'
@@ -40,9 +40,10 @@
               new Swiper(angular.element(document.querySelector('.swiper-container-suggestions')), {
                 prevButton: '.swiper-button-prev-custom-suggestions',
                 nextButton: '.swiper-button-next-custom-suggestions',
-                spaceBetween: 10,
+                spaceBetween: 30,
                 effect: 'slide',
-              });
+                initialSlide: 0
+              }).init();
               vm.prevNextSuggestions = vm.suggestions.length > 1;
             }, 250);
           }
@@ -60,7 +61,7 @@
         if (!response.error) {
           HomeService.listNextToMe(response.data).then(function(response) {
             if (!response.error) {
-              vm.nextToMe = vm.nextToMe.concat(response.data);
+              vm.nextToMe = response.data;
 
               if (vm.nextToMe.length === 0) {
                 vm.message.nextToMe = 'Nenhum estabelecimento.'
@@ -69,7 +70,7 @@
                   new Swiper(angular.element(document.querySelector('.swiper-container-nexttome')), {
                     prevButton: '.swiper-button-prev-custom-nexttome',
                     nextButton: '.swiper-button-next-custom-nexttome',
-                    spaceBetween: 10,
+                    spaceBetween: 30,
                     effect: 'slide'
                   });
                   vm.prevNextNextToMe = vm.nextToMe.length > 1;
@@ -92,7 +93,7 @@
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       if (toState.name === 'main.home' && fromState.name !== 'main.home-company') {
-        initialize();
+        $state.reload();
       }
     });
   }

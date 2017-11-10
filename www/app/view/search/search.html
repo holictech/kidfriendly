@@ -41,19 +41,17 @@
             </label>
           </div>
           <div flex style="padding-left: 2.5vw;">
-            <section ng-show="vm.characteristics.length > 0">
-              <label class="item-input item-stacked-label">
-                <span class="input-label">Características</span>
-              </label>
-              <multiselect
-                header-text="Características"
-                items="vm.characteristics"
-                text-property="desCharacteristic"
-                value-property="idCharacteristic"
-                is-translate="false"
-                value-changed="vm.onValueChanged(value)">
-              </multiselect>
-            </section>
+            <label class="item-input item-stacked-label">
+              <span class="input-label">Estrutura</span>
+            </label>
+            <multiselect
+              header-text="Estrutura"
+              items="vm.characteristics"
+              text-property="desCharacteristic"
+              value-property="idCharacteristic"
+              is-translate="false"
+              value-changed="vm.onValueChanged(value)">
+            </multiselect>
           </div>
         </div>
       </div>

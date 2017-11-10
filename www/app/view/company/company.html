@@ -43,7 +43,7 @@
         <i class="ion-rating" style="position: absolute; z-index: 10; top: -35px; right: 0;" ng-click="vm.openRating();" ng-if="vm.visibleIconRating"></i>
     </div>
     <div layout="row" class="padding">
-      <div flex class="font-raleway-bold color-orange" style="padding-right: 1vw;">CARACTERÍSTICAS</div>
+      <div flex=70 class="font-raleway-bold color-orange" style="padding-right: 1vw;">ESTRUTURA</div>
       <div flex class="font-raleway-bold color-orange text-align-right" style="padding-left: 1vw; padding-right: 2vw">
         AVALIE!
       </div>
@@ -54,7 +54,7 @@
           <ion-spinner ng-if="vm.message.characteristics === ''"></ion-spinner>
           <span ng-if="vm.message.characteristics !== null && vm.message.characteristics !== ''" ng-bind-html="vm.message.characteristics"></span>
         </div>
-        <div flex class="padding font-raleway-light color-back-054 text-align-justify" 
+        <div flex class="padding font-raleway-light color-back-054 text-align-justify"
           style="border-left: 5px solid #717070; font-size: 0.8rem !important; line-height: 1.1;"
           ng-if="vm.characteristics.length !== 0">
           <span style="font-size: 0.8rem !important;" ng-repeat="item in vm.characteristics track by item.idCharacteristic">

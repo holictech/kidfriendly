@@ -26,8 +26,8 @@
           <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-click="vm.details(item);">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-custom-suggestions" ng-show="vm.prevNextSuggestions"></div>
-      <div class="swiper-button-next swiper-button-next-custom-suggestions" ng-show="vm.prevNextSuggestions"></div>
+      <div class="swiper-button-prev swiper-button-prev-custom-suggestions" style="pointer-events: auto !important;" ng-show="vm.prevNextSuggestions"></div>
+      <div class="swiper-button-next swiper-button-next-custom-suggestions" style="pointer-events: auto !important;" ng-show="vm.prevNextSuggestions"></div>
     </div>
     <div layout="row">
       <div flex flex-offset="10">
@@ -44,8 +44,8 @@
           <img ng-src="data:image/*;base64,{{item.mgHome}}" ng-click="vm.details(item);">
         </div>
       </div>
-      <div class="swiper-button-prev swiper-button-prev-custom-nexttome" ng-show="vm.prevNextNextToMe"></div>
-      <div class="swiper-button-next swiper-button-next-custom-nexttome" ng-show="vm.prevNextNextToMe"></div>
+      <div class="swiper-button-prev swiper-button-prev-custom-nexttome" style="pointer-events: auto !important;" ng-show="vm.prevNextNextToMe"></div>
+      <div class="swiper-button-next swiper-button-next-custom-nexttome" style="pointer-events: auto !important;" ng-show="vm.prevNextNextToMe"></div>
     </div>
   </ion-content>
 </ion-view>

@@ -8,29 +8,35 @@
     AbstractService.call(this, '/characteristic');
 
     this.listByCategory = function(idCategory) {
-      var defer = $q.defer();
-      var key =  'kf_category_' + idCategory;
-      var _response = this.getSessionStorage(key);
-      var vm = this;
-
-      if (angular.isUndefined(_response)) {
-        this.httpGet(this.getURI() + '/listbycategory/' + idCategory).then(function(response) {
-          if (response.error) {
-            defer.reject(response);
-          } else {
-            defer.resolve(response);
-            vm.setSessionStorage(key, response);
-          }
-        });
-      } else {
-        defer.resolve(_response);
-      }
-
-      return defer.promise;
+      return list(this, '/listbycategory/' + idCategory, 'kf_category_' + idCategory);
     };
 
     this.listByCompany = function(idCompany) {
       return this.httpGet(this.getURI() + '/listbycompany/' + idCompany);
     };
+
+    this.listAll = function() {
+      return list(this, '/listall', 'kf_category_all');
+    };
+
+    function list(vm, uri, keySessionStorage) {
+      var defer = $q.defer();
+      var responseSessionStorage = vm.getSessionStorage(keySessionStorage);
+
+      if (angular.isUndefined(responseSessionStorage)) {
+        vm.httpGet(vm.getURI() + uri).then(function(response) {
+          if (response.error) {
+            defer.reject(response);
+          } else {
+            defer.resolve(response);
+            vm.setSessionStorage(keySessionStorage, response);
+          }
+        });
+      } else {
+        defer.resolve(responseSessionStorage);
+      }
+
+      return defer.promise;
+    }
   }
 })();

@@ -11,7 +11,7 @@
     vm.clickIconHome = function() {
       if (!($state.is('main.home') || $state.is('main.home-company'))) {
         $ionicHistory.clearCache().then(function() { 
-          $state.go('main.home') 
+          $state.go('main.home');
         });
       } else {
         vm.go('main.home');

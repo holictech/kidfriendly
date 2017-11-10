@@ -4,7 +4,7 @@
   angular.module('kidfriendly').config(Config);
   Config.$inject = ['$ionicConfigProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', 'multiselectProvider'];
 
-  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, multiselectProvider, $q, LocalityService, UserService, CategoryService) {
+  function Config($ionicConfigProvider, $stateProvider, $urlRouterProvider, $httpProvider, multiselectProvider, $q, LocalityService, UserService, CategoryService, CharacteristicService) {
     if (ionic.Platform.isAndroid()) {
       $ionicConfigProvider.scrolling.jsScrolling(true);
     }
@@ -99,6 +99,14 @@
             CategoryPrepService: function($q, CategoryService) {
               var defer = $q.defer();
               CategoryService.listAll().then(function(response) {
+                defer.resolve(response);
+              });
+
+              return defer.promise;
+            },
+            CharacteristicPrepService: function($q, CharacteristicService) {
+              var defer = $q.defer();
+              CharacteristicService.listAll().then(function(response) {
                 defer.resolve(response);
               });
 

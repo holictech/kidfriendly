@@ -167,7 +167,7 @@
         if (response.error) {
           vm.message.images = response.message;
         } else {
-          vm.images = vm.images.concat(response.data);
+          vm.images = response.data;
 
           if (vm.images.length === 0) {
             vm.message.images = 'Nenhuma imagem.';
@@ -176,7 +176,7 @@
               new Swiper(angular.element(document.querySelector('.swiper-container-gallery-company')), {
                 prevButton: '.swiper-button-prev-custom-gallery-company',
                 nextButton: '.swiper-button-next-custom-gallery-company',
-                spaceBetween: 10,
+                spaceBetween: 30,
                 effect: 'slide'
               });
               vm.prevNextVisibled = vm.images.length > 1;

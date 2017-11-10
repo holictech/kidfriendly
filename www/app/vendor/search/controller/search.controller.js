@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('kidfriendly').controller('SearchController', SearchController);
-  SearchController.$inject = ['SearchService', 'StatesPrepService', 'LocalityService', 'CategoryPrepService', 'CharacteristicService', '$controller', '$scope', '$ionicScrollDelegate', '$rootScope'];
+  SearchController.$inject = ['SearchService', 'StatesPrepService', 'LocalityService', 'CategoryPrepService', 'CharacteristicService', 'CharacteristicPrepService', '$controller', '$scope', '$ionicScrollDelegate', '$rootScope'];
 
-  function SearchController(SearchService, StatesPrepService, LocalityService, CategoryPrepService, CharacteristicService, $controller, $scope, $ionicScrollDelegate, $rootScope) {
+  function SearchController(SearchService, StatesPrepService, LocalityService, CategoryPrepService, CharacteristicService, CharacteristicPrepService, $controller, $scope, $ionicScrollDelegate, $rootScope) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     vm.establishment = null;
@@ -33,8 +33,8 @@
     };
 
     vm.listCharacteristicByCategory = function(idCategory) {
+      vm.characteristics = angular.copy(CharacteristicPrepService.data);
       vm.characteristcsSelected = [];
-      vm.characteristics = [];
 
       if (idCategory !== null) {
         vm.showLoading();
@@ -95,9 +95,19 @@
       $scope.$on('$ionicView.beforeEnter', function() {
         $ionicScrollDelegate.scrollTop();
 
-        if (StatesPrepService.error || CategoryPrepService.error) {
+        if (StatesPrepService.error || CategoryPrepService.error || CharacteristicPrepService.error) {
           vm.hideLoading();
-          SearchService.ionicPopupAlertError(StatesPrepService.error ? StatesPrepService.message : CategoryPrepService.message).then(function() {
+          var message = '';
+
+          if (StatesPrepService.error) {
+            message = StatesPrepService.message;
+          } else if (CategoryPrepService.error) {
+            message = CategoryPrepService.message;
+          } else if (CharacteristicPrepService.error) {
+            message = CharacteristicPrepService.message;
+          }
+
+          SearchService.ionicPopupAlertError(message).then(function() {
             vm.go('main.home');
           });
 
@@ -106,6 +116,11 @@
 
         vm.states = StatesPrepService.data;
         vm.categories = CategoryPrepService.data;
+
+        if (vm.characteristics.length === 0) {
+          vm.characteristics = angular.copy(CharacteristicPrepService.data);
+        }
+
         vm.timeoutHideLoading();
       });
     }
