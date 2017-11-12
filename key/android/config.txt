@@ -1,3 +1,5 @@
+android-versionCode="1"
+
 ionic cordova build android --prod --release
 
 cmd = jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore [my-release-key].jks android-release-unsigned.apk [my-alias]
