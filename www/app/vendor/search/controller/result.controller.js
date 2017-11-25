@@ -2,13 +2,17 @@
   'use strict';
 
   angular.module('kidfriendly').controller('ResultController', ResultController);
-  ResultController.$inject = ['SearchService', '$controller', '$scope', '$stateParams'];
+  ResultController.$inject = ['SearchService', '$controller', '$scope', '$stateParams', '$ionicScrollDelegate'];
 
-  function ResultController(SearchService, $controller, $scope, $stateParams) {
+  function ResultController(SearchService, $controller, $scope, $stateParams, $ionicScrollDelegate) {
     var vm = this;
     angular.extend(this, $controller('AbstractController', {'vm': vm}));
     var filters = null;
     var paginatorDto = null;
+    var scrollPosition = {
+      left: 0,
+      top: 0
+    };
     vm.results = [];
     vm.isInfiniteScroll = false;
     initialize();
@@ -33,6 +37,7 @@
     };
 
     vm.details = function(companyDto) {
+      scrollPosition = $ionicScrollDelegate.getScrollPosition();
       vm.go('main.search-result-company', {
         idCompany: companyDto.idCompany,
         desName: companyDto.desName,
@@ -46,8 +51,13 @@
         var object = angular.fromJson($stateParams.object);
         filters = object.filters;
         paginatorDto = object.response.data.paginatorDto;
-        vm.results = object.response.data.results;
+
+        if (vm.results.length === 0) {
+          vm.results = object.response.data.results;
+        }
+
         vm.isInfiniteScroll = (angular.isDefined(paginatorDto) && paginatorDto.pagination);
+        $ionicScrollDelegate.scrollTo(scrollPosition.left, scrollPosition.top);
         vm.timeoutHideLoading();
       });
     }
